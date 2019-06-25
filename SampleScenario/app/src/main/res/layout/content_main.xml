@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_main" tools:context=".MainActivity">
+
+    <TextView android:text="@string/announce_guide" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textSize="32sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/textView"
+        android:id="@+id/separate_var"
+        android:background="#666666" />
+
+    <ScrollView
+        android:layout_below="@+id/separate_var"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+            <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_yesno"
+                android:id="@+id/button_yesno"
+                android:layout_marginTop="27dp"
+                android:singleLine="false"
+                android:textSize="32sp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_tag_rule"
+                android:id="@+id/button_tag_rule"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="28dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_tag_a"
+                android:id="@+id/button_tag_a"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="28dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_tag_next"
+                android:id="@+id/button_tag_next"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="28dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_tag_speech"
+                android:id="@+id/button_tag_speech"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="28dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_tag_memory"
+                android:id="@+id/button_tag_memory"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="28dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_tag_control"
+                android:id="@+id/button_tag_control"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="28dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_tag_behavior"
+                android:id="@+id/button_tag_behavior"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="28dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_operator"
+                    android:id="@+id/button_operator"
+                    android:singleLine="false"
+                    android:textSize="32sp"
+                    android:layout_marginTop="28dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_variable"
+                    android:id="@+id/button_variable"
+                    android:singleLine="false"
+                    android:textSize="32sp"
+                    android:layout_marginTop="28dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_name_for_speech"
+                    android:id="@+id/button_name_for_speech"
+                    android:singleLine="false"
+                    android:textSize="32sp"
+                    android:layout_marginTop="28dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_finish_app"
+                    android:id="@+id/finish_app_button"
+                    android:singleLine="false"
+                    android:textSize="32sp"
+                    android:layout_marginTop="28dp"
+                    android:layout_below="@+id/button_name_for_speech" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

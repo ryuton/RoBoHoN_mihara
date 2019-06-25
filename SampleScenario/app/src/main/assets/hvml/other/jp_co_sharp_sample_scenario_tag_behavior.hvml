@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<hvml version="2.0">
+    <head>
+        <producer>jp.co.sharp.sample.scenario</producer>
+        <description>behaviorタグの使用例</description>
+        <scene value="jp.co.sharp.sample.scenario.scene_common"/>
+        <version value="1.0"/>
+        <tool_version>1.00</tool_version>
+        <accost priority="75" topic_id="t1" word="jp.co.sharp.sample.scenario.tag_behavior.t1"/>
+    </head>
+    <body>
+        <topic id="t1" listen="false">
+            <action index="1">
+                <speech>behaviorタグを使った例だよ</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+            <next href="#t2" type="default"/>
+        </topic>
+        <topic id="t2" listen="false">
+            <action index="1">
+                <speech>自動付与モーションAの例だよ。発話内容にあわせたモーションをするよ</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+            <next href="#t3" type="default"/>
+        </topic>
+        <topic id="t3" listen="false">
+            <action index="1">
+                <speech>今日は嬉しいことがあったよ。やったー！</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+            <next href="#t4" type="default"/>
+        </topic>
+        <topic id="t4" listen="false">
+            <action index="1">
+                <speech>これは自動付与モーションBの例だよ。発話の長さにあわせたモーションをするよ</speech>
+                <behavior id="general" type="normal"/>
+            </action>
+            <next href="#t5" type="default"/>
+        </topic>
+        <topic id="t5" listen="false">
+            <action index="1">
+                <speech>次は専用作り込みモーションの例だよ。特定の発話にピッタリあわせたモーションをするよ</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+            <next href="#t6" type="default"/>
+        </topic>
+        <topic id="t6" listen="false">
+            <action index="1">
+                <speech>&lt;vtml_speed value=&quot;135&quot;&gt;&lt;vtml_phoneme alphabet=&quot;x-pentax&quot; ph=&quot;オ^ッ/ケ37/エ34[普通名詞]&quot;&gt;おっけえ&lt;/vtml_phoneme&gt;&lt;vtml_pause time=&quot;50&quot;/&gt;か、だめだよ！！&lt;vtml_pause time=&quot;50&quot;/&gt;で答えてね&lt;/vtml_speed&gt;</speech>
+                <behavior id="0x040022" type="normal"/>
+            </action>
+            <next href="#t7" type="default"/>
+        </topic>
+        <topic id="t7" listen="false">
+            <action index="1">
+                <speech>じゃあ、終わるね</speech>
+                <behavior id="0x041616" type="normal"/>
+            </action>
+        </topic>
+    </body>
+</hvml>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">メッセージ</string>
+
+    <string name="app_explanation">メッセージ送信を行うサンプル</string>
+
+    <string name="hint_addr">宛先</string>
+    <string name="hint_body">本文</string>
+
+    <string name="txt_btn_attachment">添付画像を選択</string>
+    <string name="txt_btn_send">送信実行</string>
+
+    <string name="txt_chkbx_skip_confirm">ユーザー確認スキップ</string>
+    <string name="txt_chkbx_background">バックグラウンド送信</string>
+
+    <string name="txt_result">送信結果 :　</string>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">多言語</string>
+    <string name="app_explanation">言語切替のサンプル</string>
+    <string name="label_talktome">何か話しかけてね</string>
+    <string name="default_text">--Recognized text--</string>
+    <string name="japanese">日本語</string>
+    <string name="english">英語</string>
+    <string name="chinese">中国語</string>
+    <string name="label_accost">言語別のシナリオから発話する</string>
+    <string name="accost">発話</string>
+</resources>

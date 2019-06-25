@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">アクション</string>
+
+    <string name="app_explanation">アクションを実行するサンプル</string>
+
+    <string name="label_action">指定IDのアクションを実行するよ</string>
+    <string name="button_action_assign">指定</string>
+    <string name="text_result_id">Action ID : </string>
+    <string name="text_result_name">Action NAME : </string>
+
+</resources>

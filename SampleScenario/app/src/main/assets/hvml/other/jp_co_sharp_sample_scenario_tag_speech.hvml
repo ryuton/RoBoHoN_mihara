@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<hvml version="2.0">
+    <head>
+        <producer>jp.co.sharp.sample.scenario</producer>
+        <description>speechタグの使用例</description>
+        <scene value="jp.co.sharp.sample.scenario.scene_common"/>
+        <version value="1.0"/>
+        <tool_version>1.00</tool_version>
+        <accost priority="75" topic_id="t1" word="jp.co.sharp.sample.scenario.tag_speech.t1"/>
+    </head>
+    <body>
+        <topic id="t1" listen="false">
+            <action index="1">
+                <speech>speechタグを使った例だよ</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+            <next href="#t2" type="default"/>
+        </topic>
+        <topic id="t2" listen="false">
+            <action index="1">
+                <speech>
+                    speechタグの中に書いてある言葉をしゃべっているよ。
+                    <emotion type="happiness">こんにちは、気分はhappinessだよ。</emotion>
+                    <emotion level="3" type="happiness">こんにちは、気分はhappiness、levelは3だよ。</emotion>
+                    <emotion type="sadness">こんにちは、気分はsadnessだよ。</emotion>
+                    <emotion level="3" type="sadness">こんにちは、気分はsadness、levelは3だよ。</emotion>
+                    <emotion type="anger">こんにちは、気分はangerだよ。</emotion>
+                    <emotion level="3" type="anger">こんにちは、気分はanger、levelは3だよ。</emotion>
+                </speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+        </topic>
+    </body>
+</hvml>

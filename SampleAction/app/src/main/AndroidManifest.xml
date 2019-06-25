@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="jp.co.sharp.sample.action"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:versionCode="10000"
+          android:versionName="1.0.0">
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="21"/>
+
+    <uses-permission android:name="jp.co.sharp.android.rb.action.permission.REQUEST_ACTION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar.Fullscreen">
+        <activity android:name="jp.co.sharp.sample.action.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="jp.co.sharp.android.rb.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <meta-data
+                android:name="use_projector"
+                android:value="MainActivity"/>
+        </activity>
+        <uses-library android:name="jp.co.sharp.android.rb.action.framework" android:required="true" />
+    </application>
+
+</manifest>

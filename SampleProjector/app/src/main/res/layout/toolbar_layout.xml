@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_height"
+    android:background="#80000000"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        >
+        <ImageButton
+            android:id="@+id/action_projector"
+            android:layout_height="@dimen/toolbar_item_button_height"
+            android:layout_width="@dimen/toolbar_item_button_width"
+            android:padding="@dimen/toolbar_item_button_padding"
+            android:layout_marginStart="@dimen/toolbar_item_button_margin_start"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_projector_start"
+            style="@android:style/Widget.DeviceDefault.Light.ActionButton"
+            />
+
+    </LinearLayout>
+</Toolbar>

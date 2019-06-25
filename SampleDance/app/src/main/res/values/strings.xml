@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ダンス</string>
+
+    <string name="app_explanation">ダンスを実行するサンプル</string>
+
+    <string name="label_dance">ダンスを踊るよ</string>
+    <string name="button_dance_normal">ランダム</string>
+    <string name="button_dance_new">最新</string>
+    <string name="button_dance_repeat">繰り返し</string>
+    <string name="button_dance_assign">指定</string>
+    <string name="button_dance_medley">メドレー</string>
+    <string name="text_result_id">Dance ID : </string>
+    <string name="text_result_name">Dance NAME : </string>
+
+</resources>

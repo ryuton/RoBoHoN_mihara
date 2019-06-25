@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<hvml version="2.0">
+    <head>
+        <producer>jp.co.sharp.sample.scenario</producer>
+        <description>memoryの使用例</description>
+        <scene value="jp.co.sharp.sample.scenario.scene_common"/>
+        <version value="1.0"/>
+        <tool_version>1.00</tool_version>
+        <accost priority="75" topic_id="t1" word="jp.co.sharp.sample.scenario.tag_memory.t1"/>
+    </head>
+    <body>
+        <topic id="t1" listen="false">
+            <action index="1">
+                <speech>memoryタグを使った例だよ。このボタンが押された回数を数えるよ</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+            <next href="#t2" type="default"/>
+        </topic>
+        <topic id="t2" listen="false">
+            <action index="1">
+                <memory key="jp.co.sharp.sample.scenario_value" type="permanent" value="(${memory_p:jp.co.sharp.sample.scenario_value} + 1)"/>
+            </action>
+            <next href="#t3" type="default"/>
+        </topic>
+        <topic id="t3" listen="false">
+            <rule>
+                <condition case_id="c1">${memory_p:jp.co.sharp.sample.scenario_value} le 0</condition>
+                <condition case_id="c2">${memory_p:jp.co.sharp.sample.scenario_value} gt 0</condition>
+            </rule>
+            <case id="c1">
+                <next href="#t4" type="default"/>
+            </case>
+            <case id="c2">
+                <next href="#t5" type="default"/>
+            </case>
+        </topic>
+        <topic id="t4" listen="false">
+            <action index="1">
+                <memory key="jp.co.sharp.sample.scenario_value" type="permanent" value="1"/>
+            </action>
+            <next href="#t5" type="default"/>
+        </topic>
+        <topic id="t5" listen="false">
+            <action index="1">
+                <speech>ボタンを押された回数は${memory_p:jp.co.sharp.sample.scenario_value}回だよ</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+        </topic>
+    </body>
+</hvml>

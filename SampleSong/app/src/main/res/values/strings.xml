@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">歌</string>
+
+    <string name="app_explanation">歌を実行するサンプル</string>
+
+    <string name="label_song">指定IDの歌を唄うよ</string>
+    <string name="button_song_normal">ランダム</string>
+    <string name="button_song_repeat">繰り返し</string>
+    <string name="button_song_stop">停止</string>
+    <string name="button_song_assign">指定</string>
+    <string name="text_result_id">Song ID : </string>
+    <string name="text_result_name">Song NAME : </string>
+
+</resources>

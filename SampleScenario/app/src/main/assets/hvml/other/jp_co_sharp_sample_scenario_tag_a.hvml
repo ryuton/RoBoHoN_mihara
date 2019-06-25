@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<hvml version="2.0">
+    <head>
+        <producer>jp.co.sharp.sample.scenario</producer>
+        <description>aタグの使用例</description>
+        <scene value="jp.co.sharp.sample.scenario.scene_common"/>
+        <version value="1.0"/>
+        <tool_version>1.00</tool_version>
+        <accost priority="75" topic_id="t1" word="jp.co.sharp.sample.scenario.tag_a.t1"/>
+    </head>
+    <body>
+        <topic id="t1" listen="false">
+            <action index="1">
+                <speech>aタグを使った例だよ。何か言ってみて</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+            <next href="#t2" type="default"/>
+        </topic>
+        <topic id="t2" listen="true">
+            <a href="#t3">
+                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
+            </a>
+            <a href="#t4" type="default"/>
+            <next href="#t3" type="default"/>
+        </topic>
+        <topic id="t3" listen="false">
+            <action index="1">
+                <speech>ごめんね。よくわからなかったよ</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+        </topic>
+        <topic id="t4" listen="false">
+            <action index="1">
+                <speech>${Lvcsr:Basic}って聞こえたよ</speech>
+                <behavior id="assign" type="normal"/>
+            </action>
+        </topic>
+    </body>
+</hvml>

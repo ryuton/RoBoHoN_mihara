@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_main" tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/app_explanation"
+                android:id="@+id/mode_value"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/test_value"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="20dp"
+                android:background="#666666" />
+            <TextView
+                android:text="@string/label_dance"
+                android:id="@+id/label_dance"
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_dance_normal"
+                android:id="@+id/dance_normal_button"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="20dp" />
+
+            <Button
+                android:id="@+id/dance_new_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:singleLine="false"
+                android:text="@string/button_dance_new"
+                android:textSize="32sp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_dance_repeat"
+                android:id="@+id/dance_repeat_button"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="20dp" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_dance_assign"
+                android:id="@+id/dance_assign_button"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="20dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_dance_medley"
+                android:id="@+id/dance_medley_button"
+                android:singleLine="false"
+                android:textSize="32sp"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/text_id"
+                android:text="@string/text_result_id"
+                android:textSize="28sp"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/text_name"
+                android:text="@string/text_result_name"
+                android:textSize="28sp"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
