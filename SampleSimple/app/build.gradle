@@ -2,11 +2,12 @@ apply plugin: 'com.android.application'
 
 repositories{
     maven { url 'http://repo1.maven.org/maven2' }
+    google()
 }
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "25.0.2"
+
 
     defaultConfig {
         applicationId "jp.co.sharp.sample.simple"
