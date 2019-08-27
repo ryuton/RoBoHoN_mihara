@@ -12,7 +12,7 @@
     <body>
         <topic id="t1" listen="true">
             <action index="1">
-                <speech>こんにちは。どうされましたか？</speech>
+                <speech>こんにちは。どうしたの？</speech>
             </action>
             <a href="#whattime">
                 <situation trigger="user-word">何時から in ${Lvcsr:Basic}</situation>
@@ -26,11 +26,19 @@
             <a href="#staffcall">
                 <situation trigger="user-word">予約 in ${Lvcsr:Basic}</situation>
             </a>
+            <next href="#t2" type="default"/>
+        </topic>
+
+        <topic id="t2" listen="true">
+            <a href="#t3">
+                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ  in ${Lvcsr:Basic}</situation>
+            </a>
+            <next href="#t3" type="default"/>
         </topic>
 
         <topic id="whattime" listen="true">
             <action index="1">
-                <speech>午後は2時から診療開始です。ソファーにお座りになり、もう少しお待ちください。</speech>
+                <speech>午後は2時から診療開始だよ。ソファーに座って、もう少し待ってね。</speech>
             </action>
             <a href="#staffcall">
                 <situation trigger="user-word">待てない in ${Lvcsr:Basic}</situation>
@@ -39,8 +47,9 @@
 
         <topic id="staffcall" listen="false">
         <action index="1">
-            <speech>スタッフに電話をかけるね.</speech>
+            <speech>スタッフに電話をかけても良い？かけても良かったらオッケー、ダメだったらダメって言ってね</speech>
         </action>
+            <next href="#yesno" type="default"/>
         </topic>
 
         <topic id="t3" listen="false">
@@ -50,14 +59,37 @@
             </action>
         </topic>
 
-        <topic id="t4" listen="false">
-            <action index="1">
-                <speech>喋った内容を、背中の画面に表示したよ。確認してみてね</speech>
-                <behavior id="assign" type="normal" />
-                <control function="recog_talk" target="jp.co.sharp.sample.simple">
-                    <data key="Lvcsr_Basic" value="${Lvcsr:Basic}" />
-                </control>
-            </action>
+
+
+        <topic dict="Reply" id="yesno" listen="true">
+            <a href="#t4">
+                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
+            </a>
+            <a href="#t6">
+                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
+            </a>
+
+            <topic id="t4" listen="false">
+                <action index="1">
+                    <speech>${resolver:speech_ok(${resolver:ok_id})}</speech>
+                    <behavior id="${resolver:motion_ok(${resolver:ok_id})}" type="normal"/>
+                </action>
+                <next href="#t5" type="default"/>
+            </topic>
+
+            <topic id="t5" listen="false">
+                <action index="1">
+                    <speech>実行するね</speech>
+                    <behavior id="assign" type="normal"/>
+                </action>
+            </topic>
+
+            <topic id="t6" listen="false">
+                <action index="1">
+                    <speech>そっかー。実行するのやめとくね</speech>
+                    <behavior id="assign" type="normal"/>
+                </action>
+            </topic>
         </topic>
     </body>
 </hvml>
