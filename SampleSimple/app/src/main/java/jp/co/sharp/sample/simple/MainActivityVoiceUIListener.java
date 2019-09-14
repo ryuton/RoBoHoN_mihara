@@ -9,7 +9,13 @@ import jp.co.sharp.android.voiceui.VoiceUIListener;
 import jp.co.sharp.android.voiceui.VoiceUIVariable;
 import jp.co.sharp.sample.simple.customize.ScenarioDefinitions;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil;
-
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.content.Intent;
+import android.net.Uri;
 
 /**
  * 音声UIからの通知を処理する.
@@ -20,10 +26,12 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
 
     private MainActivityScenarioCallback mCallback;
 
+
     /**
      * Activity側でのCallback実装チェック（実装してないと例外発生）.
      */
     public MainActivityVoiceUIListener(Context context) {
+
         super();
         try {
             mCallback = (MainActivityScenarioCallback) context;
@@ -37,17 +45,26 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
         //controlタグからの通知(シナリオ側にcontrolタグのあるActionが開始されると呼び出される).
         //発話と同時にアプリ側で処理を実行したい場合はこちらを使う.
         Log.v(TAG, "onVoiceUIEvent");
+
     }
+
+
+
 
     @Override
     public void onVoiceUIActionEnd(List<VoiceUIVariable> variables) {
         //Actionの完了通知(シナリオ側にcontrolタグを書いたActionが完了すると呼び出される).
         //発話が終わった後でアプリ側の処理を実行したい場合はこちらを使う.
         Log.v(TAG, "onVoiceUIActionEnd");
+
         if (VoiceUIVariableUtil.isTarget(variables, ScenarioDefinitions.TARGET)) {
             mCallback.onExecCommand(VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.ATTR_FUNCTION), variables);
+
         }
+
     }
+
+
 
     @Override
     public void onVoiceUIResolveVariable(List<VoiceUIVariable> variables) {
