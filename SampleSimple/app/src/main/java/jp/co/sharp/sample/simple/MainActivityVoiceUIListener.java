@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 
+
 /**
  * 音声UIからの通知を処理する.
  * Callbackの中では重い処理をしないこと.
