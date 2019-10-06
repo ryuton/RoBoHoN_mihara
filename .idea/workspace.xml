@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="975ed192-4c65-4a3f-9fd6-4ff7bb152860" name="Default Changelist" comment="" />
+    <list default="true" id="975ed192-4c65-4a3f-9fd6-4ff7bb152860" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/SampleSimple/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/local.properties" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,57 +13,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_29" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_tag_rule.hvml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="495">
               <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_tag_a.hvml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_operator.hvml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/assets/hvml/home/jp_co_sharp_sample_addressbook_home.hvml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/common/RegisterScenarioService.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_yesno.hvml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/common/RequestScenarioReceiver.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/MainActivityVoiceUIListener.java">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -74,6 +32,13 @@
       <list>
         <option value="$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_app_reception.hvml" />
         <option value="$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/MainActivity.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
       </list>
     </option>
   </component>
@@ -93,310 +58,6 @@
             <path>
               <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
               <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="hvml" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="hvml" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jp" type="462c0819:PsiDirectoryNode" />
-              <item name="co" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jp" type="462c0819:PsiDirectoryNode" />
-              <item name="co" type="462c0819:PsiDirectoryNode" />
-              <item name="sharp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jp" type="462c0819:PsiDirectoryNode" />
-              <item name="co" type="462c0819:PsiDirectoryNode" />
-              <item name="sharp" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jp" type="462c0819:PsiDirectoryNode" />
-              <item name="co" type="462c0819:PsiDirectoryNode" />
-              <item name="sharp" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
-              <item name="addressbook" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jp" type="462c0819:PsiDirectoryNode" />
-              <item name="co" type="462c0819:PsiDirectoryNode" />
-              <item name="sharp" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
-              <item name="addressbook" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="gradle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleAddressBook" type="462c0819:PsiDirectoryNode" />
-              <item name="gradle" type="462c0819:PsiDirectoryNode" />
-              <item name="wrapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="hvml" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="hvml" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="hvml" type="462c0819:PsiDirectoryNode" />
-              <item name="other" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleScenario" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleSimple" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleSimple" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleSimple" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleSimple" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleSimple" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleSimple" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="hvml" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleSimple" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="hvml" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoBoHoN_mihara" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoBoHoN_mihara" type="462c0819:PsiDirectoryNode" />
-              <item name="SampleSimple" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="hvml" type="462c0819:PsiDirectoryNode" />
-              <item name="other" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -572,28 +233,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../Desktop/0701_SR01MW_SampleCode_V01_04_00/SampleSimple/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" />
-    <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_tag_rule.hvml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_tag_a.hvml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_operator.hvml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/assets/hvml/home/jp_co_sharp_sample_addressbook_home.hvml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/common/RegisterScenarioService.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/common/RequestScenarioReceiver.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -604,6 +243,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/common/RegisterScenarioService.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/java/jp/co/sharp/sample/addressbook/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SampleAddressBook/app/src/main/assets/hvml/home/jp_co_sharp_sample_addressbook_home.hvml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_operator.hvml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_tag_a.hvml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SampleScenario/app/src/main/assets/hvml/other/jp_co_sharp_sample_scenario_tag_rule.hvml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
         </state>
       </provider>
     </entry>
