@@ -6,13 +6,23 @@
         <scene value="jp.co.sharp.sample.simple.scene_common" />
         <version value="1.0" />
         <tool_version>1.00</tool_version>
-        <situation priority="75" topic_id="t1" trigger="user-word">コンニチハ near ${Lvcsr:Kana}
+        <situation priority="75" topic_id="t0" trigger="user-word">コンニチハ in ${Lvcsr:Kana}
         </situation>
     </head>
     <body>
+        <topic id="t0" listen="true">
+            <action index="1">
+                <speech>こんにちは。診察番号を教えてね？</speech>
+            </action>
+            <a href="#t1">
+                <situation trigger="user-word">1 in ${Lvcsr:Basic}</situation>
+            </a>
+            <next href="#t1" type="default"/>
+        </topic>
+
         <topic id="t1" listen="true">
             <action index="1">
-                <speech>こんにちは。どうしたの？</speech>
+                <speech>今日はどうしたの？</speech>
             </action>
             <a href="#whattime">
                 <situation trigger="user-word">何時から in ${Lvcsr:Basic}</situation>
@@ -20,7 +30,7 @@
             <a href="#whattime">
                 <situation trigger="user-word">痛い in ${Lvcsr:Basic}</situation>
             </a>
-            <a href="#twhattime">
+            <a href="#whattime">
                 <situation trigger="user-word">先生 in ${Lvcsr:Basic}</situation>
             </a>
             <a href="#t10">
@@ -71,27 +81,27 @@
             </a>
         </topic>
 
-            <topic id="t4" listen="false">
+        <topic id="t4" listen="false">
                 <action index="1">
                     <speech>${resolver:speech_ok(${resolver:ok_id})}</speech>
                     <behavior id="${resolver:motion_ok(${resolver:ok_id})}" type="normal"/>
                 </action>
                 <next href="#t5" type="default"/>
-            </topic>
+        </topic>
 
-            <topic id="t5" listen="false">
+        <topic id="t5" listen="false">
                 <action index="1">
-                    <speech>実行するね</speech>
+                    <speech>電話するね</speech>
                     <behavior id="assign" type="normal"/>
                 </action>
-            </topic>
+        </topic>
 
-            <topic id="t6" listen="false">
+        <topic id="t6" listen="false">
                 <action index="1">
                     <speech>そっかー。電話するのやめとくね</speech>
                     <behavior id="assign" type="normal"/>
                 </action>
-            </topic>
+        </topic>
 
         <topic id="t7" listen="false">
             <action index="1">
