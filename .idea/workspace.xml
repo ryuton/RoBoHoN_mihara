@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="975ed192-4c65-4a3f-9fd6-4ff7bb152860" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SampleSimple/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_reception.hvml" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_reception.hvml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SampleSimple/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SampleSimple/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,8 +98,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
