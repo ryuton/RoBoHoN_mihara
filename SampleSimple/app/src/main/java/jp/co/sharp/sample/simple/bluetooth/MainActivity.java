@@ -46,14 +46,16 @@ public class MainActivity extends SampleActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             BluetoothChatFragment fragment = new BluetoothChatFragment();
-            transaction.replace(R.id.sample_content_fragment, fragment);
+
+            //transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
+
     }
 
     @Override
@@ -101,10 +103,12 @@ public class MainActivity extends SampleActivityBase {
         logWrapper.setNext(msgFilter);
 
         // On screen logging via a fragment with a TextView.
-        LogFragment logFragment = (LogFragment) getSupportFragmentManager()
+        /*LogFragment logFragment = (LogFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.log_fragment);
         msgFilter.setNext(logFragment.getLogView());
 
+
+         */
         Log.i(TAG, "Ready");
     }
 }

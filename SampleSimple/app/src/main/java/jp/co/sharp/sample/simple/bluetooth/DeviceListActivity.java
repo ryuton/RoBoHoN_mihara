@@ -16,6 +16,7 @@
 
 package jp.co.sharp.sample.simple.bluetooth;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -24,6 +25,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -32,6 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.Set;
@@ -54,6 +59,10 @@ public class DeviceListActivity extends Activity {
      */
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
+    /**
+     * server MAC address
+     */
+
     private static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
 
     /**
@@ -65,6 +74,7 @@ public class DeviceListActivity extends Activity {
      * Newly discovered devices
      */
     private ArrayAdapter<String> mNewDevicesArrayAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,5 +199,6 @@ public class DeviceListActivity extends Activity {
             }
         }
     }
+
 
 }
