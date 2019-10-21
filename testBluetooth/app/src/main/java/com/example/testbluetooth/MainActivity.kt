@@ -31,30 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //bluetoothAdapterの取得
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if (bluetoothAdapter == null) {
-            Log.e( TAG,"Device doesn't support Bluetooth")
-        }
-
-        //Bluetoothの許可取り
-        if (bluetoothAdapter?.isEnabled == false) {
-            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-        }
-
-        mBluetoothService = BluetoothService(mHandler)
-
-        //pairedDevices
-        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
-        pairedDevices?.forEach { device ->
-            val deviceName = device.name
-            val deviceHardwareAddress = device.address // MAC address
-
-            if(deviceHardwareAddress == RASP3_MAC_ADDRESS) {
-                mBluetoothService?.connect(device, true)
-            }
-        }
+        connect()
 
         val btn_click_me = findViewById(R.id.button) as Button
         // set on-click listener
@@ -83,6 +60,34 @@ class MainActivity : AppCompatActivity() {
             //mOutEditText.setText(mOutStringBuffer)
         }
     }
+
+    private fun connect(){
+        //bluetoothAdapterの取得
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        if (bluetoothAdapter == null) {
+            Log.e( TAG,"Device doesn't support Bluetooth")
+        }
+
+        //Bluetoothの許可取り
+        if (bluetoothAdapter?.isEnabled == false) {
+            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+        }
+
+        mBluetoothService = BluetoothService(mHandler)
+
+        //pairedDevices
+        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
+        pairedDevices?.forEach { device ->
+            val deviceName = device.name
+            val deviceHardwareAddress = device.address // MAC address
+
+            if(deviceHardwareAddress == RASP3_MAC_ADDRESS) {
+                mBluetoothService?.connect(device, true)
+            }
+        }
+    }
+
 
     private val mHandler = @SuppressLint("HandlerLeak")
     object : Handler() {

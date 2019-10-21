@@ -1,8 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 repositories{
     maven { url 'http://repo1.maven.org/maven2' }
     google()
+    mavenCentral()
 }
 
 android {
@@ -27,4 +30,5 @@ android {
 dependencies {
     testCompile 'junit:junit:4.12'
     provided files('jar/jp.co.sharp.android.voiceui.framework.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

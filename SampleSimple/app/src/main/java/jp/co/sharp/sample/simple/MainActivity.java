@@ -1,6 +1,7 @@
 package jp.co.sharp.sample.simple;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,13 +18,19 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import jp.co.sharp.android.voiceui.VoiceUIManager;
 import jp.co.sharp.android.voiceui.VoiceUIVariable;
+import jp.co.sharp.sample.simple.bluetooth.BluetoothService;
 import jp.co.sharp.sample.simple.customize.ScenarioDefinitions;
 import jp.co.sharp.sample.simple.util.VoiceUIManagerUtil;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil.VoiceUIVariableListHelper;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+
 
 
 /**
@@ -51,6 +59,17 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
      * UIスレッド処理用.
      */
     private Handler mHandler = new Handler();
+
+    /**
+     * bluetooth var
+     */
+    private BluetoothAdapter mBluetoothAdapter = null;
+    private BluetoothService mBluetoothService = null;
+
+    private BluetoothDevice mBluetoothDevice = null;
+
+    private final static Integer REQUEST_ENABLE_BT = 1;
+    private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,6 +260,42 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         }
     }
 
+    private void connectPairedDevice(String deviceAddress) {
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null){
+            Log.e( TAG,"Device doesn't support Bluetooth");
+            return;
+        }
+
+        if (!mBluetoothAdapter.isEnabled()){
+            Intent enabledBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enabledBtIntent, REQUEST_ENABLE_BT);
+        }
+
+        mBluetoothService = new BluetoothService(mBluetoothHandler);
+
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+        for (BluetoothDevice device : pairedDevices) {
+            String deviceHardwareAddress = device.getAddress();
+            if ( deviceHardwareAddress.equals(deviceAddress)){
+                mBluetoothService.connect(device, true);
+            }
+
+        }
+
+    }
+
+
+    @SuppressLint("HandlerLeak")
+    private Handler mBluetoothHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            Log.d(TAG, msg.toString());
+        }
+    };
+
     /**
      * ホームボタンの押下イベントを受け取るためのBroadcastレシーバークラス.<br>
      * <p/>
@@ -276,4 +331,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             }
         }
     }
+
+
 }
