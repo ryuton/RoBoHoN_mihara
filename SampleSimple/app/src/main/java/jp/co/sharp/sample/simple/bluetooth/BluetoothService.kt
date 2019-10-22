@@ -3,7 +3,6 @@ package jp.co.sharp.sample.simple.bluetooth
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.bluetooth.BluetoothAdapter
-import jp.co.sharp.sample.simple.bluetooth.Constants
 
 import android.os.Bundle
 import android.os.Handler
@@ -17,21 +16,23 @@ private const val TAG = "BLUETOOTH_SERVICE"
 
 
 
-
 class BluetoothService(
     // handler that gets info from Bluetooth service
     private val mHandler: Handler = Handler()
 ) {
+    companion object {
+        // Constants that indicate the current connection state
+        const val STATE_NONE = 0       // we're doing nothing
+        const val STATE_LISTEN = 1     // now listening for incoming connections
+        const val STATE_CONNECTING = 2 // now initiating an outgoing connection
+        const val STATE_CONNECTED = 3  // now connected to a remote device
+    }
 
     // Unique UUID for this application
     private val MY_UUID_SECURE =  UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private val MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66")
 
-    // Constants that indicate the current connection state
-    val STATE_NONE = 0       // we're doing nothing
-    val STATE_LISTEN = 1     // now listening for incoming connections
-    val STATE_CONNECTING = 2 // now initiating an outgoing connection
-    val STATE_CONNECTED = 3  // now connected to a remote device
+
 
     // Message types sent from the BluetoothService Handler
     private val MESSAGE_STATE_CHANGE: Int = 1
@@ -45,6 +46,7 @@ class BluetoothService(
     private val TOAST: String = "toast"
 
     var mState = STATE_NONE
+    var mNewState = mState
     private var mAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 
     private var mConnectThread: ConnectThread? = null
@@ -66,6 +68,19 @@ class BluetoothService(
             mConnectedThread = null
         }
 
+    }
+
+    /**
+     * Update UI title according to the current state of the chat connection
+     */
+    @Synchronized
+    private fun updateUserInterfaceTitle() {
+        mState = getState()
+        Log.d(TAG, "updateUserInterfaceTitle() $mNewState -> $mState")
+        mNewState = mState
+
+        // Give the new state to the Handler so the UI Activity can update
+        mHandler.obtainMessage(Constants.MESSAGE_STATE_CHANGE, mNewState, -1).sendToTarget()
     }
 
     fun connect(mmDevice: BluetoothDevice, secure: Boolean){
@@ -108,6 +123,8 @@ class BluetoothService(
         Log.d(TAG, device.name + " " + device.address)
         msg.data = bundle
         mHandler.sendMessage(msg)
+
+        updateUserInterfaceTitle()
 
     }
 
@@ -280,6 +297,8 @@ class BluetoothService(
                 try {
                     // Read from the InputStream
                     bytes = mmInStream!!.read(buffer)
+
+                    Log.d("aaaaaaaaaaaaaaa", "MESSAGE_READ")
 
                     // Send the obtained bytes to the UI Activity
                     mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)

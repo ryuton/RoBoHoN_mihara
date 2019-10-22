@@ -3,6 +3,7 @@ package jp.co.sharp.sample.simple;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,10 +28,11 @@ import jp.co.sharp.sample.simple.customize.ScenarioDefinitions;
 import jp.co.sharp.sample.simple.util.VoiceUIManagerUtil;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil.VoiceUIVariableListHelper;
+import jp.co.sharp.sample.simple.bluetooth.Constants;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-
+import android.widget.Toast;
 
 
 /**
@@ -70,9 +72,15 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 
     private final static Integer REQUEST_ENABLE_BT = 1;
     private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
+    private final static String mConnectedDeviceName = "RASPZERO";
+
+    private ProgressDialog progressDialog = null;
+    Context activity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        progressDialog = new ProgressDialog(this);
+        activity = this;
         super.onCreate(savedInstanceState);
         Log.v(TAG, "onCreate()");
         setContentView(R.layout.activity_main);
@@ -104,10 +112,13 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                     VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
                     VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
                 }
+                /*
                 String number = "7777777777";
                 Uri call = Uri.parse("tel:" + number);
                 Intent surf = new Intent(Intent.ACTION_CALL, call);
                 startActivity(surf);
+
+                 */
             }
         });
 
@@ -179,6 +190,13 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         mVoiceUIStartReceiver = new VoiceUIStartReceiver();
         IntentFilter filter = new IntentFilter(VoiceUIManager.ACTION_VOICEUI_SERVICE_STARTED);
         registerReceiver(mVoiceUIStartReceiver, filter);
+
+        progressDialog.setTitle("searching raspberry");
+        progressDialog.setMessage("");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        connectPairedDevice(RASP3_MAC_ADDRESS);
+
     }
     @Override
     public void onResume() {
@@ -287,10 +305,60 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 
 
     @SuppressLint("HandlerLeak")
-    private Handler mBluetoothHandler = new Handler() {
+    private final Handler mBluetoothHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case Constants.MESSAGE_STATE_CHANGE:
+                    switch (msg.arg1) {
+                        case BluetoothService.STATE_CONNECTED:
+                            //setStatus(getString(R.string.title_connected_to, mConnectedDeviceName));
+                            //mConversationArrayAdapter.clear();
+                            Log.d(TAG, msg.toString());
+                            progressDialog.cancel();
+
+                            break;
+                        case BluetoothService.STATE_CONNECTING:
+                            //setStatus(R.string.title_connecting);
+                            break;
+                        case BluetoothService.STATE_LISTEN:
+                        case BluetoothService.STATE_NONE:
+                            //setStatus(R.string.title_not_connected);
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + msg.arg1);
+                    }
+                case Constants.MESSAGE_WRITE:
+
+                case Constants.MESSAGE_DEVICE_NAME:
+                    // save the connected device's name
+
+                    Toast.makeText(activity, "Connected to "
+                            + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
+                    if (mVoiceUIManager != null) {
+                        VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
+                        VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
+                    }
+                    break;
+                case Constants.MESSAGE_TOAST:
+                    if (null != activity) {
+                        Toast.makeText(activity, msg.getData().getString(Constants.TOAST),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    if (mVoiceUIManager != null) {
+                        VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
+                        VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
+                    }
+                    break;
+                case Constants.MESSAGE_READ:
+                    if (mVoiceUIManager != null) {
+                        VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
+                        VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
+                    }
+                    break;
+
+            }
 
             Log.d(TAG, msg.toString());
         }
