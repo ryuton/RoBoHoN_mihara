@@ -85,10 +85,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                     VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
                     VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
                 }
-                String number = "7777777777";
-                Uri call = Uri.parse("tel:" + number);
-                Intent surf = new Intent(Intent.ACTION_CALL, call);
-                startActivity(surf);
+
             }
         });
 
@@ -239,6 +236,15 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             default:
                 break;
         }
+    }
+
+    @Override
+    public void call() {
+        String number = "7777777777";
+        Uri call = Uri.parse("tel:" + number);
+        Intent surf = new Intent(Intent.ACTION_CALL, call);
+        startActivity(surf);
+
     }
 
     /**

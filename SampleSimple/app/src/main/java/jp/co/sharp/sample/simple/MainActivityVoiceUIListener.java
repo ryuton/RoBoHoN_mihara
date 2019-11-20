@@ -58,11 +58,12 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
         //発話が終わった後でアプリ側の処理を実行したい場合はこちらを使う.
         Log.v(TAG, "onVoiceUIActionEnd");
 
+
         if (VoiceUIVariableUtil.isTarget(variables, ScenarioDefinitions.TARGET)) {
             mCallback.onExecCommand(VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.ATTR_FUNCTION), variables);
 
         }
-
+        mCallback.call();
     }
 
 
@@ -114,6 +115,7 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
          * @param function 実行された操作コマンド種別.
          */
         public void onExecCommand(String function, List<VoiceUIVariable> variables);
+        public void call();
     }
 
 }
