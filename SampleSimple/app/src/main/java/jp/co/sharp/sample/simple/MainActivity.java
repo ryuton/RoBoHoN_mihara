@@ -112,7 +112,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                     VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
                     VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
                 }
-<<<<<<< HEAD
                 /*
                 String number = "7777777777";
                 Uri call = Uri.parse("tel:" + number);
@@ -120,9 +119,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 startActivity(surf);
 
                  */
-=======
-
->>>>>>> 7ca3158d9b585c381441a411cd62a13571762989
             }
         });
 
@@ -282,7 +278,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         }
     }
 
-<<<<<<< HEAD
     private void connectPairedDevice(String deviceAddress) {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null){
@@ -369,7 +364,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         }
     };
 
-=======
     @Override
     public void call() {
         String number = "7777777777";
@@ -378,8 +372,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         startActivity(surf);
 
     }
-
->>>>>>> 7ca3158d9b585c381441a411cd62a13571762989
     /**
      * ホームボタンの押下イベントを受け取るためのBroadcastレシーバークラス.<br>
      * <p/>

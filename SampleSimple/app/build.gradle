@@ -15,6 +15,7 @@ android {
     defaultConfig {
         applicationId "jp.co.sharp.sample.simple"
         minSdkVersion 21
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -28,7 +29,7 @@ android {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
-    provided files('jar/jp.co.sharp.android.voiceui.framework.jar')
+    testImplementation 'junit:junit:4.12'
+    compileOnly files('jar/jp.co.sharp.android.voiceui.framework.jar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
