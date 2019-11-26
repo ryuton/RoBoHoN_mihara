@@ -12,7 +12,7 @@
     <body>
         <topic id="t0" listen="true">
             <action index="1">
-                <speech>こんにちは。患者様ですか？業者の方ですか？</speech>
+                <speech>こんにちは。患者の方ですか？業者の方ですか？</speech>
             </action>
             <a href="#patient">
                 <situation trigger="user-word">患者 in ${Lvcsr:Basic}</situation>
@@ -20,7 +20,6 @@
             <a href="#trader">
                 <situation trigger="user-word">業者 in ${Lvcsr:Basic}</situation>
             </a>
-            <next href="#t1" type="default"/>
         </topic>
 
         <topic id="patient" listen="true">
@@ -66,6 +65,9 @@
         <topic id="director" listen="true">
             <action index="1">
                 <speech> 院長に電話をかけます。少々お待ちください。</speech>
+                <control function="Test_Control" target="jp.co.sharp.sample.simple">
+                    <data key="Toast_Contents" value="control"/>
+                </control>
             </action>
         </topic>
 
