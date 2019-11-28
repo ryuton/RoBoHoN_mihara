@@ -59,6 +59,10 @@ public class ScenarioDefinitions {
      */
     public static final String ACC_RESOLVE =  ScenarioDefinitions.PACKAGE + ".variable.t1";
     /**
+     * accost名：talk発話実行.
+     */
+    public static final String ACC_Talk =  ScenarioDefinitions.PACKAGE + ".talk.t1";
+    /**
      * accost名：get_memorypの発話実行.
      */
     public static final String ACC_GET_MEMORYP =  ScenarioDefinitions.PACKAGE + ".get_memoryp.t1";

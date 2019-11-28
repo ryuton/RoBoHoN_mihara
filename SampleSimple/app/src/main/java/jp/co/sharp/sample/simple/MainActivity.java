@@ -72,7 +72,9 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 
     private final static Integer REQUEST_ENABLE_BT = 1;
     private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
+    private final static String RASP0_MAC_ADDRESS = "B8:27:EB:C4:B3:3B";
     private final static String mConnectedDeviceName = "RASPZERO";
+    private Boolean test = false;
 
     private ProgressDialog progressDialog = null;
     Context activity = null;
@@ -112,13 +114,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                     VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
                     VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
                 }
-                /*
-                String number = "7777777777";
-                Uri call = Uri.parse("tel:" + number);
-                Intent surf = new Intent(Intent.ACTION_CALL, call);
-                startActivity(surf);
-
-                 */
             }
         });
 
@@ -191,11 +186,21 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         IntentFilter filter = new IntentFilter(VoiceUIManager.ACTION_VOICEUI_SERVICE_STARTED);
         registerReceiver(mVoiceUIStartReceiver, filter);
 
+        /*
+        // Register for broadcasts when a device is discovered.
+        IntentFilter btFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        registerReceiver(receiver, btFilter);
+
+        setmBluetoothService();
+        */
+
+
         progressDialog.setTitle("searching raspberry");
         progressDialog.setMessage("");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
-        connectPairedDevice(RASP3_MAC_ADDRESS);
+        connectPairedDevice(RASP0_MAC_ADDRESS);
+
 
     }
     @Override
@@ -278,7 +283,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         }
     }
 
-    private void connectPairedDevice(String deviceAddress) {
+    private void setmBluetoothService() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null){
             Log.e( TAG,"Device doesn't support Bluetooth");
@@ -292,7 +297,17 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 
         mBluetoothService = new BluetoothService(mBluetoothHandler);
 
+        mBluetoothService.startDiscovery();
+    }
+
+    private void connectPairedDevice(String deviceAddress) {
+
+        setmBluetoothService();
+
+        mBluetoothService.cancelDiscovery();
+
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
         for (BluetoothDevice device : pairedDevices) {
             String deviceHardwareAddress = device.getAddress();
             if ( deviceHardwareAddress.equals(deviceAddress)){
@@ -353,10 +368,11 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                     break;
                 case Constants.MESSAGE_READ:
                     if (mVoiceUIManager != null) {
-                        VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
+                        VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_Talk);
                         VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
                     }
                     break;
+                default:
 
             }
 
@@ -407,6 +423,24 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             }
         }
     }
+
+    // Create a BroadcastReceiver for ACTION_FOUND.
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                // Discovery has found a device. Get the BluetoothDevice
+                // object and its info from the Intent.
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                String deviceName = device.getName();
+                String deviceHardwareAddress = device.getAddress(); // MAC address
+
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                Log.d("main", "ended");
+            }
+        }
+    };
+
 
 
 }

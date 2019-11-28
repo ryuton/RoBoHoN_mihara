@@ -52,6 +52,14 @@ class BluetoothService(
     private var mConnectThread: ConnectThread? = null
     private var mConnectedThread: ConnectedThread? = null
 
+    fun startDiscovery() {
+        mAdapter?.startDiscovery()
+    }
+
+    fun cancelDiscovery() {
+        mAdapter?.cancelDiscovery()
+    }
+
     @Synchronized
     fun start() {
         Log.d(TAG, "start")
