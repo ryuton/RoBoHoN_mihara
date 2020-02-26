@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 repositories{
-    maven { url 'http://repo1.maven.org/maven2' }
+    maven { url 'https://repo1.maven.org/maven2' }
     google()
     mavenCentral()
 }
