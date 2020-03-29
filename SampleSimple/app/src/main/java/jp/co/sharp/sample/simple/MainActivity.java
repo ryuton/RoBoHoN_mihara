@@ -388,6 +388,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         startActivity(surf);
 
     }
+
     /**
      * ホームボタンの押下イベントを受け取るためのBroadcastレシーバークラス.<br>
      * <p/>
