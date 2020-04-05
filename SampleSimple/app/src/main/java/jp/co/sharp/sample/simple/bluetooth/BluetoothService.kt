@@ -32,15 +32,12 @@ class BluetoothService(
     private val MY_UUID_SECURE =  UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private val MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66")
 
-
-
     // Message types sent from the BluetoothService Handler
     private val MESSAGE_STATE_CHANGE: Int = 1
     private val MESSAGE_READ: Int = 2
     private val MESSAGE_WRITE: Int = 3
     private val MESSAGE_DEVICE_NAME: Int = 4
     private val MESSAGE_TOAST: Int = 5
-
 
     private val DEVICE_NAME: String = "device_name"
     private val TOAST: String = "toast"
