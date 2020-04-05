@@ -25,10 +25,14 @@
             <topic id="patient" listen="true">
                 <action index="1">
                     <speech> 診察券の番号を教えて欲しいな</speech>
+                    <control function="recog_talk" target="jp.co.sharp.sample.simple">
+                        <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
+                    </control>
                 </action>
                 <a href="#number">
                     <situation trigger="user-word"> 1 in ${Lvcsr:Basic}</situation>
                 </a>
+
                 <a href="#out">
                     <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ  in ${Lvcsr:Basic}</situation>
                 </a>

@@ -45,6 +45,9 @@
         <topic id="number" listen="false">
             <action index="1">
                 <speech>○○様ですね診療時間は2時からですのでお座りになってお待ちください。</speech>
+                <control function="recog_talk" target="jp.co.sharp.sample.simple">
+                    <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
+                </control>
                 <behavior id="assign" type="normal" />
             </action>
         </topic>

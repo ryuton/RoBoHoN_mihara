@@ -17,28 +17,41 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import jp.co.sharp.android.voiceui.VoiceUIManager;
 import jp.co.sharp.android.voiceui.VoiceUIVariable;
+import jp.co.sharp.sample.simple.api.MDnsServerDiscoveryListener;
 import jp.co.sharp.sample.simple.bluetooth.BluetoothService;
 import jp.co.sharp.sample.simple.customize.ScenarioDefinitions;
 import jp.co.sharp.sample.simple.util.VoiceUIManagerUtil;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil.VoiceUIVariableListHelper;
 import jp.co.sharp.sample.simple.bluetooth.Constants;
+import jp.co.sharp.sample.simple.api.APIConstants;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-/**
- * 音声UIを利用した基本的な機能だけ実装したActivity.
- */
-public class MainActivity extends Activity implements MainActivityVoiceUIListener.MainActivityScenarioCallback {
+
+public class MainActivity extends Activity implements MainActivityVoiceUIListener.MainActivityScenarioCallback, MDnsServerDiscoveryListener.MDnsServerDiscoveryCallback {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     /**
@@ -63,6 +76,11 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
     private Handler mHandler = new Handler();
 
     /**
+     * mDNSのリスナー
+     */
+    private MDnsServerDiscoveryListener mDnsServerDiscoveryListener = null;
+
+    /**
      * bluetooth var
      */
     private BluetoothAdapter mBluetoothAdapter = null;
@@ -74,13 +92,14 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
     private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
     private final static String RASP0_MAC_ADDRESS = "B8:27:EB:C4:B3:3B";
     private final static String mConnectedDeviceName = "RASPZERO";
-    private Boolean test = false;
+    private String mHostname;
 
     private ProgressDialog progressDialog = null;
     Context activity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         progressDialog = new ProgressDialog(this);
         activity = this;
         super.onCreate(savedInstanceState);
@@ -216,6 +235,9 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         if (mMainActivityVoiceUIListener == null) {
             mMainActivityVoiceUIListener = new MainActivityVoiceUIListener(this);
         }
+        if (mDnsServerDiscoveryListener == null) {
+            mDnsServerDiscoveryListener = new MDnsServerDiscoveryListener(this, "rasp0");
+        }
         //VoiceUIListenerの登録.
         VoiceUIManagerUtil.registerVoiceUIListener(mVoiceUIManager, mMainActivityVoiceUIListener);
 
@@ -268,22 +290,116 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 finish();
                 break;
             case ScenarioDefinitions.FUNC_RECOG_TALK:
-                final String lvcsr = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_LVCSR_BASIC);
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(!isFinishing()) {
-                            ((TextView) findViewById(R.id.recog_text)).setText("Lvcsr:"+lvcsr);
-                        }
-                    }
-                });
+//                final String lvcsr = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_LVCSR_BASIC);
+//                mHandler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if(!isFinishing()) {
+//                            ((TextView) findViewById(R.id.recog_text)).setText("Lvcsr:"+lvcsr);
+//                        }
+//                    }
+//                });
+                Log.i(TAG, "recog");
                 break;
             default:
                 break;
         }
     }
+    @Override
+    public void onExecCommand(String command, VoiceUIVariable variable) {
+        Log.v(TAG, "onExecCommand() : " + command);
+        switch (command) {
+            case ScenarioDefinitions.FUNC_RECOG_TALK:
+                Map<String,String> headers=new HashMap<String,String>();
+                try {
+                    String response = get(APIConstants.BASE_URL + APIConstants.PATIENT + variable.getStringValue(), headers);
+                    JSONObject responseJson = new JSONObject(response);
 
-    private void setmBluetoothService() {
+                    Log.e(TAG,
+                            responseJson.getJSONArray("results")
+                                    .getJSONObject(0)
+                                    .getString("KANJYANM")
+                    );
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+
+        }
+
+    }
+
+    private static String get(String endpoint, Map<String, String> headers) throws IOException {
+
+        final int TIMEOUT_MILLIS = 0;// タイムアウトミリ秒：0は無限
+
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        HttpURLConnection httpURLConnection = null;
+        BufferedReader bufferedReader = null;
+        InputStream inputStream = null;
+        InputStreamReader isr = null;
+
+        try {
+            URL url = new URL(endpoint);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(TIMEOUT_MILLIS);// 接続にかかる時間
+            httpURLConnection.setReadTimeout(TIMEOUT_MILLIS);// データの読み込みにかかる時間
+            httpURLConnection.setRequestMethod("GET");// HTTPメソッド
+            httpURLConnection.setUseCaches(false);// キャッシュ利用
+            httpURLConnection.setDoOutput(false);// リクエストのボディの送信を許可(GETのときはfalse,POSTのときはtrueにする)
+            httpURLConnection.setDoInput(true);// レスポンスのボディの受信を許可
+
+            // HTTPヘッダをセット
+            if (headers != null) {
+                for (String key : headers.keySet()) {
+                    httpURLConnection.setRequestProperty(key, headers.get(key));// HTTPヘッダをセット
+                }
+            }
+            httpURLConnection.connect();
+
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+                inputStream = httpURLConnection.getInputStream();
+                isr = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+                bufferedReader = new BufferedReader(isr);
+                String line = null;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+            } else {
+                // If responseCode inputStream not HTTP_OK
+            }
+
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            // fortify safeかつJava1.6 compliantなclose処理
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                }
+            }
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                }
+            }
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                }
+            }
+            if (httpURLConnection != null) {
+                httpURLConnection.disconnect();
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    private void setBluetoothService() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null){
             Log.e( TAG,"Device doesn't support Bluetooth");
@@ -302,7 +418,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 
     private void connectPairedDevice(String deviceAddress) {
 
-        setmBluetoothService();
+        setBluetoothService();
 
         mBluetoothService.cancelDiscovery();
 
@@ -387,6 +503,11 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         Intent surf = new Intent(Intent.ACTION_CALL, call);
         startActivity(surf);
 
+    }
+
+    @Override
+    public void getHostName(@NotNull InetAddress hostName) {
+        mHostname = hostName.toString();
     }
 
     /**
