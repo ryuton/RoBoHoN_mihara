@@ -160,6 +160,54 @@ public class VoiceUIManagerUtil {
         } catch (RemoteException e) {
             Log.e(TAG, "Failed StopSpeech.[" + e.getMessage() + "]");
         }
+    }/**
+     * memory_pに値を記憶する.<br>
+     *
+     * @param vm {@link VoiceUIManager}
+     * @param key memory_pのkey名(${memory_p:key}のkey部分).
+     * @param value memory_pに記憶する値.
+     * @return updateAppInfoの実行結果
+     * @see VoiceUIManager#updateAppInfo(List)
+     */
+    public static int setMemory(VoiceUIManager vm, final String key, final String value) {
+        int result = VoiceUIManager.VOICEUI_ERROR;
+        String name;
+        if (vm == null || key == null || "".equals(key)) {
+            return result;
+        }else{
+            name = ScenarioDefinitions.TAG_MEMORY_P + key;
+        }
+        VoiceUIVariable variable = new VoiceUIVariable(name, value);
+        ArrayList<VoiceUIVariable> variables = new ArrayList<VoiceUIVariable>();
+        variables.add(variable);
+        try {
+            result = vm.updateAppInfo(variables);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Failed updateAppInfo.[" + e.getMessage() + "]");
+        }
+        return result;
+
+    }
+
+    /**
+     * memory_pの値を削除する.<br>
+     * {@link VoiceUIManager#removeVariable} のラッパー関数.
+     * <br>
+     * @param vm {@link VoiceUIManager}
+     * @param key memory_pのkey名(${memory_p:key}のkey部分).
+     * @return removeVariableの実行結果
+     * @see VoiceUIManager#updateAppInfo(List)
+     */
+    public static int clearMemory(VoiceUIManager vm, final String key) {
+        int result = VoiceUIManager.VOICEUI_ERROR;
+        if (vm != null) {
+            try {
+                result = vm.removeVariable(key);
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed removeVariable.[" + e.getMessage() + "]");
+            }
+        }
+        return result;
     }
 
     /**

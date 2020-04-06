@@ -5,5 +5,6 @@ class APIConstants {
         const val BASE_URL = "http://192.168.2.100/"
 
         const val PATIENT = "Patient/"
+        const val APPOINT = "Appoint/"
     }
 }

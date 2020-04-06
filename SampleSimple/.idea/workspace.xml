@@ -10,15 +10,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84a40eba-0bf5-432d-93a0-74896da48eb5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/api/APIConstants.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/api/MDnsServerDiscoveryListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/libraries/Gradle____local_jars____Users_x_RoBoHoN_mihara_SampleAction_app_jar_jp_co_sharp_android_rb_action_framework_jar_unspecified_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_appoint.hvml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_accost.hvml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_accost.hvml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/api/APIConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/api/APIConstants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/customize/ScenarioDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/customize/ScenarioDefinitions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/util/VoiceUIManagerUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/util/VoiceUIManagerUtil.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +34,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="353375060047478" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_10_API_29" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -63,7 +71,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/bluetooth" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/assets/hvml/other" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
@@ -80,6 +88,7 @@
       <recent name="jp.co.sharp.sample.simple.bluetooth" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/assets/hvml/other" />
       <recent name="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/bluetooth" />
       <recent name="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/common" />
       <recent name="$PROJECT_DIR$/app/src/main/java" />
@@ -182,21 +191,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java</url>
-          <line>315</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

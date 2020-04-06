@@ -46,9 +46,6 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
         }
     }
 
-
-
-
     @Override
     public void onVoiceUIActionEnd(List<VoiceUIVariable> variables) {
         //Actionの完了通知(シナリオ側にcontrolタグを書いたActionが完了すると呼び出される).

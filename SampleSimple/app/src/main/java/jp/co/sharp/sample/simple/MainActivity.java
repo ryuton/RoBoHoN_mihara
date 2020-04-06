@@ -312,18 +312,24 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             case ScenarioDefinitions.FUNC_RECOG_TALK:
                 Map<String,String> headers=new HashMap<String,String>();
                 try {
-                    String response = get(APIConstants.BASE_URL + APIConstants.PATIENT + variable.getStringValue(), headers);
+                    String response = get(APIConstants.BASE_URL + APIConstants.APPOINT + variable.getStringValue(), headers);
                     JSONObject responseJson = new JSONObject(response);
-
+                    String yoyakutm = responseJson.getJSONArray("results")
+                            .getJSONObject(0)
+                            .getString("YOYAKUTM");
+                    String kanjyakananm = responseJson.getJSONArray("results")
+                            .getJSONObject(0)
+                            .getString("KANJYAKANANM");
+                    int ret = VoiceUIManagerUtil.setMemory(mVoiceUIManager, ScenarioDefinitions.MEM_P_APPOINT,  yoyakutm);
+                    ret = VoiceUIManagerUtil.setMemory(mVoiceUIManager, ScenarioDefinitions.MEM_P_KANJYAKANANM, kanjyakananm);
                     Log.e(TAG,
                             responseJson.getJSONArray("results")
                                     .getJSONObject(0)
-                                    .getString("KANJYANM")
+                                    .getString("KANJYAKANANM")
                     );
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
-
         }
 
     }

@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<hvml version="2.0">
+    <head>
+        <producer>jp.co.sharp.sample.simple</producer>
+        <description>Java側からのトリガーで発話する</description>
+        <scene value="jp.co.sharp.sample.simple.scene_common"/>
+        <version value="1.0"/>
+        <tool_version>1.00</tool_version>
+        <accost priority="75" topic_id="t1" word="jp.co.sharp.sample.simple.appoint.t1"/>
+    </head>
+    <body>
+        <body>
+            <topic id="t1" listen="true">
+                <action index="1">
+                    <speech>${memory_p:jp.co.sharp.sample.simple.kanjyakananm}さんですね。${memory_p:jp.co.sharp.sample.simple.yoyakutm}時からだよ。</speech>
+                </action>
+            </topic>
+        </body>
+    </body>
+</hvml>
