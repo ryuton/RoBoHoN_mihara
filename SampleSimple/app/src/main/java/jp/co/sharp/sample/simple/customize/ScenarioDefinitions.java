@@ -19,6 +19,10 @@ public class ScenarioDefinitions {
      */
     public static final String TAG_ACCOST = "accost";
     /**
+     * memory_pを指定するタグ
+     */
+    public static final String TAG_MEMORY_P = "memory_p:";
+    /**
      * target属性を指定する文字列
      */
     public static final String ATTR_TARGET = "target";
@@ -71,6 +75,10 @@ public class ScenarioDefinitions {
      */
     public static final String ACC_END_APP = ScenarioDefinitions.PACKAGE + ".app_end.t2";
     /**
+     * accost名：予約確認の発話
+     */
+    public static final String ACC_APPOINT = ScenarioDefinitions.PACKAGE + ".appoint.t1";
+    /**
      * resolve variable：アプリで変数解決する値.
      */
     public static final String RESOLVE_JAVA_VALUE = ScenarioDefinitions.PACKAGE + ":java_side_value";
@@ -94,6 +102,14 @@ public class ScenarioDefinitions {
      * memory_p：分.
      * */
     public static final String MEM_P_MINUTE = ScenarioDefinitions.TAG_MEMORY_PERMANENT + ScenarioDefinitions.PACKAGE + ".minute";
+    /**
+     * memory_p:予約時間
+     */
+    public static final String MEM_P_APPOINT = ScenarioDefinitions.TAG_MEMORY_PERMANENT + ScenarioDefinitions.PACKAGE + ".yoyakutm";
+    /**
+     * memory_p:患者名前（kana）
+     */
+    public static final String MEM_P_KANJYAKANANM = ScenarioDefinitions.TAG_MEMORY_PERMANENT + ScenarioDefinitions.PACKAGE + ".kanjyakananm";
     /**
      * static クラスとして使用する.
      */

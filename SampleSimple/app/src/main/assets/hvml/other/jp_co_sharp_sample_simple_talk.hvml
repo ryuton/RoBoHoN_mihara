@@ -7,7 +7,7 @@
         <version value="1.0" />
         <tool_version>1.00</tool_version>
         <accost priority="74" topic_id="t0" word="jp.co.sharp.sample.simple.talk.t1"/>
-        <situation priority="75" topic_id="t0" trigger="user-word">コンニチハ in ${Lvcsr:Kana}</situation>
+        <situation priority="75" topic_id="patient" trigger="user-word">コンニチハ in ${Lvcsr:Kana}</situation>
     </head>
     <body>
         <topic id="t0" listen="true">
@@ -29,7 +29,7 @@
             <a href="#number">
                 <situation trigger="user-word"> 1 in ${Lvcsr:Basic}</situation>
             </a>
-            <a href="#out">
+            <a href="#patient">
                 <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ  in ${Lvcsr:Basic}</situation>
             </a>
             <next href="#out" type="default"/>
@@ -44,7 +44,7 @@
 
         <topic id="number" listen="false">
             <action index="1">
-                <speech>○○様ですね診療時間は2時からですのでお座りになってお待ちください。</speech>
+                <speech>ちょっと待ってね</speech>
                 <control function="recog_talk" target="jp.co.sharp.sample.simple">
                     <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
                 </control>

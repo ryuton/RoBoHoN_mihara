@@ -41,13 +41,10 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
         Log.v(TAG, "onVoiceUIEvent");
         for (VoiceUIVariable variable : variables) {
             if ("Lvcsr_Basic".equals(variable.getName())) {
-                mCallback.onExecCommand(ScenarioDefinitions.FUNC_RECOG_TALK, variable);
+                //mCallback.onExecCommand(ScenarioDefinitions.FUNC_RECOG_TALK, variable);
             }
         }
     }
-
-
-
 
     @Override
     public void onVoiceUIActionEnd(List<VoiceUIVariable> variables) {
@@ -58,7 +55,7 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
             mCallback.onExecCommand(VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.ATTR_FUNCTION), variables);
 
         }
-        mCallback.call();
+        //mCallback.call();
     }
 
     @Override
