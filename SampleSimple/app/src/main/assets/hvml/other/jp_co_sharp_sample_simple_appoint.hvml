@@ -2,19 +2,24 @@
 <hvml version="2.0">
     <head>
         <producer>jp.co.sharp.sample.simple</producer>
-        <description>Java側からのトリガーで発話する</description>
+        <description>Java側からのトリガー発話</description>
         <scene value="jp.co.sharp.sample.simple.scene_common"/>
         <version value="1.0"/>
         <tool_version>1.00</tool_version>
         <accost priority="75" topic_id="t1" word="jp.co.sharp.sample.simple.appoint.t1"/>
+        <situation priority="75" topic_id="t1" trigger="user-word">アポイント in ${Lvcsr:Kana}</situation>
     </head>
     <body>
-        <body>
-            <topic id="t1" listen="true">
-                <action index="1">
-                    <speech>${memory_p:jp.co.sharp.sample.simple.kanjyakananm}さんですね。${memory_p:jp.co.sharp.sample.simple.yoyakutm}時からだよ。</speech>
-                </action>
-            </topic>
-        </body>
+        <topic id="t1" listen="true">
+            <action index="1">
+                <speech>${memory_p:jp.co.sharp.sample.simple.kanjyakananm}さんですね。${memory_p:jp.co.sharp.sample.simple.yoyakutm}時からだよ。</speech>
+            </action>
+        </topic>
+
+        <topic id="t2" listen="true">
+            <action index="1">
+                <speech>からだよ。</speech>
+            </action>
+        </topic>
     </body>
 </hvml>

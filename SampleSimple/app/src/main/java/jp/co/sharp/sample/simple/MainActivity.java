@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -130,7 +131,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             @Override
             public void onClick(View v) {
                 if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
+                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_APPOINT);
                     VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
                 }
             }
@@ -290,119 +291,162 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 finish();
                 break;
             case ScenarioDefinitions.FUNC_RECOG_TALK:
-//                final String lvcsr = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_LVCSR_BASIC);
-//                mHandler.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        if(!isFinishing()) {
-//                            ((TextView) findViewById(R.id.recog_text)).setText("Lvcsr:"+lvcsr);
-//                        }
-//                    }
-//                });
+                for (final VoiceUIVariable variable: variables){
+                    if ("Lvcsr_Basic".equals(variable.getName())) {
+                        AsyncTestTask testTask = new AsyncTestTask(variable);
+                        testTask.execute();
+                    }
+
+                }
+
                 Log.i(TAG, "recog");
                 break;
             default:
                 break;
         }
     }
+
     @Override
     public void onExecCommand(String command, VoiceUIVariable variable) {
         Log.v(TAG, "onExecCommand() : " + command);
         switch (command) {
             case ScenarioDefinitions.FUNC_RECOG_TALK:
-                Map<String,String> headers=new HashMap<String,String>();
-                try {
-                    String response = get(APIConstants.BASE_URL + APIConstants.APPOINT + variable.getStringValue(), headers);
-                    JSONObject responseJson = new JSONObject(response);
-                    String yoyakutm = responseJson.getJSONArray("results")
-                            .getJSONObject(0)
-                            .getString("YOYAKUTM");
-                    String kanjyakananm = responseJson.getJSONArray("results")
-                            .getJSONObject(0)
-                            .getString("KANJYAKANANM");
-                    int ret = VoiceUIManagerUtil.setMemory(mVoiceUIManager, ScenarioDefinitions.MEM_P_APPOINT,  yoyakutm);
-                    ret = VoiceUIManagerUtil.setMemory(mVoiceUIManager, ScenarioDefinitions.MEM_P_KANJYAKANANM, kanjyakananm);
-                    Log.e(TAG,
-                            responseJson.getJSONArray("results")
-                                    .getJSONObject(0)
-                                    .getString("KANJYAKANANM")
-                    );
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
         }
 
     }
 
-    private static String get(String endpoint, Map<String, String> headers) throws IOException {
 
-        final int TIMEOUT_MILLIS = 0;// タイムアウトミリ秒：0は無限
 
-        final StringBuilder stringBuilder = new StringBuilder();
+    private class AsyncTestTask extends AsyncTask<Void, Integer, String> {
+        VoiceUIVariable variable;
 
-        HttpURLConnection httpURLConnection = null;
-        BufferedReader bufferedReader = null;
-        InputStream inputStream = null;
-        InputStreamReader isr = null;
-
-        try {
-            URL url = new URL(endpoint);
-            httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setConnectTimeout(TIMEOUT_MILLIS);// 接続にかかる時間
-            httpURLConnection.setReadTimeout(TIMEOUT_MILLIS);// データの読み込みにかかる時間
-            httpURLConnection.setRequestMethod("GET");// HTTPメソッド
-            httpURLConnection.setUseCaches(false);// キャッシュ利用
-            httpURLConnection.setDoOutput(false);// リクエストのボディの送信を許可(GETのときはfalse,POSTのときはtrueにする)
-            httpURLConnection.setDoInput(true);// レスポンスのボディの受信を許可
-
-            // HTTPヘッダをセット
-            if (headers != null) {
-                for (String key : headers.keySet()) {
-                    httpURLConnection.setRequestProperty(key, headers.get(key));// HTTPヘッダをセット
-                }
-            }
-            httpURLConnection.connect();
-
-            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-
-                inputStream = httpURLConnection.getInputStream();
-                isr = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-                bufferedReader = new BufferedReader(isr);
-                String line = null;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-            } else {
-                // If responseCode inputStream not HTTP_OK
-            }
-
-        } catch (IOException e) {
-            throw e;
-        } finally {
-            // fortify safeかつJava1.6 compliantなclose処理
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                }
-            }
-            if (isr != null) {
-                try {
-                    isr.close();
-                } catch (IOException e) {
-                }
-            }
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                }
-            }
-            if (httpURLConnection != null) {
-                httpURLConnection.disconnect();
-            }
+        public AsyncTestTask(VoiceUIVariable variable) {
+            this.variable = variable;
         }
-        return stringBuilder.toString();
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+
+                JSONObject responseJson = new JSONObject(s);
+                String yoyakutm = responseJson.getJSONArray("results")
+                        .getJSONObject(0)
+                        .getString("YOYAKUTM");
+                String kanjyakananm = responseJson.getJSONArray("results")
+                        .getJSONObject(0)
+                        .getString("KANJYAKANANM");
+                int ret = VoiceUIVariableUtil.setVariableData(mVoiceUIManager, ScenarioDefinitions.MEM_P_APPOINT,  yoyakutm);
+                if(ret == VoiceUIManager.VOICEUI_ERROR){
+                    Log.e(TAG, "setVariableData:VARIABLE_REGISTER_FAILED");
+                }
+                ret = VoiceUIVariableUtil.setVariableData(mVoiceUIManager, ScenarioDefinitions.MEM_P_KANJYAKANANM, kanjyakananm);
+                if(ret == VoiceUIManager.VOICEUI_ERROR){
+                    Log.e(TAG, "setVariableData:VARIABLE_REGISTER_FAILED");
+                }
+
+                Log.e(TAG,
+                        responseJson.getJSONArray("results")
+                                .getJSONObject(0)
+                                .getString("KANJYAKANANM")
+                );
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_APPOINT);
+            VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            Map<String,String> headers=new HashMap<String,String>();
+            try {
+                return get(APIConstants.BASE_URL + APIConstants.APPOINT + variable.getStringValue(), headers);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+           return null;
+        }
+
+        private String get(String endpoint, Map<String, String> headers) throws IOException {
+
+            final int TIMEOUT_MILLIS = 0;// タイムアウトミリ秒：0は無限
+
+            final StringBuilder stringBuilder = new StringBuilder();
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedReader bufferedReader = null;
+            InputStream inputStream = null;
+            InputStreamReader isr = null;
+
+            try {
+                URL url = new URL(endpoint);
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setConnectTimeout(TIMEOUT_MILLIS);// 接続にかかる時間
+                httpURLConnection.setReadTimeout(TIMEOUT_MILLIS);// データの読み込みにかかる時間
+                httpURLConnection.setRequestMethod("GET");// HTTPメソッド
+                httpURLConnection.setUseCaches(false);// キャッシュ利用
+                httpURLConnection.setDoOutput(false);// リクエストのボディの送信を許可(GETのときはfalse,POSTのときはtrueにする)
+                httpURLConnection.setDoInput(true);// レスポンスのボディの受信を許可
+
+                // HTTPヘッダをセット
+                if (headers != null) {
+                    for (String key : headers.keySet()) {
+                        httpURLConnection.setRequestProperty(key, headers.get(key));// HTTPヘッダをセット
+                    }
+                }
+                httpURLConnection.connect();
+
+                if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+                    inputStream = httpURLConnection.getInputStream();
+                    isr = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+                    bufferedReader = new BufferedReader(isr);
+                    String line = null;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                } else {
+                    // If responseCode inputStream not HTTP_OK
+                }
+
+            } catch (IOException e) {
+                throw e;
+            } finally {
+                // fortify safeかつJava1.6 compliantなclose処理
+                if (bufferedReader != null) {
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                    }
+                }
+                if (isr != null) {
+                    try {
+                        isr.close();
+                    } catch (IOException e) {
+                    }
+                }
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                    }
+                }
+                if (httpURLConnection != null) {
+                    httpURLConnection.disconnect();
+                }
+            }
+            return stringBuilder.toString();
+        }
+
     }
 
     private void setBluetoothService() {

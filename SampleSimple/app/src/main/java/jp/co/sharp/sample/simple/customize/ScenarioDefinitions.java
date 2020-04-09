@@ -75,6 +75,10 @@ public class ScenarioDefinitions {
      */
     public static final String ACC_END_APP = ScenarioDefinitions.PACKAGE + ".app_end.t2";
     /**
+     * accost名：予約確認の発話
+     */
+    public static final String ACC_APPOINT = ScenarioDefinitions.PACKAGE + ".appoint.t1";
+    /**
      * resolve variable：アプリで変数解決する値.
      */
     public static final String RESOLVE_JAVA_VALUE = ScenarioDefinitions.PACKAGE + ":java_side_value";
