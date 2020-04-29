@@ -15,11 +15,5 @@
                 <speech>${memory_p:jp.co.sharp.sample.simple.kanjyakananm}さんですね。${memory_p:jp.co.sharp.sample.simple.yoyakutm}時からだよ。</speech>
             </action>
         </topic>
-
-        <topic id="t2" listen="true">
-            <action index="1">
-                <speech>からだよ。</speech>
-            </action>
-        </topic>
     </body>
 </hvml>

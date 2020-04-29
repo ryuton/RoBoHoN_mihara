@@ -85,9 +85,6 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
     public void onVoiceUIRejection(VoiceUIVariable variable) {
         //priority負けなどで発話が棄却された場合のコールバック.
         Log.v(TAG, "onVoiceUIRejection");
-        if (ScenarioDefinitions.ACC_END_APP.equals(variable.getStringValue())) {
-            mCallback.onExecCommand(ScenarioDefinitions.FUNC_END_APP, variable);
-        }
     }
 
     @Override
@@ -105,7 +102,6 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
          * @param function 実行された操作コマンド種別.
          */
         void onExecCommand(String function, List<VoiceUIVariable> variables);
-        void onExecCommand(String function, VoiceUIVariable variable);
         void call();
     }
 }

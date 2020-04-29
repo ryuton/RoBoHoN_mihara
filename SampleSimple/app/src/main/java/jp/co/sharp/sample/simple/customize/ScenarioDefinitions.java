@@ -59,21 +59,9 @@ public class ScenarioDefinitions {
      */
     public static final String ACC_ACCOST =  ScenarioDefinitions.PACKAGE + ".accost.t1";
     /**
-     * accost名：resolveテスト発話実行.
-     */
-    public static final String ACC_RESOLVE =  ScenarioDefinitions.PACKAGE + ".variable.t1";
-    /**
      * accost名：talk発話実行.
      */
     public static final String ACC_Talk =  ScenarioDefinitions.PACKAGE + ".talk.t1";
-    /**
-     * accost名：get_memorypの発話実行.
-     */
-    public static final String ACC_GET_MEMORYP =  ScenarioDefinitions.PACKAGE + ".get_memoryp.t1";
-    /**
-     * accost名：アプリ終了発話実行.
-     */
-    public static final String ACC_END_APP = ScenarioDefinitions.PACKAGE + ".app_end.t2";
     /**
      * accost名：予約確認の発話
      */
@@ -83,25 +71,9 @@ public class ScenarioDefinitions {
      */
     public static final String RESOLVE_JAVA_VALUE = ScenarioDefinitions.PACKAGE + ":java_side_value";
     /**
-     * data key：シナリオ起動時情報1.
-     */
-    public static final String KEY_TEST_1 = "key_test1";
-    /**
-     * data key：シナリオ起動時情報2.
-     */
-    public static final String KEY_TEST_2 = "key_test2";
-    /**
      * data key：大語彙認識文言.
      */
     public static final String KEY_LVCSR_BASIC = "Lvcsr_Basic";
-    /**
-     * memory_p：時.
-     */
-    public static final String MEM_P_HOUR = ScenarioDefinitions.TAG_MEMORY_PERMANENT + ScenarioDefinitions.PACKAGE + ".hour";
-    /**
-     * memory_p：分.
-     * */
-    public static final String MEM_P_MINUTE = ScenarioDefinitions.TAG_MEMORY_PERMANENT + ScenarioDefinitions.PACKAGE + ".minute";
     /**
      * memory_p:予約時間
      */

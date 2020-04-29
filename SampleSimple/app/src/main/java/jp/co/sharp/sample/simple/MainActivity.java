@@ -75,22 +75,18 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
      * UIスレッド処理用.
      */
     private Handler mHandler = new Handler();
-
     /**
      * mDNSのリスナー
      */
     private MDnsServerDiscoveryListener mDnsServerDiscoveryListener = null;
-
     /**
      * bluetooth var
      */
     private BluetoothAdapter mBluetoothAdapter = null;
     private BluetoothService mBluetoothService = null;
-
     private BluetoothDevice mBluetoothDevice = null;
 
     private final static Integer REQUEST_ENABLE_BT = 1;
-    private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
     private final static String RASP0_MAC_ADDRESS = "B8:27:EB:C4:B3:3B";
     private final static String mConnectedDeviceName = "RASPZERO";
     private String mHostname;
@@ -108,93 +104,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        if (intent != null) {
-            //ホームシナリオから"mode"の値を受け取る.
-            String modeVal = intent.getStringExtra("mode");
-            if (modeVal != null) {
-                ((TextView)findViewById(R.id.mode_value)).setText(modeVal);
-            }
-            //ホームシナリオから任意の値を受け取る.
-            List<VoiceUIVariable> variables = intent.getParcelableArrayListExtra("VoiceUIVariable");
-            if (variables != null) {
-                String test1 = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_TEST_1);
-                String test2 = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_TEST_2);
-                ((TextView)findViewById(R.id.test_value)).setText(test1 + ", " + test2);
-            }else{
-                Log.d(TAG, "VoiceUIVariable is null");
-            }
-        }
-
-        // accostボタン
-        Button voiceAccostButton = (Button)findViewById(R.id.voice_accost_button);
-        voiceAccostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_APPOINT);
-                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                }
-            }
-        });
-
-        // resolve variableボタン
-        Button resolveButton = (Button)findViewById(R.id.resolve_variable_button);
-        resolveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_RESOLVE);
-                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                }
-            }
-        });
-
-        // set memory_pボタン
-        Button getMemoryPButton = (Button)findViewById(R.id.set_memoryP);
-        getMemoryPButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar now = Calendar.getInstance();
-
-                final String hour = String.valueOf(now.get(Calendar.HOUR_OF_DAY));
-                final String minute = String.valueOf(now.get(Calendar.MINUTE));
-                int ret = VoiceUIVariableUtil.setVariableData(mVoiceUIManager, ScenarioDefinitions.MEM_P_HOUR, hour);
-                if(ret == VoiceUIManager.VOICEUI_ERROR){
-                    Log.d(TAG, "setVariableData:VARIABLE_REGISTER_FAILED");
-                }
-                ret = VoiceUIVariableUtil.setVariableData(mVoiceUIManager, ScenarioDefinitions.MEM_P_MINUTE, minute);
-                if(ret == VoiceUIManager.VOICEUI_ERROR){
-                    Log.d(TAG, "setVariableData:VARIABLE_REGISTER_FAILED");
-                }
-                String text = "Set " + hour + ":" + minute;
-                TextView textSetting = (TextView)findViewById(R.id.ViewTime);
-                textSetting.setText(text);
-            }
-        });
-
-        // get memory_pボタン
-        Button setMemoryPButton = (Button)findViewById(R.id.get_memoryP);
-        setMemoryPButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_GET_MEMORYP);
-                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                }
-            }
-        });
-
-        // finish app：アプリ終了ボタン
-        Button finishAppButton = (Button)findViewById(R.id.finish_app_button);
-        finishAppButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_END_APP);
-                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                }
-            }
-        });
 
         //ホームボタンの検知登録.
         mHomeEventReceiver = new HomeEventReceiver();
@@ -206,23 +115,13 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         IntentFilter filter = new IntentFilter(VoiceUIManager.ACTION_VOICEUI_SERVICE_STARTED);
         registerReceiver(mVoiceUIStartReceiver, filter);
 
-        /*
-        // Register for broadcasts when a device is discovered.
-        IntentFilter btFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(receiver, btFilter);
-
-        setmBluetoothService();
-        */
-
-
         progressDialog.setTitle("searching raspberry");
         progressDialog.setMessage("");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
         connectPairedDevice(RASP0_MAC_ADDRESS);
-
-
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -291,32 +190,22 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 finish();
                 break;
             case ScenarioDefinitions.FUNC_RECOG_TALK:
+                //診察番号を取得した際に
                 for (final VoiceUIVariable variable: variables){
-                    if ("Lvcsr_Basic".equals(variable.getName())) {
+                    if (ScenarioDefinitions.KEY_LVCSR_BASIC.equals(variable.getName())) {
                         AsyncTestTask testTask = new AsyncTestTask(variable);
                         testTask.execute();
                     }
-
                 }
-
-                Log.i(TAG, "recog");
                 break;
             default:
                 break;
         }
     }
 
-    @Override
-    public void onExecCommand(String command, VoiceUIVariable variable) {
-        Log.v(TAG, "onExecCommand() : " + command);
-        switch (command) {
-            case ScenarioDefinitions.FUNC_RECOG_TALK:
-        }
-
-    }
-
-
-
+    //ラズパイ側にget
+    //そのうちちゃんとした場所に移そう
+    @SuppressLint("StaticFieldLeak")
     private class AsyncTestTask extends AsyncTask<Void, Integer, String> {
         VoiceUIVariable variable;
 
