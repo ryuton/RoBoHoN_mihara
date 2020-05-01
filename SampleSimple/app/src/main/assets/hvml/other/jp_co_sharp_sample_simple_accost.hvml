@@ -24,11 +24,12 @@
 
             <topic id="patient" listen="true">
                 <action index="1">
-                    <speech> 診察券の番号を教えて欲しいな</speech>
+                    <speech> 診察番号を教えて欲しいな</speech>
                     <control function="recog_talk" target="jp.co.sharp.sample.simple">
                         <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
                     </control>
                 </action>
+
                 <a href="#number">
                     <situation trigger="user-word"> 1 in ${Lvcsr:Basic}</situation>
                 </a>
@@ -39,16 +40,16 @@
                 <next href="#out" type="default"/>
             </topic>
 
-            <topic id="out" listen="false">
+            <topic id="number" listen="false">
                 <action index="1">
-                    <speech>すいませんどちら様でしょうか。今係りの者がきますのでお待ちください</speech>
+                    <speech>○○様ですね診療時間は2時からですのでお座りになってお待ちください。</speech>
                     <behavior id="assign" type="normal" />
                 </action>
             </topic>
 
-            <topic id="number" listen="false">
+            <topic id="out" listen="false">
                 <action index="1">
-                    <speech>○○様ですね診療時間は2時からですのでお座りになってお待ちください。</speech>
+                    <speech>すいませんどちら様でしょうか。今係りの者がきますのでお待ちください</speech>
                     <behavior id="assign" type="normal" />
                 </action>
             </topic>
@@ -79,6 +80,11 @@
                     <speech> すいません。午後は2時から診療開始ですので、お待ちください</speech>
                 </action>
             </topic>
+
+
+
+
+
 
 
             <topic id="t0" listen="true">

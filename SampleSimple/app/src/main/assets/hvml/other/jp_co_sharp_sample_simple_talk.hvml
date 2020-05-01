@@ -6,84 +6,13 @@
         <scene value="jp.co.sharp.sample.simple.scene_common" />
         <version value="1.0" />
         <tool_version>1.00</tool_version>
-        <accost priority="74" topic_id="t0" word="jp.co.sharp.sample.simple.talk.t1"/>
-        <situation priority="75" topic_id="patient" trigger="user-word">コンニチハ in ${Lvcsr:Kana}</situation>
+        <accost priority="74" topic_id="#t0" word="jp.co.sharp.sample.simple.talk.t1"/>
+        <situation priority="75" topic_id="#t0" trigger="user-word">コンニチハ in ${Lvcsr:Kana}</situation>
     </head>
     <body>
-        <topic id="t0" listen="true">
+        <topic id="t999" listen="true">
             <action index="1">
-                <speech>こんにちは。患者の方ですか？業者の方ですか？</speech>
-            </action>
-            <a href="#patient">
-                <situation trigger="user-word">患者 in ${Lvcsr:Basic}</situation>
-            </a>
-            <a href="#trader">
-                <situation trigger="user-word">業者 in ${Lvcsr:Basic}</situation>
-            </a>
-        </topic>
-
-        <topic id="patient" listen="true">
-            <action index="1">
-                <speech> 診察券の番号を教えて欲しいな</speech>
-            </action>
-            <a href="#number">
-                <situation trigger="user-word"> 1 in ${Lvcsr:Basic}</situation>
-            </a>
-            <a href="#patient">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ  in ${Lvcsr:Basic}</situation>
-            </a>
-            <next href="#out" type="default"/>
-        </topic>
-
-        <topic id="out" listen="false">
-            <action index="1">
-                <speech>すいませんどちら様でしょうか。今係りの者がきますのでお待ちください</speech>
-                <behavior id="assign" type="normal" />
-            </action>
-        </topic>
-
-        <topic id="number" listen="false">
-            <action index="1">
-                <speech>ちょっと待ってね</speech>
-                <control function="recog_talk" target="jp.co.sharp.sample.simple">
-                    <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
-                </control>
-                <behavior id="assign" type="normal" />
-            </action>
-        </topic>
-
-        <topic id="trader" listen="true">
-            <action index="1">
-                <speech> 院長にご用意でしょうか？スタッフにご用事でしょうか？急ぐようでしたら、お呼びします</speech>
-            </action>
-            <a href="#director">
-                <situation trigger="user-word"> 院長 in ${Lvcsr:Basic}</situation>
-            </a>
-            <a href="#staff">
-                <situation trigger="user-word">スタッフ  in ${Lvcsr:Basic}</situation>
-            </a>
-            <next href="#out" type="default"/>
-        </topic>
-
-        <topic id="director" listen="true">
-            <action index="1">
-                <speech> 院長に電話をかけます。少々お待ちください。</speech>
-                <control function="Test_Control" target="jp.co.sharp.sample.simple">
-                    <data key="Toast_Contents" value="control"/>
-                </control>
-            </action>
-        </topic>
-
-        <topic id="staff" listen="true">
-            <action index="1">
-                <speech> すいません。午後は2時から診療開始ですので、お待ちください</speech>
-            </action>
-        </topic>
-
-
-        <topic id="t1" listen="true">
-            <action index="1">
-                <speech>今日はどうしたの？</speech>
+                <speech>こんにちは。どうされましたか？</speech>
             </action>
             <a href="#whattime">
                 <situation trigger="user-word">何時から in ${Lvcsr:Basic}</situation>
@@ -94,23 +23,124 @@
             <a href="#whattime">
                 <situation trigger="user-word">先生 in ${Lvcsr:Basic}</situation>
             </a>
-            <a href="#t10">
-                <situation trigger="user-word">1 in ${Lvcsr:Basic}</situation>
-            </a>
             <a href="#staffcall">
                 <situation trigger="user-word">予約 in ${Lvcsr:Basic}</situation>
             </a>
             <next href="#t2" type="default"/>
         </topic>
 
-        <topic id="t2" listen="true">
-            <a href="#t3">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ  in ${Lvcsr:Basic}</situation>
+        <topic id="t0" listen="true">
+            <action index="1">
+                <speech>こんにちは。患者の方ですか？業者の方ですか？</speech>
+            </action>
+            <a href="#t1">
+                <situation trigger="user-word">患者 in ${Lvcsr:Basic}</situation>
             </a>
-            <next href="#t3" type="default"/>
+            <a href="#t2">
+                <situation trigger="user-word">業者 in ${Lvcsr:Basic}</situation>
+            </a>
         </topic>
 
-        <topic id="whattime" listen="true">
+        <topic id="t1" listen="true">
+            <action index="1">
+                <speech> 診察券の番号を教えて欲しいな</speech>
+            </action>
+            <a href="#t3">
+                <situation trigger="user-word"> 1 in ${Lvcsr:Basic}</situation>
+            </a>
+            <a href="#t4">
+                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ  in ${Lvcsr:Basic}</situation>
+            </a>
+            <next href="#t4" type="default"/>
+        </topic>
+
+        <topic id="t3" listen="false">
+            <action index="1">
+                <speech>ちょっと待ってね</speech>
+                <control function="recog_talk" target="jp.co.sharp.sample.simple">
+                    <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
+                </control>
+                <behavior id="assign" type="normal" />
+            </action>
+        </topic>
+
+        <topic id="t4" listen="false">
+            <action index="1">
+                <speech>すいませんどちら様でしょうか。今係りの者がきますのでお待ちください</speech>
+                <behavior id="assign" type="normal" />
+            </action>
+        </topic>
+
+        <topic id="t2" listen="true">
+            <action index="1">
+                <speech> 院長にご用意でしょうか？スタッフにご用事でしょうか？急ぐようでしたら、お呼びします</speech>
+            </action>
+            <a href="#t5">
+                <situation trigger="user-word"> 院長 in ${Lvcsr:Basic}</situation>
+            </a>
+            <a href="#t6">
+                <situation trigger="user-word">スタッフ  in ${Lvcsr:Basic}</situation>
+            </a>
+            <next href="#out" type="default"/>
+        </topic>
+
+        <topic id="t5" listen="false">
+            <action index="1">
+                <speech>院長に電話をかけますか？よかったらオッケーって言ってね。</speech>
+            </action>
+                <next href="#y1" type="default"/>
+        </topic>
+
+        <topic dict="Reply" id="y1" listen="true">
+            <a href="#t11">
+                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
+            </a>
+            <a href="#t12">
+                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
+            </a>
+        </topic>
+
+        <topic id="t10" listen="true">
+            <action index="1">
+                <speech> 院長に電話をかけます。少々お待ちください。</speech>
+                <control function="Test_Control" target="jp.co.sharp.sample.simple">
+                    <data key="Toast_Contents" value="control"/>
+                </control>
+            </action>
+        </topic>
+
+        <topic id="t11" listen="true">
+            <action index="1">
+                <speech> 午後は2時から診療開始だよ。ソファーに座って、もう少し待ってね。</speech>
+            </action>
+        </topic>
+
+        <topic id="t6" listen="false">
+            <action index="1">
+                <speech>スタッフに電話をかけますか？よかったらオッケーって言ってね。</speech>
+            </action>
+                <next href="#y2" type="default"/>
+        </topic>
+
+        <topic dict="Reply" id="y2" listen="true">
+            <a href="#t12">
+                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
+            </a>
+            <a href="#t13">
+                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
+            </a>
+        </topic>
+
+        <topic id="t12" listen="true">
+            <action index="1">
+                <speech> スタップに電話をかけるよ。</speech>
+                <control function="Test_Control" target="jp.co.sharp.sample.simple">
+                    <data key="Toast_Contents" value="control"/>
+                </control>
+            </action>
+        </topic>
+
+        <topic id="t13 listen="true">
             <action index="1">
                 <speech>午後は2時から診療開始だよ。ソファーに座って、もう少し待ってね。</speech>
             </action>
@@ -118,68 +148,5 @@
                 <situation trigger="user-word">待てない in ${Lvcsr:Basic}</situation>
             </a>
         </topic>
-
-        <topic id="staffcall" listen="false">
-        <action index="1">
-            <speech>スタッフに電話をかける？かけても良かったらオッケー、かけない方が良かったらダメって言ってね。</speech>
-        </action>
-            <next href="#yesno" type="default"/>
-        </topic>
-
-        <topic id="t3" listen="false">
-            <action index="1">
-                <speech>よくわからなかったよ。またお話ししてね。</speech>
-                <behavior id="assign" type="normal" />
-            </action>
-        </topic>
-
-        <topic dict="Reply" id="yesno" listen="true">
-            <a href="#t4">
-                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
-            </a>
-            <a href="#t6">
-                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
-            </a>
-        </topic>
-
-        <topic id="t4" listen="false">
-                <action index="1">
-                    <speech>${resolver:speech_ok(${resolver:ok_id})}</speech>
-                    <behavior id="${resolver:motion_ok(${resolver:ok_id})}" type="normal"/>
-                </action>
-                <next href="#t5" type="default"/>
-        </topic>
-
-        <topic id="t5" listen="false">
-                <action index="1">
-                    <speech>電話するね</speech>
-                    <behavior id="assign" type="normal"/>
-                </action>
-        </topic>
-
-        <topic id="t6" listen="false">
-                <action index="1">
-                    <speech>そっかー。電話するのやめとくね</speech>
-                    <behavior id="assign" type="normal"/>
-                </action>
-        </topic>
-
-        <topic id="t7" listen="false">
-            <action index="1">
-                <speech>診察番号を教えてね</speech>
-                <behavior id="assign" type="normal"/>
-            </action>
-        </topic>
-
-        <topic id="t10" listen="false">
-            <action index="1">
-                <speech>喋った内容を、背中の画面に表示したよ。確認してみてね</speech>
-                <behavior id="assign" type="normal" />
-                <control function="recog_talk" target="jp.co.sharp.sample.simple">
-                    <data key="Lvcsr_Basic" value="${Lvcsr:Basic}" />
-                </control>
-            </action>
-        </topic>
-
     </body>
 </hvml>

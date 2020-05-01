@@ -379,59 +379,59 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case Constants.MESSAGE_STATE_CHANGE:
-                    switch (msg.arg1) {
-                        case BluetoothService.STATE_CONNECTED:
-                            //setStatus(getString(R.string.title_connected_to, mConnectedDeviceName));
-                            //mConversationArrayAdapter.clear();
-                            Log.d(TAG, msg.toString());
-                            progressDialog.cancel();
+        switch (msg.what) {
+            case Constants.MESSAGE_STATE_CHANGE:
+                switch (msg.arg1) {
+                    case BluetoothService.STATE_CONNECTED:
+                        //setStatus(getString(R.string.title_connected_to, mConnectedDeviceName));
+                        //mConversationArrayAdapter.clear();
+                        Log.d(TAG, msg.toString());
+                        progressDialog.cancel();
 
-                            break;
-                        case BluetoothService.STATE_CONNECTING:
-                            //setStatus(R.string.title_connecting);
-                            break;
-                        case BluetoothService.STATE_LISTEN:
-                        case BluetoothService.STATE_NONE:
-                            //setStatus(R.string.title_not_connected);
-                            break;
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + msg.arg1);
-                    }
-                case Constants.MESSAGE_WRITE:
+                        break;
+                    case BluetoothService.STATE_CONNECTING:
+                        //setStatus(R.string.title_connecting);
+                        break;
+                    case BluetoothService.STATE_LISTEN:
+                    case BluetoothService.STATE_NONE:
+                        //setStatus(R.string.title_not_connected);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + msg.arg1);
+                }
+            case Constants.MESSAGE_WRITE:
 
-                case Constants.MESSAGE_DEVICE_NAME:
-                    // save the connected device's name
+            case Constants.MESSAGE_DEVICE_NAME:
+                // save the connected device's name
 
-                    Toast.makeText(activity, "Connected to "
-                            + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
-                    if (mVoiceUIManager != null) {
-                        VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
-                        VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                    }
-                    break;
-                case Constants.MESSAGE_TOAST:
-                    if (null != activity) {
-                        Toast.makeText(activity, msg.getData().getString(Constants.TOAST),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    if (mVoiceUIManager != null) {
-                        VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
-                        VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                    }
-                    break;
-                case Constants.MESSAGE_READ:
-                    if (mVoiceUIManager != null) {
-                        VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_Talk);
-                        VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                    }
-                    break;
-                default:
+                Toast.makeText(activity, "Connected to "
+                        + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
+                if (mVoiceUIManager != null) {
+                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
+                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
+                }
+                break;
+            case Constants.MESSAGE_TOAST:
+                if (null != activity) {
+                    Toast.makeText(activity, msg.getData().getString(Constants.TOAST),
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (mVoiceUIManager != null) {
+                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_ACCOST);
+                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
+                }
+                break;
+            case Constants.MESSAGE_READ:
+                if (mVoiceUIManager != null) {
+                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_Talk);
+                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
+                }
+                break;
+            default:
 
-            }
+        }
 
-            Log.d(TAG, msg.toString());
+        Log.d(TAG, msg.toString());
         }
     };
 
@@ -484,24 +484,4 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             }
         }
     }
-
-    // Create a BroadcastReceiver for ACTION_FOUND.
-    private final BroadcastReceiver receiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                // Discovery has found a device. Get the BluetoothDevice
-                // object and its info from the Intent.
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                String deviceName = device.getName();
-                String deviceHardwareAddress = device.getAddress(); // MAC address
-
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                Log.d("main", "ended");
-            }
-        }
-    };
-
-
-
 }
