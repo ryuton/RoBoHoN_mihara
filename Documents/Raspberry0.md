@@ -2,7 +2,7 @@
 
 ## bluetoothについて
 
-測距センサはラズパイゼロのGPIOの2,6,21を使用しています。抜けてしまった場合は黒が__2__、オレンジが__6__、白が__21__に接続してください。
+測距センサはラズパイゼロのGPIOの5V,GND,21を使用しています。抜けてしまった場合は黒が__2__、オレンジが__6__、白が__40__に接続してください。
 
 ![gpio](img/raspzero_gpio.png)
 
@@ -37,8 +37,9 @@ ssh pi@rasp0.local
 メンテナンスツールで設定をしたDB\_IDとDB\_PASSWORDをそれぞれ"DB\_ID"と"DB\_PASSWORD"と変えて下記のコマンドを実行します。
 
 ```
-echo export SUNNY_USER="DB_ID" >> ~/.bash_profile
-echo export SUNNY_PASSWORD="DB_PASSWORD" >> ~/.bash_profile
+echo SUNNY_HOST="IPアドレス" >> /etc/sysconfig/mssql_server_env
+echo SUNNY_USER="DB_ID" >> /etc/sysconfig/mssql_server_env
+echo SUNNY_PASSWORD="DB_PASSWORD" >> /etc/sysconfig/mssql_server_env
 ```
 
 ![maintenance_tool](img/maintenance_tool.png)
