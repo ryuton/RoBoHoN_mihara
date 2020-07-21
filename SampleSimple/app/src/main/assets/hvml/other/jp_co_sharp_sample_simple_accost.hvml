@@ -69,17 +69,15 @@
             <topic id="director" listen="true">
                 <action index="1">
                     <speech> 院長に電話をかけます。少々お待ちください。</speech>
-
                     <data key="id" value="test"/>
                 </action>
             </topic>
 
             <topic id="staff" listen="true">
                 <action index="1">
-                    <speech> すいません。午後は2時から診療開始ですので、お待ちください</speech>
+                    <speech>すいません。午後は2時から診療開始ですので、お待ちください</speech>
                 </action>
             </topic>
-
 
             <topic id="t0" listen="true">
                 <action index="1">
