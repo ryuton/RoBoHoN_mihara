@@ -10,11 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84a40eba-0bf5-432d-93a0-74896da48eb5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Documents/ロボホン対話フロー.asta" beforeDir="false" afterPath="$PROJECT_DIR$/../Documents/ロボホン対話フロー.asta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Documents/ロボホン対話フロー.asta.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/api/APIConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/api/APIConstants.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,6 +63,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -180,16 +179,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java</url>
-          <line>337</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -292,7 +292,9 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 break;
             case ScenarioDefinitions.FUNC_RECOG_TALK:
                 for (final VoiceUIVariable variable: variables){
+                    Log.e(TAG, variable.toString());
                     if ("Lvcsr_Basic".equals(variable.getName())) {
+
                         AsyncTestTask testTask = new AsyncTestTask(variable);
                         testTask.execute();
                     }

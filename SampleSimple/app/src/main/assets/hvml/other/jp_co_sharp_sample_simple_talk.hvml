@@ -24,14 +24,13 @@
 
         <topic id="t1" listen="true">
             <action index="1">
-                <speech> 診察券の番号を教えて欲しいな</speech>
+                <speech> 診察券の番号を教えて欲しいな。番号は一桁ずつ1、２、３、４みたいに言って下さい</speech>
+                <memory type="temporary" key="loop_count" value="0"/>
             </action>
             <a href="#t3">
-                <situation trigger="user-word"> 1 in ${Lvcsr:Basic}</situation>
+                <situation trigger="user-word"> 0 lt ${Lvcsr:Basic}</situation>
             </a>
-            <a href="#t4">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ  in ${Lvcsr:Basic}</situation>
-            </a>
+            <next href="#t4" type="default"/>
         </topic>
 
         <topic id="t3" listen="false">
@@ -44,11 +43,28 @@
             </action>
         </topic>
 
-        <topic id="t4" listen="false">
-            <action index="1">
-                <speech>すいませんどちら様でしょうか。今係りの者がきますのでお待ちください</speech>
-                <behavior id="assign" type="normal" />
-            </action>
+        <topic id="t4" listen="true">
+            <rule>
+                <condition case_id="1">${memory_t:loop_count} lt 3 </condition>
+                <condition case_id="2">${memory_t:loop_count} ge 3</condition>
+            </rule>
+            <case id="1">
+                <action index="1">
+                    <speech>番号が違うみたいだよ。もう一度教えてね。番号は一桁ずつ1、２、３、４みたいに言って下さい</speech>
+                    <memory type="temporary" key="loop_count" value="(${memory_t:loop_count} + 1)"/>
+                    <behavior id="assign" type="normal" />
+                </action>
+                <a href="#t3">
+                    <situation trigger="user-word"> 1 in ${Lvcsr:Basic}</situation>
+                </a>
+                <next href="#t4" type="default"/>
+            </case>
+            <case id="2">
+                <action index="1">
+                    <speech>ごめんね。見つからなかったよ。</speech>
+                    <behavior id="assign" type="normal" />
+                </action>
+            </case>
         </topic>
 
         <topic id="t2" listen="true">
@@ -56,7 +72,7 @@
                 <speech> 院長にご用意でしょうか？スタッフにご用事でしょうか？急ぐようでしたら、お呼びします</speech>
             </action>
             <a href="#t5">
-                <situation trigger="user-word"> 院長 in ${Lvcsr:Basic}</situation>
+                <situation trigger="user-word">院長 in ${Lvcsr:Basic}</situation>
             </a>
             <a href="#t6">
                 <situation trigger="user-word">スタッフ  in ${Lvcsr:Basic}</situation>
@@ -103,6 +119,9 @@
         </topic>
 
         <topic dict="Reply" id="y2" listen="true">
+            <action index="1">
+                <speech> 検索したよ。</speech>
+            </action>
             <a href="#t12">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
             </a>
