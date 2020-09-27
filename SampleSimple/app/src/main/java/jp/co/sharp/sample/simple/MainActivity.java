@@ -75,7 +75,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
      * UIスレッド処理用.
      */
     private Handler mHandler = new Handler();
-
     /**
      * mDNSのリスナー
      */
@@ -86,7 +85,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
      */
     private BluetoothAdapter mBluetoothAdapter = null;
     private BluetoothService mBluetoothService = null;
-
     private BluetoothDevice mBluetoothDevice = null;
 
     private final static Integer REQUEST_ENABLE_BT = 1;
@@ -223,6 +221,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -290,6 +289,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             case ScenarioDefinitions.FUNC_END_APP:
                 finish();
                 break;
+
             case ScenarioDefinitions.FUNC_RECOG_TALK:
                 for (final VoiceUIVariable variable: variables){
                     Log.e(TAG, variable.toString());
@@ -298,11 +298,10 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                         AsyncTestTask testTask = new AsyncTestTask(variable);
                         testTask.execute();
                     }
-
                 }
-
                 Log.i(TAG, "recog");
                 break;
+
             default:
                 break;
         }
@@ -316,8 +315,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         }
 
     }
-
-
 
     private class AsyncTestTask extends AsyncTask<Void, Integer, String> {
         VoiceUIVariable variable;
@@ -464,14 +461,11 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         }
 
         mBluetoothService = new BluetoothService(mBluetoothHandler);
-
         mBluetoothService.startDiscovery();
     }
 
     private void connectPairedDevice(String deviceAddress) {
-
         setBluetoothService();
-
         mBluetoothService.cancelDiscovery();
 
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
@@ -481,11 +475,8 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             if ( deviceHardwareAddress.equals(deviceAddress)){
                 mBluetoothService.connect(device, true);
             }
-
         }
-
     }
-
 
     @SuppressLint("HandlerLeak")
     private final Handler mBluetoothHandler = new Handler() {
@@ -614,7 +605,4 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             }
         }
     };
-
-
-
 }
