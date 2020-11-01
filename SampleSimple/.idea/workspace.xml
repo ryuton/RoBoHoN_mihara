@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AndroidLayouts">
     <shared>
       <config />
@@ -10,21 +13,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84a40eba-0bf5-432d-93a0-74896da48eb5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MyItemRecyclerViewAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/SpeachListFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/dummy/DummyContent.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_speach_list.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_speach_list_list.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/templateLanguages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/assets/hvml/hvml_schema_Ver110.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/hvmlParser/HVMLParse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/hvmlParser/Parser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/hvmlParser/hvml.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars_____app_jar_jp_co_sharp_android_voiceui_framework_jar_unspecified_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____app_jar_jp_co_sharp_android_voiceui_framework_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_accost.hvml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_accost.hvml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/MyItemRecyclerViewAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/SpeachListFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/customize/ScenarioDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/customize/ScenarioDefinitions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_speach_list.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_speach_list_list.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +48,28 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SampleSimple" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="SampleSimple" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -52,11 +79,16 @@
         <option value="Kotlin Class" />
         <option value="layoutResourceFile_vertical" />
         <option value="layoutResourceFile" />
+        <option value="Enum" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1YN6Ivb7xKP2EOV4NAtBd6tBEl6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -66,6 +98,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DEBUGGABLE_DEVICE" value="sharp-sr01mw-353375060047478" />
     <property name="DEBUGGABLE_PROCESS" value="jp.co.sharp.sample.simple" />
@@ -77,23 +110,28 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/assets/hvml/other" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="run.code.analysis.last.selected.profile" value="aProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="MODULE_TAB" value="Properties" />
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.-695452256">
-      <recent name="jp.co.sharp.sample.simple" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="jp.co.sharp.sample.simple" />
-    </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="jp.co.sharp.sample.simple.bluetooth" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="jp.co.sharp.sample.simple.bluetooth" />
+    <key name="android.template.-695452256">
+      <recent name="jp.co.sharp.sample.simple" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/assets/hvml" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="jp.co.sharp.sample.simple" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/assets/hvml/other" />
@@ -101,8 +139,11 @@
       <recent name="$PROJECT_DIR$/app/src/main/java/jp/co/sharp/sample/simple/common" />
       <recent name="$PROJECT_DIR$/app/src/main/java" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="jp.co.sharp.sample.simple.bluetooth" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -161,6 +202,30 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SampleSimple [validateXml]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="validateXml" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.SampleSimple [validateXml]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -189,25 +254,81 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="440" y="202" key="#Inspections" timestamp="1598064280515">
+    <state x="599" y="200" key="#General" timestamp="1601251367641">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="440" y="202" key="#Inspections/0.23.1680.1027@0.23.1680.1027" timestamp="1598064280515" />
+    <state x="599" y="200" key="#General/0.23.1680.1027@0.23.1680.1027" timestamp="1601251367641" />
+    <state x="599" y="200" key="#Inspections" timestamp="1601251882197">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="599" y="200" key="#Inspections/0.23.1680.1027@0.23.1680.1027" timestamp="1601251882197" />
+    <state x="365" y="227" key="#PSD" timestamp="1601251932098">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="365" y="227" key="#PSD/0.23.1680.1027@0.23.1680.1027" timestamp="1601251932098" />
+    <state x="439" y="201" key="#Scopes" timestamp="1601223653283">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="439" y="201" key="#Scopes/0.23.1680.1027@0.23.1680.1027" timestamp="1601223653283" />
+    <state x="440" y="202" key="#Updates" timestamp="1601249632724">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="440" y="202" key="#Updates/0.23.1680.1027@0.23.1680.1027" timestamp="1601249632724" />
+    <state x="455" y="346" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601251727597">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="455" y="346" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1680.1027@0.23.1680.1027" timestamp="1601251727597" />
     <state x="528" y="271" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1599206620849">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="528" y="271" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1599206620849" />
-    <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597604497604">
+    <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601244267101">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1597604497604" />
+    <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1601244267101" />
+    <state x="536" y="381" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1601251841725">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="536" y="381" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1680.1027@0.23.1680.1027" timestamp="1601251841725" />
     <state x="428" y="298" key="AndroidCreateResourceFileDialog" timestamp="1597604099258">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="428" y="298" key="AndroidCreateResourceFileDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1597604099258" />
+    <state width="1638" height="238" key="GridCell.Tab.0.bottom" timestamp="1601251853945">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="238" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1601251853945" />
+    <state width="1638" height="238" key="GridCell.Tab.0.center" timestamp="1601251853945">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="238" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1601251853945" />
+    <state width="1638" height="238" key="GridCell.Tab.0.left" timestamp="1601251853944">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="238" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1601251853944" />
+    <state width="1638" height="238" key="GridCell.Tab.0.right" timestamp="1601251853945">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="238" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1601251853945" />
+    <state x="428" y="286" key="IDE.errors.dialog" timestamp="1601248469897">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="428" y="286" key="IDE.errors.dialog/0.23.1680.1027@0.23.1680.1027" timestamp="1601248469897" />
+    <state x="341" y="175" key="SettingsEditor" timestamp="1601803060604">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="341" y="175" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1601803060604" />
+    <state x="507" y="235" key="com.intellij.javaee.MapExternalResourceDialog" timestamp="1601254135176">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="507" y="235" key="com.intellij.javaee.MapExternalResourceDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1601254135176" />
     <state x="620" y="460" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600597563169">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="620" y="460" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1680.1027@0.23.1680.1027" timestamp="1600597563169" />
+    <state x="440" y="202" key="scopes" timestamp="1601221039333">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="440" y="202" key="scopes/0.23.1680.1027@0.23.1680.1027" timestamp="1601221039333" />
   </component>
 </project>
