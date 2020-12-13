@@ -3,5 +3,5 @@
   <component name="ProjectResources">
     <resource url="robohon_xsd" location="$PROJECT_DIR$/app/src/main/assets/hvml/hvml_schema_Ver110.xsd" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

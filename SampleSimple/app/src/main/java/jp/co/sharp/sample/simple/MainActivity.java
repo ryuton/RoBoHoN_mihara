@@ -301,6 +301,8 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 }
                 Log.i(TAG, "recog");
                 break;
+            case ScenarioDefinitions.FUNC_HVML_ACTION:
+                Log.d(TAG, "action");
 
             default:
                 break;

@@ -1,18 +1,21 @@
 <?xml version="1.0" ?>
-<hvml version="2.0">
+<hvml version="2.0" xmlns="robohon_xsd">
     <head>
         <producer>jp.co.sharp.sample.simple</producer>
         <description>受付するためのシナリオ</description>
-        <scene value="jp.co.sharp.sample.simple.scene_common" />
-        <version value="1.0" />
         <tool_version>1.00</tool_version>
-        <accost priority="74" topic_id="t0" word="jp.co.sharp.sample.simple.talk.t1"/>
+        <scene value="jp.co.sharp.sample.simple.scene_common" />
         <situation priority="75" topic_id="t0" trigger="user-word">コンニチハ in ${Lvcsr:Kana}</situation>
+        <accost priority="74" topic_id="t0" word="jp.co.sharp.sample.simple.talk.t1"/>
+        <version value="1.0" />
     </head>
     <body>
         <topic id="t0" listen="true">
             <action index="1">
                 <speech>こんにちは。患者の方ですか？業者の方ですか？</speech>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="t0"/>
+                </control>
             </action>
             <a href="#t1">
                 <situation trigger="user-word">カンジャ in ${Lvcsr:Kana}</situation>
@@ -25,6 +28,9 @@
         <topic id="t1" listen="true">
             <action index="1">
                 <speech> 診察券の番号を教えて欲しいな。番号は一桁ずつ1、２、３、４みたいに言って下さい</speech>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="t1"/>
+                </control>
                 <memory type="temporary" key="loop_count" value="0"/>
             </action>
             <a href="#t3">
@@ -39,6 +45,9 @@
                 <control function="recog_talk" target="jp.co.sharp.sample.simple">
                     <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
                 </control>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="t3"/>
+                </control>
                 <behavior id="assign" type="normal" />
             </action>
         </topic>
@@ -51,6 +60,9 @@
             <case id="1">
                 <action index="1">
                     <speech>番号が違うみたいだよ。もう一度教えてね。番号は一桁ずつ1、２、３、４みたいに言って下さい</speech>
+                    <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                        <data key="topic_id" value="t4"/>
+                    </control>
                     <memory type="temporary" key="loop_count" value="(${memory_t:loop_count} + 1)"/>
                     <behavior id="assign" type="normal" />
                 </action>
@@ -70,6 +82,9 @@
         <topic id="t2" listen="true">
             <action index="1">
                 <speech> 院長にご用意でしょうか？スタッフにご用事でしょうか？急ぐようでしたら、お呼びします</speech>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="t2"/>
+                </control>
             </action>
             <a href="#t5">
                 <situation trigger="user-word">院長 in ${Lvcsr:Basic}</situation>
@@ -83,6 +98,9 @@
         <topic id="t5" listen="false">
             <action index="1">
                 <speech>院長に電話をかけますか？よかったらオッケーって言ってね。</speech>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="t5"/>
+                </control>
             </action>
             <next href="#y1" type="default"/>
         </topic>
@@ -90,6 +108,9 @@
         <topic id="t6" listen="false">
             <action index="1">
                 <speech>スタッフに電話をかけますか？よかったらオッケーって言ってね。</speech>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="t6"/>
+                </control>
             </action>
             <next href="#y2" type="default"/>
         </topic>
@@ -109,18 +130,27 @@
                 <control function="Test_Control" target="jp.co.sharp.sample.simple">
                     <data key="Toast_Contents" value="control"/>
                 </control>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="t10"/>
+                </control>
             </action>
         </topic>
 
         <topic id="t11" listen="true">
             <action index="1">
                 <speech> 午後は2時から診療開始だよ。ソファーに座って、もう少し待ってね。</speech>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="t11"/>
+                </control>
             </action>
         </topic>
 
         <topic dict="Reply" id="y2" listen="true">
             <action index="1">
                 <speech> 検索したよ。</speech>
+                <control function="hvml_action" target="jp.co.sharp.sample.simple">
+                    <data key="topic_id" value="y2"/>
+                </control>
             </action>
             <a href="#t12">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
@@ -129,7 +159,5 @@
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
             </a>
         </topic>
-
-
     </body>
 </hvml>
