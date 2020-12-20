@@ -129,13 +129,19 @@ class HVMLParser(resources: Resources, fileName: String) {
         parser.require(XmlPullParser.START_TAG, ns, "action")
 
         var index: String? = null
+        var speech: String? = null
         index = parser.getAttributeValue(null, "index")
 
-        skip(parser)
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.eventType != XmlPullParser.START_TAG) {
+                continue
+            }
+            when (parser.name) {
+                "speech" -> speech = readText(parser, "speech")
+            }
+        }
 
-        parser.require(XmlPullParser.END_TAG, ns, "action")
-
-        return Topic.Action(index)
+        return Topic.Action(index, speech)
     }
 
     @Throws(XmlPullParserException::class, IOException::class)

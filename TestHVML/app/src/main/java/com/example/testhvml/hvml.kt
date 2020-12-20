@@ -55,7 +55,8 @@ data class Topic(
     )
 
     data class Action(
-        var index: String?
+        var index: String?,
+        var speech: String?
     )
 
     data class Anchor (

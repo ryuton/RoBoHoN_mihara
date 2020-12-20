@@ -16,7 +16,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/Anchor"
+        android:id="@+id/AnchorName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -25,7 +25,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/Next"
+        android:id="@+id/NextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
