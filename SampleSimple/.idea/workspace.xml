@@ -16,27 +16,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84a40eba-0bf5-432d-93a0-74896da48eb5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../SampleAction/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SampleAction/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SampleAction/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SampleAction/.idea/libraries/Gradle____local_jars____Users_x_RoBoHoN_mihara_SampleAction_app_jar_jp_co_sharp_android_rb_action_framework_jar_unspecified_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SampleAction/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SampleAction/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SampleAction/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SampleAction/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SampleAction/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/assets/hvml/other/hvml_schema_Ver110.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/assets/hvml/other/hvml_schema_Ver110.xsd.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestHVML/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestHVML/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestHVML/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestHVML/app/src/main/java/com/example/testhvml/HVMLParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/java/com/example/testhvml/HVMLParser.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TestHVML/app/src/main/java/com/example/testhvml/HVMLPlacement.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/java/com/example/testhvml/HVMLPlacement.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestHVML/app/src/main/java/com/example/testhvml/hvml.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/java/com/example/testhvml/hvml.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestHVML/app/src/main/res/layout/layout_topic.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/res/layout/layout_topic.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestHVML/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TestHVML/app/src/main/java/com/example/testhvml/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/java/com/example/testhvml/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TestHVML/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TestHVML/app/src/main/res/layout/activity_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,30 +1,37 @@
 package com.example.testhvml
 
+import android.util.Log
 import android.view.View
 import android.view.View.generateViewId
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 
+class HVMLPlacement (private val hvmlModel: HvmlModel) {
 
-class HVMLPlace(view: View, startId: Int?, topId: Int?, bottomId: Int?, arrowView: View?)
+    interface HVMLPlacementListener{
+        fun newTopicLayout(topic: Topic) : View
+        fun newArrowView(): View
+        fun getRootLayout(): ConstraintLayout
+        fun addArrowView(arrowView: View)
+    }
 
-class HVMLPlacement (rootLayoutId: Int,
-                     private val topicLayoutId: Int,
-                     private val topicNameId: Int,
-                     private val anchorNameId: Int,
-                     private val nextNameId: Int,
-                     private val activity: AppCompatActivity,
-                     private val hvmlModel: HvmlModel
-                     ) {
+    private var mHVMLPlacementListener: HVMLPlacementListener? = null
 
-    private var rootLayout = activity.findViewById<ConstraintLayout>(rootLayoutId)
-    var treedTopics = createTree()
+    /**
+     * HVMLPlacementListenerのゲッター
+     *
+     * @param listener HVMLPlacementListener
+     */
+    fun setHVMLPlacementListener(listener: HVMLPlacementListener) {
+        this.mHVMLPlacementListener = listener
+    }
 
-    private fun createTree(): List<List<Topic>> {
-
-        var treedTopics = listOf<List<Topic>>()
+    fun createTree(): List<List<View>> {
+        var treedTopics = listOf<List<View>>()
 
         hvmlModel.head?.situation?.topicId?.let {
             val topic =  topicFromId(it)
@@ -33,55 +40,61 @@ class HVMLPlacement (rootLayoutId: Int,
             }
         }
 
+        setRootConstraint(treedTopics)
+
         return treedTopics
-    }
-
-    private fun newTopicLayout(topic: Topic,
-                               topicLayoutId: Int,
-                               topicNameId: Int,
-                               anchorNameId: Int,
-                               nextNameId: Int
-    ) : View {
-        val topicLayout = this.activity.findViewById<View>(topicLayoutId)
-        topicLayout.id = generateViewId()
-
-        val topicName = topicLayout.findViewById<TextView>(topicNameId)
-        topicName.text = topic.actions.first().speech
-
-        val anchorName = topicLayout.findViewById<TextView>(anchorNameId)
-        var anchorText = ""
-        topic.anchors.forEach { anchor ->
-            anchorText += anchor.href
-        }
-        anchorName.text = anchorText
-
-        val nextName = topicLayout.findViewById<TextView>(nextNameId)
-        nextName.text = topic.next?.href
-
-        return topicLayout
     }
 
     /**
      * パースしたHVMLをレイアウト
      *
      * @param topic Topic
-     * @param col 列
+     * @param col   列
      */
     @Suppress("NAME_SHADOWING")
-    private fun addTopics(topic: Topic, col: Int) : MutableList<MutableList<Topic>>  {
-        val treedTopics = mutableListOf<MutableList<Topic>>()
-        val topicLayout = newTopicLayout(topic, topicLayoutId, )
-        topicLayout.id = generateViewId()
-        rootLayout.addView(topicLayout)
-        treedTopics[col].add(topic)
+    private fun addTopics(topic: Topic, col: Int) : MutableList<MutableList<View>>  {
+        var treedTopics = mutableListOf<MutableList<View>>()
+        val topicLayout = mHVMLPlacementListener?.newTopicLayout(topic)
+        (0..col + 1).forEach {
+            treedTopics.add( mutableListOf() )
+        }
+        treedTopics[col].add(topicLayout!!)
+
+        mHVMLPlacementListener?.getRootLayout()?.addView(topicLayout)
 
 
-        val segues: List<Topic.Segue?> = topic.anchors + topic.next
-
+        //topicのanchorとtopic配列を合成
+        val segues: List<Topic.Segue?> = topic.anchors // + topic.next
         segues.forEachIndexed { index, segue ->
             segue?.href?.let { href ->
-               val topic = topicFromId(href)
-                if (topic != null) addTopics(topic, col + 1)
+               val nextTopic = topicFromId(href.replace("#", ""))
+                if (nextTopic != null) {
+                    val dstTopics = addTopics(nextTopic, col + 1)
+                    treedTopics = mergeListList(treedTopics, dstTopics)
+                }
+            }
+        }
+
+        val lineTreedTopics =  treedTopics[col + 1]
+        (0 until segues.count()).forEach { index ->
+            val now = lineTreedTopics.count() - segues.count() + index
+            //行の要素が１つのとき
+            if (lineTreedTopics.count() == 1) addConstraint(lineTreedTopics[now], topicLayout.id, null, null)
+            else {
+
+                if (index == 0) {
+                    //行の上
+                    if (now == 0) addConstraint(lineTreedTopics[now], topicLayout.id, null, null)
+                    //上にまだあるとき
+                    else {
+                        addConstraint(lineTreedTopics[now], topicLayout.id, lineTreedTopics[now - 1].id, lineTreedTopics[now + 1].id)
+                        addConstraint(lineTreedTopics[now - 1], topicLayout.id, null, lineTreedTopics[now + 1].id)
+                    }
+                }
+                //行の一番下
+                else if (index == segues.count() - 1) addConstraint(lineTreedTopics[now], topicLayout.id, lineTreedTopics[now - 1].id, null)
+
+                else addConstraint(lineTreedTopics[now], topicLayout.id, lineTreedTopics[now - 1].id, lineTreedTopics[now + 1].id)
             }
         }
 
@@ -95,36 +108,59 @@ class HVMLPlacement (rootLayoutId: Int,
      * @param startId   対象のTopicの左にあるTopicのID
      * @param topId     対象のTopicの上にあるTopicのID
      * @param bottomId　対象のTopicの下にあるTopicのID
-     * @param arrowView 対象のTopicと親のTopicの関係を表す矢印
      */
-    private fun addConstraint(view: View, startId: Int?, topId: Int?, bottomId: Int?, arrowView: View?) {
-        this.rootLayout.addView(view)
+    private fun addConstraint(view: View, startId: Int?, topId: Int?, bottomId: Int?) {
+        val arrowView = mHVMLPlacementListener!!.newArrowView()
+        mHVMLPlacementListener?.getRootLayout()?.addView(arrowView)
         // ConstraintSetを生成してConstraintLayoutから制約を複製する
         val constraintSet = ConstraintSet()
-        constraintSet.clone(rootLayout)
+        constraintSet.clone(mHVMLPlacementListener?.getRootLayout())
 
         //Topicの左
-        if (startId == null) constraintSet.connect(view.id, ConstraintSet.START, this.rootLayout.id, ConstraintSet.START)
-        else constraintSet.connect(view.id, ConstraintSet.START, startId, ConstraintSet.START)
-
-        //Topicの上
-        if (topId == null) constraintSet.connect(view.id, ConstraintSet.TOP, this.rootLayout.id, ConstraintSet.TOP)
-        else constraintSet.connect(view.id, ConstraintSet.TOP, topId, ConstraintSet.END)
-
-        //Topicの下
-        if (bottomId == null) constraintSet.connect(view.id, ConstraintSet.BOTTOM, this.rootLayout.id, ConstraintSet. BOTTOM)
-        else constraintSet.connect(view.id, ConstraintSet.BOTTOM, bottomId, ConstraintSet.TOP)
-
-        //矢印のConstraint
-        if (arrowView != null && startId != null) {
+        if (startId != null)  {
+            //mainView
+            constraintSet.connect(view.id, ConstraintSet.START, arrowView.id, ConstraintSet.END)
+            //starView
+            constraintSet.connect(startId, ConstraintSet.END, arrowView.id, ConstraintSet.START)
+            //矢印のConstraint
             constraintSet.connect(arrowView.id, ConstraintSet.BOTTOM, startId, ConstraintSet.BOTTOM)
             constraintSet.connect(arrowView.id, ConstraintSet.START, startId, ConstraintSet.END)
             constraintSet.connect(arrowView.id, ConstraintSet.TOP, view.id, ConstraintSet.TOP)
             constraintSet.connect(arrowView.id, ConstraintSet.END, view.id, ConstraintSet.START)
         }
 
+        //Topicの上
+        if (topId != null)  constraintSet.connect(view.id, ConstraintSet.TOP, topId, ConstraintSet.BOTTOM)
+
+        //Topicの下
+        if (bottomId != null) constraintSet.connect(view.id, ConstraintSet.BOTTOM, bottomId, ConstraintSet.TOP)
+
         //制約を実行
-        constraintSet.applyTo(this.rootLayout)
+        constraintSet.applyTo(mHVMLPlacementListener?.getRootLayout())
+    }
+
+    /**
+     * 端にあるtopicViewとrootConstraintLayoutとのConstraintを適用
+     *
+     * @param treedLayout 配置済みのList<List<View>>
+     */
+    private fun setRootConstraint(treedLayout: List<List<View>> ) {
+
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(mHVMLPlacementListener?.getRootLayout())
+
+        treedLayout.forEachIndexed { i, lineTreedLayout ->
+            lineTreedLayout.forEachIndexed { index, view ->
+                if (index == 0) {
+                    if (i == 0) constraintSet.connect(view.id, ConstraintSet.START, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.START)
+                    constraintSet.connect(view.id, ConstraintSet.TOP, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.TOP)
+                }
+                if (index == lineTreedLayout.count()) constraintSet.connect(view.id, ConstraintSet.END, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.END)
+            }
+
+        }
+        //制約を実行
+        constraintSet.applyTo(mHVMLPlacementListener?.getRootLayout())
     }
 
     /**
@@ -136,17 +172,23 @@ class HVMLPlacement (rootLayoutId: Int,
      * @return            マージ後のListOfList
      */
     private fun <T> mergeListList(preListList: MutableList<MutableList<T>>, dstListList: MutableList<MutableList<T>>): MutableList<MutableList<T>> {
-        var returnListList = mutableListOf<MutableList<Topic>>()
+        val returnListList = mutableListOf<MutableList<T>>()
 
         if ( preListList.count() < dstListList.count()) {
-            (0..preListList.count()).forEach { index ->
-                returnListList[index] = (preListList[index] + dstListList[index]) as MutableList<Topic>
+            (0 until dstListList.count()).forEach { index ->
+                returnListList.add(mutableListOf())
+                if (index < preListList.count()) returnListList[index] = (dstListList[index] + preListList[index]) as MutableList<T>
+                else returnListList[index] = dstListList[index]
             }
         } else {
-            (0..dstListList.count()).forEach { index ->
-                returnListList[index] = (preListList[index] + dstListList[index]) as MutableList<Topic>
+            (0 until preListList.count()).forEach { index ->
+                returnListList.add(mutableListOf())
+                if (index < dstListList.count()) returnListList[index] = (preListList[index] + dstListList[index]) as MutableList<T>
+                else returnListList[index] = preListList[index]
             }
         }
+
+        return returnListList
     }
 
     /**
@@ -160,6 +202,10 @@ class HVMLPlacement (rootLayoutId: Int,
         }
 
         return null
+    }
+
+    public fun rotateArrowView() {
+
     }
 }
 

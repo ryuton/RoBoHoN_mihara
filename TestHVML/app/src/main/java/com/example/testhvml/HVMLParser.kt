@@ -14,16 +14,26 @@ class HVMLParser(resources: Resources, fileName: String) {
     val hvmlString = resources.assets.open(fileName)
 
     @Throws(XmlPullParserException::class, IOException::class)
-    fun parse(): List<Topic> {
+    fun parse(): HvmlModel {
         hvmlString.use { inputStream ->
             val parser: XmlPullParser = Xml.newPullParser()
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
             parser.setInput(inputStream, null)
-            parser.nextTag()
-            parser.nextTag()
-            readHead(parser)
-            parser.nextTag()
-            return readTopics(parser)
+            var head: Head? = null
+            var topics = listOf<Topic>()
+            parser.nextTag() // <?xml version="1.0" ?>
+            parser.require(XmlPullParser.START_TAG, ns, "hvml")
+            while (parser.next() != XmlPullParser.END_TAG) {
+                if (parser.eventType != XmlPullParser.START_TAG) {
+                    continue
+                }
+                when (parser.name) {
+                    "body" -> topics = readTopics(parser)
+                    "head" -> head = readHead(parser)
+                    else -> skip(parser)
+                }
+            }
+            return HvmlModel(head, topics)
             //return readHead(parser)
         }
     }
@@ -118,6 +128,7 @@ class HVMLParser(resources: Resources, fileName: String) {
             }
             when (parser.name) {
                 "action" -> conditions.add(readCondition(parser))
+                else -> skip(parser)
             }
         }
 
@@ -138,6 +149,7 @@ class HVMLParser(resources: Resources, fileName: String) {
             }
             when (parser.name) {
                 "speech" -> speech = readText(parser, "speech")
+                else -> skip(parser)
             }
         }
 
