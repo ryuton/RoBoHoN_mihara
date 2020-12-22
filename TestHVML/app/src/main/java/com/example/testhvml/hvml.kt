@@ -36,7 +36,7 @@ data class Topic(
     var rule: Rule?,
     var actions: List<Action>,
     var anchors: List<Anchor>,
-    var next: Next?
+    var nexts: List<Next>
 ) {
     data class Rule (
         var conditions: List<Condition>

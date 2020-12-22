@@ -4,25 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:textAlignment="center">
+    android:textAlignment="center"
+    android:background="@drawable/topic_boder">
 
     <TextView
         android:id="@+id/TopicName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:background="@color/topicName"
         android:text="TextView"
         android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="12dp"
-        android:autoSizeMaxTextSize="54dp"
         android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="2">
         <TextView
             android:id="@+id/AnchorName"
             android:layout_width="match_parent"

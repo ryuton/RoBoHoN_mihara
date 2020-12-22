@@ -66,7 +66,7 @@ class HVMLParser(resources: Resources, fileName: String) {
         var rule: Topic.Rule? = null
         val actions = mutableListOf<Topic.Action>()
         val anchors = mutableListOf<Topic.Anchor>()
-        var next: Topic.Next? = null
+        var nexts = mutableListOf<Topic.Next>()
 
         id = parser.getAttributeValue(null, "id")
 
@@ -79,12 +79,12 @@ class HVMLParser(resources: Resources, fileName: String) {
                 "role" -> rule = readRule(parser)
                 "action" -> actions.add(readAction(parser))
                 "a" -> anchors.add(readAnchor(parser))
-                "next" -> next = readNext(parser)
+                "next" -> nexts.add(readNext(parser))
                 else -> skip(parser)
             }
         }
 
-        val topic = Topic(id, case, rule, actions, anchors, next)
+        val topic = Topic(id, case, rule, actions, anchors, nexts)
 
         return topic
     }

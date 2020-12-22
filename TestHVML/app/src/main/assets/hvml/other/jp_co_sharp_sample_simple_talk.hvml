@@ -93,7 +93,6 @@
             <a href="#t6">
                 <situation trigger="user-word">スタッフ  in ${Lvcsr:Basic}</situation>
             </a>
-            <next href="#out" type="default"/>
         </topic>
 
         <topic id="t5" listen="false">

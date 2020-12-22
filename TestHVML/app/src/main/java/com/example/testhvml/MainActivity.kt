@@ -15,9 +15,8 @@ import androidx.core.content.ContextCompat
 import kotlin.math.atan2
 
 class MainActivity : AppCompatActivity(), HVMLPlacement.HVMLPlacementListener{
-    var topicView: View? = null
-    var topicView1: View? = null
-    var arrowView: View? = null
+    lateinit var placement: HVMLPlacement
+    var flag = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,26 +25,28 @@ class MainActivity : AppCompatActivity(), HVMLPlacement.HVMLPlacementListener{
         val paser = HVMLParser(resources, "hvml/other/jp_co_sharp_sample_simple_talk.hvml")
         val model = paser.parse()
 
-        val placement = HVMLPlacement(model)
+        placement = HVMLPlacement(model)
         placement.setHVMLPlacementListener(this)
         placement.createTree()
     }
 
     override fun onWindowFocusChanged(p0: Boolean) {
-        arrowView?.rotation = getRadianDegree(topicView!!.getLocationPointInWindow(), topicView1!!.getLocationPointInWindow()).toFloat()
-    }
+        if (flag) {
+            placement.rotateArrowView()
+            flag = false
+        }
 
-    fun getRadianDegree(pre: Point, dst: Point): Double {
-        return atan2((dst.x - pre.y).toDouble(), (dst.x - pre.y).toDouble()) * 180.0 / Math.PI
     }
 
     override fun newTopicLayout(topic: Topic): View {
         val topicLayout = layoutInflater.inflate(R.layout.layout_topic, null)
         topicLayout.id = generateViewId()
-        topicLayout.layoutParams = FrameLayout.LayoutParams(350, 350)
+        topicLayout.layoutParams = FrameLayout.LayoutParams(500, 500)
 
         val topicTextView = topicLayout.findViewById<TextView>(R.id.TopicName)
-        topicTextView.text = topic.actions.first().speech
+        if (!topic.actions.isNullOrEmpty()){
+            topicTextView.text = topic.actions.first().speech
+        }
 
         val anchorTextView = topicLayout.findViewById<TextView>(R.id.AnchorName)
         var anchorText = ""
@@ -55,14 +56,18 @@ class MainActivity : AppCompatActivity(), HVMLPlacement.HVMLPlacementListener{
         anchorTextView.text = anchorText
 
         val nextTextView = topicLayout.findViewById<TextView>(R.id.NextName)
-        nextTextView.text = topic.next?.href
+        var nextText = ""
+        topic.nexts.forEach { next ->
+            nextText += next
+        }
+        nextTextView.text = nextText
 
         return topicLayout
     }
 
     override fun newArrowView(): View {
         val arrowView = layoutInflater.inflate(R.layout.layout_arrow, null)
-        arrowView.layoutParams = FrameLayout.LayoutParams(350, 350)
+        arrowView.layoutParams = FrameLayout.LayoutParams(400, 400)
         arrowView.id = generateViewId()
 
         return arrowView
@@ -76,19 +81,6 @@ class MainActivity : AppCompatActivity(), HVMLPlacement.HVMLPlacementListener{
         addContentView(arrowView, FrameLayout.LayoutParams(350, 350))
     }
 
-}
-
-
-fun View.getLocationPointInWindow(): Point {
-    val array = IntArray(2)
-    this.getLocationInWindow(array)
-    return Point(array[0], array[1])
-}
-
-fun View.getLocationPointOnScreen(): Point {
-    val array = IntArray(2)
-    this.getLocationOnScreen(array)
-    return Point(array[0], array[1])
 }
 
 //val root = findViewById<ConstraintLayout>(R.id.root)
