@@ -1,7 +1,0 @@
-<resources>
-    <dimen name="toolbar_height">36dp</dimen>
-    <dimen name="toolbar_item_button_height">28dp</dimen>
-    <dimen name="toolbar_item_button_width">28dp</dimen>
-    <dimen name="toolbar_item_button_padding">6dp</dimen>
-    <dimen name="toolbar_item_button_margin_start">4dp</dimen>
-</resources>
