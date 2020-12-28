@@ -3,7 +3,21 @@ package com.example.testhvml
 data class HvmlModel (
     var head: Head?,
     var topics: List<Topic>
-)
+) {
+
+    /**
+     * IDを指定してTopicsの配列からTopic一つ取り出す
+     *
+     * @param id TopicのID
+     */
+    public fun topicFromId(id: String): Topic? {
+        topics.forEach {
+            if (it.id == id) return  it
+        }
+
+        return null
+    }
+}
 
 data class Head (
     var producer: String?,

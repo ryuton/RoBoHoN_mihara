@@ -185,20 +185,7 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
         constraintSet.applyTo(mHVMLPlacementListener?.getRootLayout())
     }
 
-    /**
-     * IDを指定してTopicsの配列からTopic一つ取り出す
-     *
-     * @param id TopicのID
-     */
-    private fun topicFromId(id: String): Topic? {
-        this.hvmlModel.topics.forEach {
-            if (it.id == id) return  it
-        }
-
-        return null
-    }
-
-    public fun rotateArrowView() {
+    fun rotateArrowView() {
         mTreeSingleton.arrowRelations.forEach { arrowRelation ->
             val preLayout = arrowRelation.startView.findViewById<TextView>(R.id.TopicName)
             val dstLayout = arrowRelation.targetView.findViewById<TextView>(R.id.TopicName)
