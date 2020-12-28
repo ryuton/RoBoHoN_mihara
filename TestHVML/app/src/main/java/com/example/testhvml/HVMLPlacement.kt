@@ -11,13 +11,32 @@ import kotlin.math.atan2
 class HVMLPlacement (private val hvmlModel: HvmlModel) {
 
     object TreeSingleton{
+
+        /**
+         * arrowViewの親子関係
+         *
+         * @param startView  arrowViewの親（arrowViewの左）
+         * @param targetView arrowViewの子（arrowViewの右）
+         * @param arrowView  arrowView
+         */
         class ArrowRelation(
             val startView: View,
             val targetView: View,
             val arrowView: View
         )
 
-        var topicLayoutTree = mutableListOf<MutableList<View>>()
+        /**
+         * topicViewと対応するview
+         *
+         * @param topic
+         * @param topicView
+         */
+        class TopicRelation(
+                val topic: Topic,
+                val topicView: View
+        )
+
+        private var topicLayoutTree = mutableListOf<MutableList<TopicRelation>>()
         var arrowRelations = mutableListOf<ArrowRelation>()
 
         private fun addCol(col: Int) {
@@ -26,24 +45,56 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
             }
         }
 
-        fun addView(col: Int, view: View) {
+        fun addValue(col: Int, view: View, topic: Topic) {
             if (topicLayoutTree.count() <= col) addCol(col)
-            topicLayoutTree[col].add(view)
+            topicLayoutTree[col].add(TopicRelation(topic, view))
         }
 
+        /**
+         * 新しいArrowRelationを作成
+         *
+         * @param startView
+         * @param targetView
+         * @param arrowView
+         */
         fun addArrowRelation(startView: View, targetView: View, arrowView: View) {
             arrowRelations.add(
                 ArrowRelation(startView, targetView, arrowView)
             )
         }
 
-        fun getTree(): List<List<View>> {
+        /**
+         * 全部返す
+         */
+        fun getTree(): List<List<TopicRelation>> {
             return topicLayoutTree
         }
 
-        fun getCol(col: Int): List<View> {
+        /**
+         * 行を返す
+         *
+         * @param col 行のInt
+         */
+        fun getCol(col: Int): List<TopicRelation> {
             if (topicLayoutTree.count() <= col) addCol(col)
             return topicLayoutTree[col]
+        }
+
+        /**
+         * topicRelationを返す
+         */
+        fun  getTopicRelation(col: Int, row: Int): TopicRelation {
+            return topicLayoutTree[col][row]
+        }
+
+        fun  getTopicRelation(topicId: String): TopicRelation? {
+            topicLayoutTree.forEach { lineTopicLayout ->
+                lineTopicLayout.forEach { topicRelation ->
+                    if (topicRelation.topic.id == topicId) return topicRelation
+                }
+            }
+
+            return null
         }
     }
 
@@ -70,7 +121,6 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
     }
 
     fun createTree() {
-
         hvmlModel.head?.situation?.topicId?.let {
             val topic =  this.hvmlModel.topicFromId(it)
             if (topic != null) {
@@ -91,7 +141,7 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
     private fun addTopics(topic: Topic, col: Int) {
         val topicLayout = mHVMLPlacementListener?.newTopicLayout(topic)
 
-        mTreeSingleton.addView(col, topicLayout!!)
+        mTreeSingleton.addValue(col, topicLayout!!, topic)
         mHVMLPlacementListener?.getRootLayout()?.addView(topicLayout)
 
 
@@ -113,14 +163,14 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
             mHVMLPlacementListener?.getRootLayout()?.addView(arrowView)
 
             val now = lineTreedTopics.count() - segues.count() + index
-            val targetId = lineTreedTopics[now].id
+            val targetId = lineTreedTopics[now].topicView.id
             val startId = topicLayout.id
-            val topId = lineTreedTopics.getOrNull(now - 1)?.id
-            val bottomId = lineTreedTopics.getOrNull(now + 1)?.id
+            val topId = lineTreedTopics.getOrNull(now - 1)?.topicView?.id
+            val bottomId = lineTreedTopics.getOrNull(now + 1)?.topicView?.id
 
             addConstraint(targetId, startId, topId, bottomId, arrowView.id)
             if (index == 0 && now != 0 && topId != null) addConstraint(topId, null, null, targetId, null)
-            mTreeSingleton.addArrowRelation(topicLayout, lineTreedTopics[now], arrowView)
+            mTreeSingleton.addArrowRelation(topicLayout, lineTreedTopics[now].topicView, arrowView)
         }
     }
 
@@ -165,18 +215,17 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
      *
      * @param treedLayout 配置済みのList<List<View>>
      */
-    private fun setRootConstraint(treedLayout: List<List<View>> ) {
-
+    private fun setRootConstraint(treedLayout: List<List<TreeSingleton.TopicRelation>> ) {
         val constraintSet = ConstraintSet()
         constraintSet.clone(mHVMLPlacementListener?.getRootLayout())
 
         treedLayout.forEachIndexed { i, lineTreedLayout ->
-            lineTreedLayout.forEachIndexed { index, view ->
+            lineTreedLayout.forEachIndexed { index, topicRelation ->
                 if (index == 0) {
-                    if (i == 0) constraintSet.connect(view.id, ConstraintSet.START, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.START)
-                    constraintSet.connect(view.id, ConstraintSet.TOP, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.TOP)
+                    if (i == 0) constraintSet.connect(topicRelation.topicView.id, ConstraintSet.START, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.START)
+                    constraintSet.connect(topicRelation.topicView.id, ConstraintSet.TOP, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.TOP)
                 }
-                if (index == lineTreedLayout.count() - 1) constraintSet.connect(view.id, ConstraintSet.BOTTOM, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.BOTTOM)
+                if (index == lineTreedLayout.count() - 1) constraintSet.connect(topicRelation.topicView.id, ConstraintSet.BOTTOM, mHVMLPlacementListener?.getRootLayout()!!.id, ConstraintSet.BOTTOM)
             }
 
         }
@@ -201,6 +250,12 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
                 arrowRelation.targetView.getLocationPointInWindow()
             )
         }
+    }
+
+    fun setTopicViewBackground(topicId: String, color: Int): Point? {
+        val topicRelation = this.mTreeSingleton.getTopicRelation(topicId)
+        topicRelation?.topicView?.setBackgroundColor(color)
+        return topicRelation?.topicView?.getLocationPointInWindow()
     }
 
     private fun getRadianDegree(pre: Point, dst: Point): Float {
