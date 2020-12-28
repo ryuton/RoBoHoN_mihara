@@ -1,22 +1,22 @@
 package com.example.testhvml
 
 import android.graphics.Color
-import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.generateViewId
-import android.widget.FrameLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
-import kotlin.math.atan2
 
 class MainActivity : AppCompatActivity(), HVMLPlacement.HVMLPlacementListener{
     lateinit var placement: HVMLPlacement
+    lateinit var button: Button
+    lateinit var horizontalScrollView: HorizontalScrollView
+    lateinit var scrollView: ScrollView
     var flag = true
+    private val topicIds = arrayOf("t1",  "t2", "t3", "t4", "t5", "t11", "t10")
+    private var now = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +28,25 @@ class MainActivity : AppCompatActivity(), HVMLPlacement.HVMLPlacementListener{
         placement = HVMLPlacement(model)
         placement.setHVMLPlacementListener(this)
         placement.createTree()
+
+        horizontalScrollView = findViewById(R.id.horizontal)
+        scrollView = findViewById(R.id.vertical)
+
+        button = findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+            val point = placement.setTopicViewBackground(topicIds[now], Color.BLUE)
+            Log.d("-------points-------", point.toString())
+            if (now != 0) placement.setTopicViewBackground(topicIds[now - 1], Color.WHITE)
+            else placement.setTopicViewBackground(topicIds[topicIds.count() - 1], Color.WHITE)
+            if (now == topicIds.count() - 1) now = 0
+            else now++
+
+            if (point != null) {
+                horizontalScrollView.smoothScrollBy(point.x, point.y)
+                scrollView.smoothScrollBy(point.x, point.y)
+            }
+
+        }
     }
 
     override fun onWindowFocusChanged(p0: Boolean) {
@@ -35,7 +54,6 @@ class MainActivity : AppCompatActivity(), HVMLPlacement.HVMLPlacementListener{
             placement.rotateArrowView()
             flag = false
         }
-
     }
 
     override fun newTopicLayout(topic: Topic): View {
