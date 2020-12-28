@@ -44,6 +44,9 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
         else if(VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_RECOG_TALK)) {
             mCallback.onExecCommand(ScenarioDefinitions.FUNC_RECOG_TALK, variables);
         }
+        else if(VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_HVML_ACTION)) {
+            mCallback.onExecCommand(ScenarioDefinitions.FUNC_HVML_ACTION, variables);
+        }
     }
 
     @Override

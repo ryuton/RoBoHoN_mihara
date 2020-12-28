@@ -8,14 +8,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -26,7 +30,6 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +40,8 @@ import jp.co.sharp.android.voiceui.VoiceUIVariable;
 import jp.co.sharp.sample.simple.api.MDnsServerDiscoveryListener;
 import jp.co.sharp.sample.simple.bluetooth.BluetoothService;
 import jp.co.sharp.sample.simple.customize.ScenarioDefinitions;
+import jp.co.sharp.sample.simple.hvmlParser.HVMLParser;
+import jp.co.sharp.sample.simple.hvmlParser.HVMLPlacement;
 import jp.co.sharp.sample.simple.util.VoiceUIManagerUtil;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil;
 import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil.VoiceUIVariableListHelper;
@@ -47,12 +52,16 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.widget.Toast;
 
+import com.example.testhvml.HvmlModel;
+import com.example.testhvml.Topic;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
 
-public class MainActivity extends Activity implements MainActivityVoiceUIListener.MainActivityScenarioCallback, MDnsServerDiscoveryListener.MDnsServerDiscoveryCallback {
+public class MainActivity extends Activity implements MainActivityVoiceUIListener.MainActivityScenarioCallback, MDnsServerDiscoveryListener.MDnsServerDiscoveryCallback, HVMLPlacement.HVMLPlacementListener {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     /**
@@ -96,6 +105,14 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
     private ProgressDialog progressDialog = null;
     Context activity = null;
 
+    /**
+     * HVML Placement
+     */
+    private HVMLPlacement mPlacement = null;
+    private HorizontalScrollView mHorizontalScrollView = null;
+    private ScrollView mScrollView = null;
+    private String mPreTopicId = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -123,77 +140,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             }
         }
 
-        // accostボタン
-        Button voiceAccostButton = (Button)findViewById(R.id.voice_accost_button);
-        voiceAccostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_APPOINT);
-                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                }
-            }
-        });
-
-        // resolve variableボタン
-        Button resolveButton = (Button)findViewById(R.id.resolve_variable_button);
-        resolveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_RESOLVE);
-                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                }
-            }
-        });
-
-        // set memory_pボタン
-        Button getMemoryPButton = (Button)findViewById(R.id.set_memoryP);
-        getMemoryPButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar now = Calendar.getInstance();
-
-                final String hour = String.valueOf(now.get(Calendar.HOUR_OF_DAY));
-                final String minute = String.valueOf(now.get(Calendar.MINUTE));
-                int ret = VoiceUIVariableUtil.setVariableData(mVoiceUIManager, ScenarioDefinitions.MEM_P_HOUR, hour);
-                if(ret == VoiceUIManager.VOICEUI_ERROR){
-                    Log.d(TAG, "setVariableData:VARIABLE_REGISTER_FAILED");
-                }
-                ret = VoiceUIVariableUtil.setVariableData(mVoiceUIManager, ScenarioDefinitions.MEM_P_MINUTE, minute);
-                if(ret == VoiceUIManager.VOICEUI_ERROR){
-                    Log.d(TAG, "setVariableData:VARIABLE_REGISTER_FAILED");
-                }
-                String text = "Set " + hour + ":" + minute;
-                TextView textSetting = (TextView)findViewById(R.id.ViewTime);
-                textSetting.setText(text);
-            }
-        });
-
-        // get memory_pボタン
-        Button setMemoryPButton = (Button)findViewById(R.id.get_memoryP);
-        setMemoryPButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_GET_MEMORYP);
-                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                }
-            }
-        });
-
-        // finish app：アプリ終了ボタン
-        Button finishAppButton = (Button)findViewById(R.id.finish_app_button);
-        finishAppButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVoiceUIManager != null) {
-                    VoiceUIVariableListHelper helper = new VoiceUIVariableListHelper().addAccost(ScenarioDefinitions.ACC_END_APP);
-                    VoiceUIManagerUtil.updateAppInfo(mVoiceUIManager, helper.getVariableList(), true);
-                }
-            }
-        });
-
         //ホームボタンの検知登録.
         mHomeEventReceiver = new HomeEventReceiver();
         IntentFilter filterHome = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
@@ -204,22 +150,30 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         IntentFilter filter = new IntentFilter(VoiceUIManager.ACTION_VOICEUI_SERVICE_STARTED);
         registerReceiver(mVoiceUIStartReceiver, filter);
 
-        /*
-        // Register for broadcasts when a device is discovered.
-        IntentFilter btFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(receiver, btFilter);
-
-        setmBluetoothService();
-        */
-
-
         progressDialog.setTitle("searching raspberry");
         progressDialog.setMessage("");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
         connectPairedDevice(RASP0_MAC_ADDRESS);
 
+        //hvml parser
+        HVMLParser parser = new HVMLParser(getResources(), "hvml/other/jp_co_sharp_sample_simple_talk.hvml" );
+        HvmlModel model = null;
+        try {
+            model = parser.parse();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        assert model != null;
+        mPlacement = new HVMLPlacement(model);
+        mPlacement.setHVMLPlacementListener(this);
+        mPlacement.createTree();
+
+        mHorizontalScrollView = (HorizontalScrollView) findViewById(R.id.horizontal);
+        mScrollView = (ScrollView) findViewById(R.id.vertical);
     }
 
     @Override
@@ -279,6 +233,12 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         mMainActivityVoiceUIListener = null;
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        mPlacement.rotateArrowView();
+    }
+
     /**
      * VoiceUIListenerクラスからのコールバックを実装する.
      */
@@ -302,6 +262,14 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 Log.i(TAG, "recog");
                 break;
             case ScenarioDefinitions.FUNC_HVML_ACTION:
+                for (final VoiceUIVariable variable: variables){
+                    Log.e(TAG, variable.toString());
+                    if ("topic_id".equals(variable.getName())) {
+                        String topicId = variable.getStringValue();
+                        changeTargetView(topicId, mPreTopicId);
+                        mPreTopicId = topicId;
+                    }
+                }
                 Log.d(TAG, "action");
 
             default:
@@ -316,6 +284,61 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             case ScenarioDefinitions.FUNC_RECOG_TALK:
         }
 
+    }
+
+    //PlacementListener
+    @NotNull
+    @Override
+    public View newTopicLayout(@NotNull Topic topic) {
+        View topicLayout = getLayoutInflater().inflate(R.layout.layout_topic, null);
+        topicLayout.setId(View.generateViewId());
+        topicLayout.setLayoutParams(new FrameLayout.LayoutParams(500, 500));
+
+        TextView topicTextView = (TextView) topicLayout.findViewById(R.id.TopicName);
+        if (!topic.getActions().isEmpty()) {
+            topicTextView.setText(topic.getActions().get(0).getSpeech());
+        }
+
+        TextView anchorTextView = (TextView) topicLayout.findViewById(R.id.AnchorName);
+        StringBuilder anchorText = new StringBuilder();
+        for (Topic.Anchor anchor: topic.getAnchors()) {
+            anchorText.append(anchor.getHref());
+        }
+        anchorTextView.setText(anchorText);
+
+        TextView nextTextView = (TextView) topicLayout.findViewById(R.id.NextName);
+        StringBuilder nextText = new StringBuilder();
+        for (Topic.Next next: topic.getNexts()) {
+            nextText.append(next.getHref());
+        }
+        nextTextView.setText(nextText);
+
+        return topicLayout;
+    }
+
+    @NotNull
+    @Override
+    public View newArrowView() {
+        View arrowView = getLayoutInflater().inflate(R.layout.layout_arrow, null);
+        arrowView.setLayoutParams(new FrameLayout.LayoutParams(400, 400));
+        arrowView.setId(View.generateViewId());
+
+        return arrowView;
+    }
+
+    private void changeTargetView(String topicId, String preTopicId) {
+        Point targetPoint = mPlacement.setTopicViewBackground(topicId, R.color.teal_200);
+        if(!preTopicId.equals("")) mPlacement.setTopicViewBackground(preTopicId, R.color.white);
+
+        assert targetPoint != null;
+        mHorizontalScrollView.smoothScrollBy(targetPoint.x, targetPoint.y);
+        mScrollView.smoothScrollBy(targetPoint.x, targetPoint.y);
+    }
+
+    @NotNull
+    @Override
+    public ConstraintLayout getRootLayout() {
+        return (ConstraintLayout) findViewById(R.id.root);
     }
 
     private class AsyncTestTask extends AsyncTask<Void, Integer, String> {
@@ -591,7 +614,9 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         }
     }
 
-    // Create a BroadcastReceiver for ACTION_FOUND.
+    /**
+     * Create a BroadcastReceiver for ACTION_FOUND.
+     */
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -607,4 +632,8 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             }
         }
     };
+
+    /**
+     * HVML placement
+     */
 }
