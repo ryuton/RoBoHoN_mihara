@@ -3,13 +3,9 @@ package com.example.testhvml
 import android.graphics.Point
 import android.util.Log
 import android.view.View
-import android.view.View.generateViewId
-import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
 import kotlin.math.atan2
 
 class HVMLPlacement (private val hvmlModel: HvmlModel) {
@@ -24,7 +20,7 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
         var topicLayoutTree = mutableListOf<MutableList<View>>()
         var arrowRelations = mutableListOf<ArrowRelation>()
 
-        fun addCol(col: Int) {
+        private fun addCol(col: Int) {
             while (topicLayoutTree.count() <= col) {
                 topicLayoutTree.add( mutableListOf() )
             }
@@ -51,6 +47,9 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
         }
     }
 
+    /**
+     * layout系のListener
+     */
     interface HVMLPlacementListener{
         fun newTopicLayout(topic: Topic) : View
         fun newArrowView(): View
@@ -73,7 +72,7 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
     fun createTree() {
 
         hvmlModel.head?.situation?.topicId?.let {
-            val topic =  topicFromId(it)
+            val topic =  this.hvmlModel.topicFromId(it)
             if (topic != null) {
                 addTopics(topic, 0)
             }
@@ -98,9 +97,9 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
 
         //topicのanchorとtopic配列を合成
         val segues: List<Topic.Segue?> = topic.anchors + topic.nexts
-        segues.forEachIndexed { index, segue ->
+        segues.forEachIndexed { _, segue ->
             segue?.href?.let { href ->
-               val nextTopic = topicFromId(href.replace("#", ""))
+               val nextTopic = this.hvmlModel.topicFromId(href.replace("#", ""))
                 if (nextTopic != null) {
                     addTopics(nextTopic, col + 1)
                 }
@@ -128,7 +127,7 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
     /**
      * Constraint Layoutを計算する
      *
-     * @param view      対象のTopic
+     * @param targetId      対象のTopic
      * @param startId   対象のTopicの左にあるTopicのID
      * @param topId     対象のTopicの上にあるTopicのID
      * @param bottomId　対象のTopicの下にあるTopicのID
@@ -204,19 +203,13 @@ class HVMLPlacement (private val hvmlModel: HvmlModel) {
         }
     }
 
-    fun getRadianDegree(pre: Point, dst: Point): Float {
+    private fun getRadianDegree(pre: Point, dst: Point): Float {
         return (atan2(((dst.y - pre.y).toDouble()), ((dst.x - pre.x).toDouble())) * 180.0 / Math.PI ).toFloat() * 2
     }
 
-    fun View.getLocationPointInWindow(): Point {
+    private fun View.getLocationPointInWindow(): Point {
         val array = IntArray(2)
         this.getLocationInWindow(array)
-        return Point(array[0], array[1])
-    }
-
-    fun View.getLocationPointOnScreen(): Point {
-        val array = IntArray(2)
-        this.getLocationOnScreen(array)
         return Point(array[0], array[1])
     }
 
