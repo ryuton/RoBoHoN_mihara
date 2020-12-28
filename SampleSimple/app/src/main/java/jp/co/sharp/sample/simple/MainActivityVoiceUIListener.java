@@ -20,7 +20,6 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
 
     private MainActivityScenarioCallback mCallback;
 
-
     /**
      * Activity側でのCallback実装チェック（実装してないと例外発生）.
      */
@@ -39,10 +38,11 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
         //controlタグからの通知(シナリオ側にcontrolタグのあるActionが開始されると呼び出される).
         //発話と同時にアプリ側で処理を実行したい場合はこちらを使う.
         Log.v(TAG, "onVoiceUIEvent");
-        for (VoiceUIVariable variable : variables) {
-            if ("Lvcsr_Basic".equals(variable.getName())) {
-                //mCallback.onExecCommand(ScenarioDefinitions.FUNC_RECOG_TALK, variable);
-            }
+        if (VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_HVML_ACTION)) {
+            mCallback.onExecCommand(ScenarioDefinitions.FUNC_HVML_ACTION, variables);
+        }
+        else if(VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_RECOG_TALK)) {
+            mCallback.onExecCommand(ScenarioDefinitions.FUNC_RECOG_TALK, variables);
         }
     }
 
@@ -53,8 +53,8 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
         Log.v(TAG, "onVoiceUIActionEnd");
         if (VoiceUIVariableUtil.isTarget(variables, ScenarioDefinitions.TARGET)) {
             mCallback.onExecCommand(VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.ATTR_FUNCTION), variables);
-
         }
+
         //mCallback.call();
     }
 

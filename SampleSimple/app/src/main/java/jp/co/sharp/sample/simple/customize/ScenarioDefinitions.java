@@ -55,6 +55,10 @@ public class ScenarioDefinitions {
      */
     public static final String FUNC_RECOG_TALK = "recog_talk";
     /**
+     * function：現在の会話を通知する
+     */
+    public static final String FUNC_HVML_ACTION = "hvml_action";
+    /**
      * accost名：accostテスト発話実行.
      */
     public static final String ACC_ACCOST =  ScenarioDefinitions.PACKAGE + ".accost.t1";
