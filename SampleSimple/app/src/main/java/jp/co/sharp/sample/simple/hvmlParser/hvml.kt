@@ -1,4 +1,4 @@
-package com.example.testhvml
+package jp.co.sharp.sample.simple.hvmlParser
 
 data class HvmlModel (
         var head: Head?,

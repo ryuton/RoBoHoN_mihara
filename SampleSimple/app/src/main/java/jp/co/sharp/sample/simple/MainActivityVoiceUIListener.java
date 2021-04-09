@@ -38,14 +38,14 @@ public class MainActivityVoiceUIListener implements VoiceUIListener{
         //controlタグからの通知(シナリオ側にcontrolタグのあるActionが開始されると呼び出される).
         //発話と同時にアプリ側で処理を実行したい場合はこちらを使う.
         Log.v(TAG, "onVoiceUIEvent");
+
+        //発話のTopic名
         if (VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_HVML_ACTION)) {
             mCallback.onExecCommand(ScenarioDefinitions.FUNC_HVML_ACTION, variables);
         }
+        //発話の内容取得
         else if(VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_RECOG_TALK)) {
             mCallback.onExecCommand(ScenarioDefinitions.FUNC_RECOG_TALK, variables);
-        }
-        else if(VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_HVML_ACTION)) {
-            mCallback.onExecCommand(ScenarioDefinitions.FUNC_HVML_ACTION, variables);
         }
     }
 

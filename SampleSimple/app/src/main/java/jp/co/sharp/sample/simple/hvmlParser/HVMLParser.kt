@@ -2,7 +2,6 @@ package jp.co.sharp.sample.simple.hvmlParser
 
 import android.content.res.Resources
 import android.util.Xml
-import com.example.testhvml.*
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException

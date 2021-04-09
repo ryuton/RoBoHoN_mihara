@@ -6,8 +6,6 @@ import android.support.constraint.ConstraintSet
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import com.example.testhvml.HvmlModel
-import com.example.testhvml.Topic
 import jp.co.sharp.sample.simple.R
 import kotlin.math.atan2
 

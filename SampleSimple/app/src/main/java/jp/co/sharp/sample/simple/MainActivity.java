@@ -52,8 +52,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.widget.Toast;
 
-import com.example.testhvml.HvmlModel;
-import com.example.testhvml.Topic;
+import jp.co.sharp.sample.simple.hvmlParser.HvmlModel;
+import jp.co.sharp.sample.simple.hvmlParser.Topic;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -61,7 +61,9 @@ import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
 
-public class MainActivity extends Activity implements MainActivityVoiceUIListener.MainActivityScenarioCallback, MDnsServerDiscoveryListener.MDnsServerDiscoveryCallback, HVMLPlacement.HVMLPlacementListener {
+public class MainActivity extends Activity implements MainActivityVoiceUIListener.MainActivityScenarioCallback,
+        MDnsServerDiscoveryListener.MDnsServerDiscoveryCallback,
+        HVMLPlacement.HVMLPlacementListener {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     /**
@@ -150,27 +152,11 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         IntentFilter filter = new IntentFilter(VoiceUIManager.ACTION_VOICEUI_SERVICE_STARTED);
         registerReceiver(mVoiceUIStartReceiver, filter);
 
-        progressDialog.setTitle("searching raspberry");
-        progressDialog.setMessage("");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-        connectPairedDevice(RASP0_MAC_ADDRESS);
-
-        //hvml parser
-        HVMLParser parser = new HVMLParser(getResources(), "hvml/other/jp_co_sharp_sample_simple_talk.hvml" );
-        HvmlModel model = null;
-        try {
-            model = parser.parse();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assert model != null;
-        mPlacement = new HVMLPlacement(model);
-        mPlacement.setHVMLPlacementListener(this);
-        mPlacement.createTree();
+//        progressDialog.setTitle("searching raspberry");
+//        progressDialog.setMessage("");
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
+//        connectPairedDevice(RASP0_MAC_ADDRESS);
 
         mHorizontalScrollView = (HorizontalScrollView) findViewById(R.id.horizontal);
         mScrollView = (ScrollView) findViewById(R.id.vertical);
@@ -192,6 +178,23 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         if (mDnsServerDiscoveryListener == null) {
             mDnsServerDiscoveryListener = new MDnsServerDiscoveryListener(this, "rasp0");
         }
+
+        if (mPlacement == null) {
+            //hvml parser
+            HVMLParser parser = new HVMLParser(getResources(), "hvml/other/jp_co_sharp_sample_simple_talk.hvml" );
+            HvmlModel model = null;
+            try {
+                model = parser.parse();
+            } catch (XmlPullParserException | IOException e) {
+                e.printStackTrace();
+            }
+
+            assert model != null;
+            mPlacement = new HVMLPlacement(model);
+            mPlacement.setHVMLPlacementListener(this);
+            mPlacement.createTree();
+        }
+
         //VoiceUIListenerの登録.
         VoiceUIManagerUtil.registerVoiceUIListener(mVoiceUIManager, mMainActivityVoiceUIListener);
 
@@ -250,6 +253,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 finish();
                 break;
 
+            //発話の取得アクション
             case ScenarioDefinitions.FUNC_RECOG_TALK:
                 for (final VoiceUIVariable variable: variables){
                     Log.e(TAG, variable.toString());
@@ -261,6 +265,8 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 }
                 Log.i(TAG, "recog");
                 break;
+
+            //ロボホンの発話ごとに呼ばれる
             case ScenarioDefinitions.FUNC_HVML_ACTION:
                 for (final VoiceUIVariable variable: variables){
                     Log.e(TAG, variable.toString());
@@ -299,20 +305,20 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             topicTextView.setText(topic.getActions().get(0).getSpeech());
         }
 
-        TextView anchorTextView = (TextView) topicLayout.findViewById(R.id.AnchorName);
-        StringBuilder anchorText = new StringBuilder();
-        for (Topic.Anchor anchor: topic.getAnchors()) {
-            anchorText.append(anchor.getHref());
-        }
-        anchorTextView.setText(anchorText);
+//        TextView anchorTextView = (TextView) topicLayout.findViewById(R.id.AnchorName);
+//        StringBuilder anchorText = new StringBuilder();
+//        for (Topic.Anchor anchor: topic.getAnchors()) {
+//            anchorText.append(anchor.getHref());
+//        }
+//        anchorTextView.setText(anchorText);
 
-        TextView nextTextView = (TextView) topicLayout.findViewById(R.id.NextName);
-        StringBuilder nextText = new StringBuilder();
-        for (Topic.Next next: topic.getNexts()) {
-            nextText.append(next.getHref());
-        }
-        nextTextView.setText(nextText);
-
+//        TextView nextTextView = (TextView) topicLayout.findViewById(R.id.NextName);
+//        StringBuilder nextText = new StringBuilder();
+//        for (Topic.Next next: topic.getNexts()) {
+//            nextText.append(next.getHref());
+//        }
+//        nextTextView.setText(nextText);
+//
         return topicLayout;
     }
 
@@ -449,19 +455,19 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 if (bufferedReader != null) {
                     try {
                         bufferedReader.close();
-                    } catch (IOException e) {
+                    } catch (IOException ignored) {
                     }
                 }
                 if (isr != null) {
                     try {
                         isr.close();
-                    } catch (IOException e) {
+                    } catch (IOException ignored) {
                     }
                 }
                 if (inputStream != null) {
                     try {
                         inputStream.close();
-                    } catch (IOException e) {
+                    } catch (IOException ignored) {
                     }
                 }
                 if (httpURLConnection != null) {
@@ -633,7 +639,4 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         }
     };
 
-    /**
-     * HVML placement
-     */
 }
