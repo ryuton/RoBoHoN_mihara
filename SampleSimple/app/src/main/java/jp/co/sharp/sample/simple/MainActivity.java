@@ -1,4 +1,4 @@
-package jp.co.sharp.sample.simple;
+ package jp.co.sharp.sample.simple;
 
 
 import android.annotation.SuppressLint;
@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,8 +17,7 @@ import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
-import android.widget.ScrollView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -82,10 +80,10 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
      * ホームボタンイベント検知.
      */
     private HomeEventReceiver mHomeEventReceiver;
-    /**
-     * UIスレッド処理用.
-     */
-    private Handler mHandler = new Handler();
+//    /**
+//     * UIスレッド処理用.
+//     */
+//    private Handler mHandler = new Handler();
     /**
      * mDNSのリスナー
      */
@@ -96,11 +94,11 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
      */
     private BluetoothAdapter mBluetoothAdapter = null;
     private BluetoothService mBluetoothService = null;
-    private BluetoothDevice mBluetoothDevice = null;
+//    private BluetoothDevice mBluetoothDevice = null;
 
     private final static Integer REQUEST_ENABLE_BT = 1;
-    private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
-    private final static String RASP0_MAC_ADDRESS = "B8:27:EB:C4:B3:3B";
+//    private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
+//    private final static String RASP0_MAC_ADDRESS = "B8:27:EB:C4:B3:3B";
     private final static String mConnectedDeviceName = "RASPZERO";
     private String mHostname;
 
@@ -110,10 +108,8 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
     /**
      * HVML Placement
      */
-    private HVMLPlacement mPlacement = null;
-    private HorizontalScrollView mHorizontalScrollView = null;
-    private ScrollView mScrollView = null;
-    private String mPreTopicId = "";
+    private LinearLayout topicView;
+    HvmlModel hvmlModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +132,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             if (variables != null) {
                 String test1 = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_TEST_1);
                 String test2 = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_TEST_2);
-                ((TextView)findViewById(R.id.test_value)).setText(test1 + ", " + test2);
+                ((TextView)findViewById(R.id.test_value)).setText(String.format("%s, %s", test1, test2));
             }else{
                 Log.d(TAG, "VoiceUIVariable is null");
             }
@@ -158,8 +154,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 //        progressDialog.show();
 //        connectPairedDevice(RASP0_MAC_ADDRESS);
 
-        mHorizontalScrollView = (HorizontalScrollView) findViewById(R.id.horizontal);
-        mScrollView = (ScrollView) findViewById(R.id.vertical);
     }
 
     @Override
@@ -179,21 +173,17 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             mDnsServerDiscoveryListener = new MDnsServerDiscoveryListener(this, "rasp0");
         }
 
-        if (mPlacement == null) {
-            //hvml parser
-            HVMLParser parser = new HVMLParser(getResources(), "hvml/other/jp_co_sharp_sample_simple_talk.hvml" );
-            HvmlModel model = null;
-            try {
-                model = parser.parse();
-            } catch (XmlPullParserException | IOException e) {
-                e.printStackTrace();
-            }
-
-            assert model != null;
-            mPlacement = new HVMLPlacement(model);
-            mPlacement.setHVMLPlacementListener(this);
-            mPlacement.createTree();
+        //hvml parser
+        HVMLParser parser = new HVMLParser(getResources(), "hvml/other/jp_co_sharp_sample_simple_talk.hvml" );
+        try {
+            hvmlModel = parser.parse();
+        } catch (XmlPullParserException | IOException e) {
+            e.printStackTrace();
         }
+
+        assert hvmlModel != null;
+
+        topicView = (LinearLayout) findViewById(R.id.TopicLayout);
 
         //VoiceUIListenerの登録.
         VoiceUIManagerUtil.registerVoiceUIListener(mVoiceUIManager, mMainActivityVoiceUIListener);
@@ -236,12 +226,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         mMainActivityVoiceUIListener = null;
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        mPlacement.rotateArrowView();
-    }
-
     /**
      * VoiceUIListenerクラスからのコールバックを実装する.
      */
@@ -272,8 +256,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                     Log.e(TAG, variable.toString());
                     if ("topic_id".equals(variable.getName())) {
                         String topicId = variable.getStringValue();
-                        changeTargetView(topicId, mPreTopicId);
-                        mPreTopicId = topicId;
+
                     }
                 }
                 Log.d(TAG, "action");
@@ -288,6 +271,9 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         Log.v(TAG, "onExecCommand() : " + command);
         switch (command) {
             case ScenarioDefinitions.FUNC_RECOG_TALK:
+            case ScenarioDefinitions.FUNC_HVML_ACTION:
+            default:
+                break;
         }
 
     }
@@ -332,13 +318,12 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         return arrowView;
     }
 
-    private void changeTargetView(String topicId, String preTopicId) {
-        Point targetPoint = mPlacement.setTopicViewBackground(topicId, R.color.teal_200);
-        if(!preTopicId.equals("")) mPlacement.setTopicViewBackground(preTopicId, R.color.white);
+    private void changeTargetView(Topic topic) {
+        TextView topicNameTextView = (TextView) topicView.findViewById(R.id.TopicName);
+        topicView.setLayoutParams(new FrameLayout.LayoutParams(700, 700));
+        topicNameTextView.setText(topic.getActions().get(0).getSpeech());
 
-        assert targetPoint != null;
-        mHorizontalScrollView.smoothScrollBy(targetPoint.x, targetPoint.y);
-        mScrollView.smoothScrollBy(targetPoint.x, targetPoint.y);
+        (ConstraintLayout) findViewById(R.id.root)
     }
 
     @NotNull
@@ -396,7 +381,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
         @Override
         protected String doInBackground(Void... voids) {
 
-            Map<String,String> headers=new HashMap<String,String>();
+            Map<String,String> headers= new HashMap<>();
             try {
                 return get(APIConstants.BASE_URL + APIConstants.APPOINT + variable.getStringValue(), headers);
 
@@ -436,20 +421,19 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                 httpURLConnection.connect();
 
                 if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-
                     inputStream = httpURLConnection.getInputStream();
                     isr = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                     bufferedReader = new BufferedReader(isr);
-                    String line = null;
+                    String line;
                     while ((line = bufferedReader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
-                } else {
-                    // If responseCode inputStream not HTTP_OK
                 }
 
             } catch (IOException e) {
+                Log.d(TAG, "get: " + httpURLConnection.getResponseCode());
                 throw e;
+
             } finally {
                 // fortify safeかつJava1.6 compliantなclose処理
                 if (bufferedReader != null) {
