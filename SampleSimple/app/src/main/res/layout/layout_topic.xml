@@ -14,31 +14,32 @@
         android:layout_weight="2"
         android:background="@color/topicName"
         android:text="TextView"
+        android:textSize="50sp"
         android:textAlignment="center" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="2">
-        <TextView
-            android:id="@+id/AnchorName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/topicSegue"
-            android:text="Anchor: "
-            android:textAlignment="center" />
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_weight="2">-->
+<!--        <TextView-->
+<!--            android:id="@+id/AnchorName"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@color/topicSegue"-->
+<!--            android:text="Anchor: "-->
+<!--            android:textAlignment="center" />-->
 
-        <TextView
-            android:id="@+id/NextName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/topicSegue"
-            android:text="Next: "
-            android:textAlignment="center" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/NextName"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@color/topicSegue"-->
+<!--            android:text="Next: "-->
+<!--            android:textAlignment="center" />-->
+<!--    </LinearLayout>-->
 
 
 </LinearLayout>

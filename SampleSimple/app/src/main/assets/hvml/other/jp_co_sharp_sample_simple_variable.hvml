@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<hvml version="2.0">
+<hvml version="2.0" xmlns="robohon_xsd">
     <head>
         <producer>jp.co.sharp.sample.simple</producer>
         <description>Java側でしか処理できない値をシナリオから取得する</description>

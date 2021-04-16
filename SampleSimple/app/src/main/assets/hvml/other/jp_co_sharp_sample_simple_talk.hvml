@@ -1,13 +1,11 @@
 <?xml version="1.0" ?>
-<hvml version="2.0">
+<hvml version="2.0" xmlns="robohon_xsd">
     <head>
         <producer>jp.co.sharp.sample.simple</producer>
-        <description>受付するためのシナリオ</description>
+        <description>こんにちはと話しかけてね</description>
         <tool_version>1.00</tool_version>
-        <scene value="jp.co.sharp.sample.simple.scene_common" />
-        <situation priority="99" topic_id="t0" trigger="user-word">コンニチハ in ${Lvcsr:Kana}</situation>
+        <scene value="jp.co.sharp.sample.simple.scene_common"/>
         <situation priority="99" topic_id="t0" trigger="user-word">こんにちは in ${Lvcsr:Basic}</situation>
-        <situation priority="99" topic_id="t0" trigger="user-word">hello in ${Lvcsr:Basic}</situation>
         <accost priority="74" topic_id="t0" word="jp.co.sharp.sample.simple.talk.t1"/>
         <version value="1.0" />
     </head>

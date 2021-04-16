@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
@@ -31,6 +32,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import jp.co.sharp.android.voiceui.VoiceUIManager;
@@ -97,8 +99,8 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 //    private BluetoothDevice mBluetoothDevice = null;
 
     private final static Integer REQUEST_ENABLE_BT = 1;
-//    private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
-//    private final static String RASP0_MAC_ADDRESS = "B8:27:EB:C4:B3:3B";
+    private final static String RASP3_MAC_ADDRESS = "B8:27:EB:D9:8F:13";
+    private final static String RASP0_MAC_ADDRESS = "B8:27:EB:C4:B3:3B";
     private final static String mConnectedDeviceName = "RASPZERO";
     private String mHostname;
 
@@ -173,17 +175,20 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             mDnsServerDiscoveryListener = new MDnsServerDiscoveryListener(this, "rasp0");
         }
 
+        topicView = (LinearLayout) findViewById(R.id.TopicLayout);
+
         //hvml parser
         HVMLParser parser = new HVMLParser(getResources(), "hvml/other/jp_co_sharp_sample_simple_talk.hvml" );
         try {
             hvmlModel = parser.parse();
+            TextView topicTextView = (TextView) topicView.findViewById(R.id.TopicName);
+            topicTextView.setText(Objects.requireNonNull(hvmlModel.getHead()).getDescription());
+
         } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
         }
 
         assert hvmlModel != null;
-
-        topicView = (LinearLayout) findViewById(R.id.TopicLayout);
 
         //VoiceUIListenerの登録.
         VoiceUIManagerUtil.registerVoiceUIListener(mVoiceUIManager, mMainActivityVoiceUIListener);
@@ -256,7 +261,8 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                     Log.e(TAG, variable.toString());
                     if ("topic_id".equals(variable.getName())) {
                         String topicId = variable.getStringValue();
-
+                        Topic topic = hvmlModel.topicFromId(topicId);
+                        this.changeTargetView(topic);
                     }
                 }
                 Log.d(TAG, "action");
@@ -267,69 +273,12 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
     }
 
     @Override
-    public void onExecCommand(String command, VoiceUIVariable variable) {
-        Log.v(TAG, "onExecCommand() : " + command);
-        switch (command) {
-            case ScenarioDefinitions.FUNC_RECOG_TALK:
-            case ScenarioDefinitions.FUNC_HVML_ACTION:
-            default:
-                break;
-        }
+    public void call() {
+        String number = "7777777777";
+        Uri call = Uri.parse("tel:" + number);
+        Intent surf = new Intent(Intent.ACTION_CALL, call);
+        startActivity(surf);
 
-    }
-
-    //PlacementListener
-    @NotNull
-    @Override
-    public View newTopicLayout(@NotNull Topic topic) {
-        View topicLayout = getLayoutInflater().inflate(R.layout.layout_topic, null);
-        topicLayout.setId(View.generateViewId());
-        topicLayout.setLayoutParams(new FrameLayout.LayoutParams(500, 500));
-
-        TextView topicTextView = (TextView) topicLayout.findViewById(R.id.TopicName);
-        if (!topic.getActions().isEmpty()) {
-            topicTextView.setText(topic.getActions().get(0).getSpeech());
-        }
-
-//        TextView anchorTextView = (TextView) topicLayout.findViewById(R.id.AnchorName);
-//        StringBuilder anchorText = new StringBuilder();
-//        for (Topic.Anchor anchor: topic.getAnchors()) {
-//            anchorText.append(anchor.getHref());
-//        }
-//        anchorTextView.setText(anchorText);
-
-//        TextView nextTextView = (TextView) topicLayout.findViewById(R.id.NextName);
-//        StringBuilder nextText = new StringBuilder();
-//        for (Topic.Next next: topic.getNexts()) {
-//            nextText.append(next.getHref());
-//        }
-//        nextTextView.setText(nextText);
-//
-        return topicLayout;
-    }
-
-    @NotNull
-    @Override
-    public View newArrowView() {
-        View arrowView = getLayoutInflater().inflate(R.layout.layout_arrow, null);
-        arrowView.setLayoutParams(new FrameLayout.LayoutParams(400, 400));
-        arrowView.setId(View.generateViewId());
-
-        return arrowView;
-    }
-
-    private void changeTargetView(Topic topic) {
-        TextView topicNameTextView = (TextView) topicView.findViewById(R.id.TopicName);
-        topicView.setLayoutParams(new FrameLayout.LayoutParams(700, 700));
-        topicNameTextView.setText(topic.getActions().get(0).getSpeech());
-
-        (ConstraintLayout) findViewById(R.id.root)
-    }
-
-    @NotNull
-    @Override
-    public ConstraintLayout getRootLayout() {
-        return (ConstraintLayout) findViewById(R.id.root);
     }
 
     private class AsyncTestTask extends AsyncTask<Void, Integer, String> {
@@ -388,7 +337,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             } catch (IOException e) {
                 e.printStackTrace();
             }
-           return null;
+            return null;
         }
 
         private String get(String endpoint, Map<String, String> headers) throws IOException {
@@ -463,6 +412,80 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
 
     }
 
+    @Override
+    public void onExecCommand(String command, VoiceUIVariable variable) {
+        Log.v(TAG, "onExecCommand() : " + command);
+        switch (command) {
+            case ScenarioDefinitions.FUNC_RECOG_TALK:
+            case ScenarioDefinitions.FUNC_HVML_ACTION:
+            default:
+                break;
+        }
+
+    }
+
+    //PlacementListener
+    @NotNull
+    @Override
+    public View newTopicLayout(@NotNull Topic topic) {
+        View topicLayout = getLayoutInflater().inflate(R.layout.layout_topic, null);
+        topicLayout.setId(View.generateViewId());
+        topicLayout.setLayoutParams(new FrameLayout.LayoutParams(500, 500));
+
+        TextView topicTextView = (TextView) topicLayout.findViewById(R.id.TopicName);
+        if (!topic.getActions().isEmpty()) {
+            topicTextView.setText(topic.getActions().get(0).getSpeech());
+        }
+
+//        TextView anchorTextView = (TextView) topicLayout.findViewById(R.id.AnchorName);
+//        StringBuilder anchorText = new StringBuilder();
+//        for (Topic.Anchor anchor: topic.getAnchors()) {
+//            anchorText.append(anchor.getHref());
+//        }
+//        anchorTextView.setText(anchorText);
+
+//        TextView nextTextView = (TextView) topicLayout.findViewById(R.id.NextName);
+//        StringBuilder nextText = new StringBuilder();
+//        for (Topic.Next next: topic.getNexts()) {
+//            nextText.append(next.getHref());
+//        }
+//        nextTextView.setText(nextText);
+//
+        return topicLayout;
+    }
+
+    @NotNull
+    @Override
+    public View newArrowView() {
+        View arrowView = getLayoutInflater().inflate(R.layout.layout_arrow, null);
+        arrowView.setLayoutParams(new FrameLayout.LayoutParams(400, 400));
+        arrowView.setId(View.generateViewId());
+
+        return arrowView;
+    }
+
+    private void changeTargetView(final Topic topic) {
+
+        final Handler mainHandler = new Handler(Looper.getMainLooper());
+        /* 処理 */
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                TextView topicNameTextView = (TextView) topicView.findViewById(R.id.TopicName);
+                topicNameTextView.setText(topic.getActions().get(0).getSpeech());
+            }
+        });
+
+    }
+
+    @NotNull
+    @Override
+    public ConstraintLayout getRootLayout() {
+        return (ConstraintLayout) findViewById(R.id.root);
+    }
+
+
+    // Bluetooth
     private void setBluetoothService() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null){
@@ -501,6 +524,7 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             switch (msg.what) {
                 case Constants.MESSAGE_STATE_CHANGE:
                     switch (msg.arg1) {
+                        //接続された
                         case BluetoothService.STATE_CONNECTED:
                             //setStatus(getString(R.string.title_connected_to, mConnectedDeviceName));
                             //mConversationArrayAdapter.clear();
@@ -508,12 +532,12 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
                             progressDialog.cancel();
 
                             break;
+                        //接続中
                         case BluetoothService.STATE_CONNECTING:
-                            //setStatus(R.string.title_connecting);
                             break;
+                        //検索中
                         case BluetoothService.STATE_LISTEN:
                         case BluetoothService.STATE_NONE:
-                            //setStatus(R.string.title_not_connected);
                             break;
                         default:
                             throw new IllegalStateException("Unexpected value: " + msg.arg1);
@@ -553,15 +577,6 @@ public class MainActivity extends Activity implements MainActivityVoiceUIListene
             Log.d(TAG, msg.toString());
         }
     };
-
-    @Override
-    public void call() {
-        String number = "7777777777";
-        Uri call = Uri.parse("tel:" + number);
-        Intent surf = new Intent(Intent.ACTION_CALL, call);
-        startActivity(surf);
-
-    }
 
     @Override
     public void getHostName(@NotNull InetAddress hostName) {
