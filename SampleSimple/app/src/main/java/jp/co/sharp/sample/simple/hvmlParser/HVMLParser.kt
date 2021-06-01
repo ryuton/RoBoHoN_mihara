@@ -9,21 +9,31 @@ import java.io.IOException
 const val TAG = "PARSE_HVML"
 private val ns: String? = null
 
-class HVMLParse(resources: Resources, fileName: String) {
+class HVMLParser(resources: Resources, fileName: String) {
 
     val hvmlString = resources.assets.open(fileName)
 
     @Throws(XmlPullParserException::class, IOException::class)
-    fun parse(): List<Topic> {
+    fun parse(): HvmlModel {
         hvmlString.use { inputStream ->
             val parser: XmlPullParser = Xml.newPullParser()
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
             parser.setInput(inputStream, null)
-            parser.nextTag()
-            parser.nextTag()
-            readHead(parser)
-            parser.nextTag()
-            return readTopics(parser)
+            var head: Head? = null
+            var topics = listOf<Topic>()
+            parser.nextTag() // <?xml version="1.0" ?>
+            parser.require(XmlPullParser.START_TAG, ns, "hvml")
+            while (parser.next() != XmlPullParser.END_TAG) {
+                if (parser.eventType != XmlPullParser.START_TAG) {
+                    continue
+                }
+                when (parser.name) {
+                    "body" -> topics = readTopics(parser)
+                    "head" -> head = readHead(parser)
+                    else -> skip(parser)
+                }
+            }
+            return HvmlModel(head, topics)
             //return readHead(parser)
         }
     }
@@ -56,7 +66,7 @@ class HVMLParse(resources: Resources, fileName: String) {
         var rule: Topic.Rule? = null
         val actions = mutableListOf<Topic.Action>()
         val anchors = mutableListOf<Topic.Anchor>()
-        var next: Topic.Next? = null
+        var nexts = mutableListOf<Topic.Next>()
 
         id = parser.getAttributeValue(null, "id")
 
@@ -69,12 +79,12 @@ class HVMLParse(resources: Resources, fileName: String) {
                 "role" -> rule = readRule(parser)
                 "action" -> actions.add(readAction(parser))
                 "a" -> anchors.add(readAnchor(parser))
-                "next" -> next = readNext(parser)
+                "next" -> nexts.add(readNext(parser))
                 else -> skip(parser)
             }
         }
 
-        val topic = Topic(id, case, rule, actions, anchors, next)
+        val topic = Topic(id, case, rule, actions, anchors, nexts)
 
         return topic
     }
@@ -118,6 +128,7 @@ class HVMLParse(resources: Resources, fileName: String) {
             }
             when (parser.name) {
                 "action" -> conditions.add(readCondition(parser))
+                else -> skip(parser)
             }
         }
 
@@ -129,13 +140,20 @@ class HVMLParse(resources: Resources, fileName: String) {
         parser.require(XmlPullParser.START_TAG, ns, "action")
 
         var index: String? = null
+        var speech: String? = null
         index = parser.getAttributeValue(null, "index")
 
-        skip(parser)
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.eventType != XmlPullParser.START_TAG) {
+                continue
+            }
+            when (parser.name) {
+                "speech" -> speech = readText(parser, "speech")
+                else -> skip(parser)
+            }
+        }
 
-        parser.require(XmlPullParser.END_TAG, ns, "action")
-
-        return Topic.Action(index)
+        return Topic.Action(index, speech)
     }
 
     @Throws(XmlPullParserException::class, IOException::class)

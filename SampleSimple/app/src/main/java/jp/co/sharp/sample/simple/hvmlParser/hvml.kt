@@ -1,16 +1,22 @@
 package jp.co.sharp.sample.simple.hvmlParser
 
-import android.content.res.Resources
-
 data class HvmlModel (
         var head: Head?,
         var topics: List<Topic>
 ) {
-    fun parse(resources: Resources, fileName: String) {
-        val parser = HVMLParse(resources, fileName)
-        topics = parser.parse()
-    }
 
+    /**
+     * IDを指定してTopicsの配列からTopic一つ取り出す
+     *
+     * @param id TopicのID
+     */
+    public fun topicFromId(id: String): Topic? {
+        topics.forEach {
+            if (it.id == id) return  it
+        }
+
+        return null
+    }
 }
 
 data class Head (
@@ -44,7 +50,7 @@ data class Topic(
         var rule: Rule?,
         var actions: List<Action>,
         var anchors: List<Anchor>,
-        var next: Next?
+        var nexts: List<Next>
 ) {
     data class Rule (
             var conditions: List<Condition>
@@ -63,21 +69,22 @@ data class Topic(
     )
 
     data class Action(
-            var index: String?
+            var index: String?,
+            var speech: String?
     )
 
     data class Anchor (
             override var href: String?,
             override var type: String?
-    ): Segue(href, type)
+    ): Segue
 
     data class Next (
             override var href: String?,
             override var type: String?
-    ): Segue(href, type)
+    ): Segue
 
-    open class Segue (
-            open var href: String?,
-            open var type: String?
-    )
+    interface Segue {
+        var href: String?
+        var type: String?
+    }
 }
