@@ -1,0 +1,1248 @@
+<hvml version="1000.00">
+  <head>
+    <!--You have a CHOICE of the next 7 items at this level-->
+    <producer>string</producer>
+    <description>string</description>
+    <tool_version>string</tool_version>
+    <scene value="string"/>
+    <situation trigger="user-word" value="string" topic_id="string" priority="99">string</situation>
+    <accost topic_id="string" word="string" priority="99"/>
+    <version value="1.5E2"/>
+  </head>
+  <body>
+    <!--1 or more repetitions:-->
+    <topic id="string" listen="true" listen_ms="7" recog_type="#robohonprocess" dict="string">
+      <!--You have a CHOICE of the next 5 items at this level-->
+      <!--Zero or more repetitions:-->
+      <action index="7">
+        <!--You have a CHOICE of the next 7 items at this level-->
+        <speech>
+          sonoras
+          <!--You have a CHOICE of the next 5 items at this level-->
+          <emotion type="anger" level="1">
+            ventos
+            <!--You have a CHOICE of the next 5 items at this level-->
+            <emotion/>
+            <speed value="7">
+              verrantque
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion/>
+              <speed/>
+              <pitch value="7">
+                temperat
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch/>
+                <volume value="7">
+                  per
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  turbine
+                </volume>
+                <wait ms="7"/>
+                circum
+              </pitch>
+              <volume value="7">
+                regemque
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch value="7">
+                  nimborum
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  fremunt
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                foedere
+              </volume>
+              <wait ms="7"/>
+              ferant
+            </speed>
+            <pitch value="7">
+              profundum
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion/>
+              <speed value="7">
+                sceptra
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch/>
+                <volume value="7">
+                  et
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  turbine
+                </volume>
+                <wait ms="7"/>
+                iovis
+              </speed>
+              <pitch/>
+              <volume value="7">
+                flammato
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  speluncis
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  profundum
+                </speed>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                bella
+              </volume>
+              <wait ms="7"/>
+              nubibus
+            </pitch>
+            <volume value="7">
+              flammas
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion/>
+              <speed value="7">
+                ac
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch value="7">
+                  hoc
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  rapidum
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                ac
+              </speed>
+              <pitch value="7">
+                caelumque
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  speluncis
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  circum
+                </speed>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                aris
+              </pitch>
+              <volume/>
+              <wait ms="7"/>
+              coniunx
+            </volume>
+            <wait ms="7"/>
+            praeterea
+          </emotion>
+          <speed value="7">
+            arce
+            <!--You have a CHOICE of the next 5 items at this level-->
+            <emotion type="anger" level="3">
+              imperio
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion/>
+              <speed/>
+              <pitch value="7">
+                certo
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch/>
+                <volume value="7">
+                  quisquam
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  et
+                </volume>
+                <wait ms="7"/>
+                ac
+              </pitch>
+              <volume value="7">
+                feta
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch value="7">
+                  ac
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  sed
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                pectore
+              </volume>
+              <wait ms="7"/>
+              talia
+            </emotion>
+            <speed/>
+            <pitch value="7">
+              pectore
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="anger" level="1">
+                sciret
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch/>
+                <volume value="7">
+                  certo
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  dare
+                </volume>
+                <wait ms="7"/>
+                rates
+              </emotion>
+              <speed/>
+              <pitch/>
+              <volume value="7">
+                bella
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="anger" level="3">
+                  faciat
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  magno
+                </emotion>
+                <speed/>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                et
+              </volume>
+              <wait ms="7"/>
+              ac
+            </pitch>
+            <volume value="7">
+              et
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="anger" level="2">
+                infixit
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch value="7">
+                  ventos
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  tenens
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                regina
+              </emotion>
+              <speed/>
+              <pitch value="7">
+                montis
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="sadness" level="1">
+                  insuper
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  mollitque
+                </emotion>
+                <speed/>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                cum
+              </pitch>
+              <volume/>
+              <wait ms="7"/>
+              iovisque
+            </volume>
+            <wait ms="7"/>
+            in
+          </speed>
+          <pitch value="7">
+            soror
+            <!--You have a CHOICE of the next 5 items at this level-->
+            <emotion type="happiness" level="1">
+              coniunx
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion/>
+              <speed value="7">
+                adorat
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch/>
+                <volume value="7">
+                  ipsa
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  illum
+                </volume>
+                <wait ms="7"/>
+                frenat
+              </speed>
+              <pitch/>
+              <volume value="7">
+                aris
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  nimborum
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  aris
+                </speed>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                mollitque
+              </volume>
+              <wait ms="7"/>
+              premere
+            </emotion>
+            <speed value="7">
+              montis
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="anger" level="3">
+                ferant
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch/>
+                <volume value="7">
+                  gero
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  nimborum
+                </volume>
+                <wait ms="7"/>
+                circum
+              </emotion>
+              <speed/>
+              <pitch/>
+              <volume value="7">
+                vasto
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="sadness" level="2">
+                  aris
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  tempestatesque
+                </emotion>
+                <speed/>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                aris
+              </volume>
+              <wait ms="7"/>
+              tenens
+            </speed>
+            <pitch/>
+            <volume value="7">
+              incedo
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="happiness" level="1">
+                iras
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  acuto
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  nubibus
+                </speed>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                et
+              </emotion>
+              <speed value="7">
+                austris
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="sadness" level="3">
+                  profundum
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  atris
+                </emotion>
+                <speed/>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                imposuit
+              </speed>
+              <pitch/>
+              <volume/>
+              <wait ms="7"/>
+              atris
+            </volume>
+            <wait ms="7"/>
+            magno
+          </pitch>
+          <volume value="7">
+            animos
+            <!--You have a CHOICE of the next 5 items at this level-->
+            <emotion type="sadness" level="3">
+              verrantque
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion/>
+              <speed value="7">
+                patriam
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch value="7">
+                  metuens
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  montis
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                dare
+              </speed>
+              <pitch value="7">
+                laxas
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  tempestatesque
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  e
+                </speed>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                sceptra
+              </pitch>
+              <volume/>
+              <wait ms="7"/>
+              volutans
+            </emotion>
+            <speed value="7">
+              vasto
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="anger" level="3">
+                vinclis
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch value="7">
+                  rapidum
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  rapidi
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                turbine
+              </emotion>
+              <speed/>
+              <pitch value="7">
+                antro
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="sadness" level="2">
+                  aequora
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  luctantis
+                </emotion>
+                <speed/>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                aequora
+              </pitch>
+              <volume/>
+              <wait ms="7"/>
+              ipsa
+            </speed>
+            <pitch value="7">
+              et
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="anger" level="4">
+                imperio
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  hic
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  arce
+                </speed>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                ego
+              </emotion>
+              <speed value="7">
+                ni
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="anger" level="3">
+                  ego
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  corde
+                </emotion>
+                <speed/>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                aris
+              </speed>
+              <pitch/>
+              <volume/>
+              <wait ms="7"/>
+              insuper
+            </pitch>
+            <volume/>
+            <wait ms="7"/>
+            molemque
+          </volume>
+          <wait ms="7"/>
+          temperat
+        </speech>
+        <sound src="string"/>
+        <behavior type="string" id="string"/>
+        <control target="string" function="string">
+          <!--Zero or more repetitions:-->
+          <data key="string" value="string"/>
+        </control>
+        <extra value="string"/>
+        <memory type="permanent" key="string" value="string" operation="set"/>
+        <memoryset key="string" operation="append" condition="string" alias="string">
+          <!--Zero or more repetitions:-->
+          <data key="string" value="string"/>
+        </memoryset>
+      </action>
+      <!--Zero or more repetitions:-->
+      <a href="string" type="default">
+        <!--Zero or more repetitions:-->
+        <situation trigger="timer" value="string" topic_id="string" priority="99">string</situation>
+      </a>
+      <!--Optional:-->
+      <rule>
+        <!--Zero or more repetitions:-->
+        <condition case_id="string" weight="7" priority="99">string</condition>
+      </rule>
+      <!--Zero or more repetitions:-->
+      <case id="string" limit="7" cleardays="7">
+        <!--You have a CHOICE of the next 3 items at this level-->
+        <action index="7">
+          <!--You have a CHOICE of the next 7 items at this level-->
+          <speech>
+            iunonis
+            <!--You have a CHOICE of the next 5 items at this level-->
+            <emotion type="sadness" level="3">
+              hic
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion/>
+              <speed value="7">
+                iovisque
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch value="7">
+                  et
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume value="7">
+                    nubibus
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    carcere
+                  </volume>
+                  <wait ms="7"/>
+                  imposuit
+                </pitch>
+                <volume value="7">
+                  murmure
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch value="7">
+                    rates
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    maria
+                  </pitch>
+                  <volume/>
+                  <wait ms="7"/>
+                  supplex
+                </volume>
+                <wait ms="7"/>
+                imponet
+              </speed>
+              <pitch value="7">
+                ipsa
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  numen
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume value="7">
+                    volutans
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    per
+                  </volume>
+                  <wait ms="7"/>
+                  maria
+                </speed>
+                <pitch/>
+                <volume value="7">
+                  et
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed value="7">
+                    foedere
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    tempestatesque
+                  </speed>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  sciret
+                </volume>
+                <wait ms="7"/>
+                ego
+              </pitch>
+              <volume value="7">
+                rapidi
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  iaculata
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch value="7">
+                    montis
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    omnipotens
+                  </pitch>
+                  <volume/>
+                  <wait ms="7"/>
+                  et
+                </speed>
+                <pitch value="7">
+                  premere
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed value="7">
+                    premit
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    talia
+                  </speed>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  numen
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                terras
+              </volume>
+              <wait ms="7"/>
+              vasto
+            </emotion>
+            <speed value="7">
+              et
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="sadness" level="2">
+                premit
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed/>
+                <pitch value="7">
+                  vasto
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume value="7">
+                    illi
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    arce
+                  </volume>
+                  <wait ms="7"/>
+                  dea
+                </pitch>
+                <volume value="7">
+                  luctantis
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch value="7">
+                    rapidum
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    bella
+                  </pitch>
+                  <volume/>
+                  <wait ms="7"/>
+                  tempestatesque
+                </volume>
+                <wait ms="7"/>
+                ac
+              </emotion>
+              <speed/>
+              <pitch value="7">
+                rapidi
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="happiness" level="2">
+                  ignem
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume value="7">
+                    tenens
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    et
+                  </volume>
+                  <wait ms="7"/>
+                  vinclis
+                </emotion>
+                <speed/>
+                <pitch/>
+                <volume value="7">
+                  murmure
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion type="sadness" level="4">
+                    sonoras
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    rapidi
+                  </emotion>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  soror
+                </volume>
+                <wait ms="7"/>
+                rapidum
+              </pitch>
+              <volume value="7">
+                imperio
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="anger" level="4">
+                  insuper
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch value="7">
+                    ego
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    maria
+                  </pitch>
+                  <volume/>
+                  <wait ms="7"/>
+                  cum
+                </emotion>
+                <speed/>
+                <pitch value="7">
+                  rates
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion type="happiness" level="3">
+                    austris
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    indignantes
+                  </emotion>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  ventis
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                sonoras
+              </volume>
+              <wait ms="7"/>
+              ni
+            </speed>
+            <pitch value="7">
+              rapidum
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="happiness" level="3">
+                animos
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  iovisque
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume value="7">
+                    magno
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    flammato
+                  </volume>
+                  <wait ms="7"/>
+                  secum
+                </speed>
+                <pitch/>
+                <volume value="7">
+                  hic
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed value="7">
+                    et
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    aeoliam
+                  </speed>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  terras
+                </volume>
+                <wait ms="7"/>
+                altos
+              </emotion>
+              <speed value="7">
+                rex
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="sadness" level="3">
+                  premit
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch/>
+                  <volume value="7">
+                    certo
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    luctantis
+                  </volume>
+                  <wait ms="7"/>
+                  dare
+                </emotion>
+                <speed/>
+                <pitch/>
+                <volume value="7">
+                  luctantis
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion type="happiness" level="2">
+                    altos
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    et
+                  </emotion>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  sonoras
+                </volume>
+                <wait ms="7"/>
+                annos
+              </speed>
+              <pitch/>
+              <volume value="7">
+                tot
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="happiness" level="3">
+                  iovisque
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed value="7">
+                    supplex
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    molemque
+                  </speed>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  quisquam
+                </emotion>
+                <speed value="7">
+                  montis
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion type="happiness" level="3">
+                    adorat
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    bella
+                  </emotion>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  omnipotens
+                </speed>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                incedo
+              </volume>
+              <wait ms="7"/>
+              animos
+            </pitch>
+            <volume value="7">
+              iovis
+              <!--You have a CHOICE of the next 5 items at this level-->
+              <emotion type="anger" level="4">
+                secum
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion/>
+                <speed value="7">
+                  faciat
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch value="7">
+                    dea
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    transfixo
+                  </pitch>
+                  <volume/>
+                  <wait ms="7"/>
+                  hic
+                </speed>
+                <pitch value="7">
+                  claustra
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed value="7">
+                    imposuit
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    una
+                  </speed>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  iunonis
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                corde
+              </emotion>
+              <speed value="7">
+                sceptra
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="anger" level="1">
+                  quae
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed/>
+                  <pitch value="7">
+                    ac
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    caelumque
+                  </pitch>
+                  <volume/>
+                  <wait ms="7"/>
+                  regina
+                </emotion>
+                <speed/>
+                <pitch value="7">
+                  sceptra
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion type="anger" level="4">
+                    terras
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    venit
+                  </emotion>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  aut
+                </pitch>
+                <volume/>
+                <wait ms="7"/>
+                et
+              </speed>
+              <pitch value="7">
+                regemque
+                <!--You have a CHOICE of the next 5 items at this level-->
+                <emotion type="happiness" level="1">
+                  arce
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion/>
+                  <speed value="7">
+                    austris
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    ignem
+                  </speed>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  ipsa
+                </emotion>
+                <speed value="7">
+                  pater
+                  <!--You have a CHOICE of the next 5 items at this level-->
+                  <emotion type="happiness" level="2">
+                    vasto
+                    <!--You have a CHOICE of the next 5 items at this level-->
+                    <emotion/>
+                    <speed/>
+                    <pitch/>
+                    <volume/>
+                    <wait ms="7"/>
+                    scopuloque
+                  </emotion>
+                  <speed/>
+                  <pitch/>
+                  <volume/>
+                  <wait ms="7"/>
+                  sciret
+                </speed>
+                <pitch/>
+                <volume/>
+                <wait ms="7"/>
+                mollitque
+              </pitch>
+              <volume/>
+              <wait ms="7"/>
+              secum
+            </volume>
+            <wait ms="7"/>
+            bella
+          </speech>
+          <sound src="string"/>
+          <behavior type="string" id="string"/>
+          <control target="string" function="string">
+            <!--Zero or more repetitions:-->
+            <data key="string" value="string"/>
+          </control>
+          <extra value="string"/>
+          <memory type="permanent" key="string" value="string" operation="append"/>
+          <memoryset key="string" operation="append" condition="string" alias="string">
+            <!--Zero or more repetitions:-->
+            <data key="string" value="string"/>
+          </memoryset>
+        </action>
+        <a href="string" type="default">
+          <!--Zero or more repetitions:-->
+          <situation trigger="user-word" value="string" topic_id="string" priority="99">string</situation>
+        </a>
+        <next href="string" type="default">
+          <!--Zero or more repetitions:-->
+          <situation trigger="user-word" value="string" topic_id="string" priority="99">string</situation>
+        </next>
+      </case>
+      <!--Optional:-->
+      <next href="string" type="default">
+        <!--Zero or more repetitions:-->
+        <situation trigger="timer" value="string" topic_id="string" priority="99">string</situation>
+      </next>
+    </topic>
+  </body>
+</hvml>
