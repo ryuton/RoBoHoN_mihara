@@ -128,8 +128,8 @@
         <topic id="t10" listen="true">
             <action index="1">
                 <speech> 院長に電話をかけます。少々お待ちください。</speech>
-                <control function="Test_Control" target="com.example.robohonreception">
-                    <data key="Toast_Contents" value="control"/>
+                <control function="call_action" target="com.example.robohonreception">
+                    <data key="call" value="yes"/>
                 </control>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t10"/>

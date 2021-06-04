@@ -61,6 +61,10 @@ public class ScenarioDefinitions {
      */
     public static final String FUNC_HVML_ACTION = "hvml_action";
     /**
+     * function：発話内容を通知する.
+     */
+    public static final String FUNC_CALLL_ACTION = "call_action";
+    /**
      * accost名：accostテスト発話実行.
      */
     public static final String ACC_ACCOST =  ScenarioDefinitions.PACKAGE + ".accost.t1";

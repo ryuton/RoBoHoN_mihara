@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -25,6 +26,7 @@ import com.example.robohonreception.voiceui.VoiceUIListenerImpl;
 import com.example.robohonreception.voiceui.VoiceUIManagerUtil;
 import com.example.robohonreception.voiceui.VoiceUIVariableUtil;
 
+import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_CALLL_ACTION;
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_END_APP;
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_HVML_ACTION;
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_RECOG_TALK;
@@ -167,6 +169,18 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                         public void run() {
                             if(!isFinishing()) {
 //                                ((TextView) findViewById(R.id.recog_text)).setText("Lvcsr:"+lvcsr);
+                            }
+                        }
+                    });
+                } else if(FUNC_CALLL_ACTION.equals(function)) {
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(!isFinishing()) {
+                                String number = "0138473163";
+                                Uri call = Uri.parse("tel:" + number);
+                                Intent surf = new Intent(Intent.ACTION_CALL, call);
+                                startActivity(surf);
                             }
                         }
                     });
