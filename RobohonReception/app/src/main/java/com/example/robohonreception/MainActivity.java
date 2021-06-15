@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.List;
 
@@ -21,6 +25,7 @@ import jp.co.sharp.android.voiceui.VoiceUIManager;
 import jp.co.sharp.android.voiceui.VoiceUIVariable;
 import com.example.robohonreception.R;
 
+import com.example.robohonreception.hvml.HVMLParser;
 import com.example.robohonreception.voiceui.ScenarioDefinitions;
 import com.example.robohonreception.voiceui.VoiceUIListenerImpl;
 import com.example.robohonreception.voiceui.VoiceUIManagerUtil;
@@ -32,9 +37,6 @@ import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_HVML
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_RECOG_TALK;
 
 
-/**
- * 音声UIを利用した基本的な機能だけ実装したActivity.
- */
 public class MainActivity extends Activity implements VoiceUIListenerImpl.ScenarioCallback {
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -54,6 +56,8 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
      * UIスレッド処理用.
      */
     private Handler mHandler = new Handler();
+
+    private HVMLParser mHVMLParser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,18 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
         mHomeEventReceiver = new HomeEventReceiver();
         IntentFilter filterHome = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         registerReceiver(mHomeEventReceiver, filterHome);
+
+
+        //HVMLParse
+        try {
+            AssetManager assetManager = getResources().getAssets();
+            InputStream inputStream= assetManager.open("hvml/other/com_example_robohonreception_talk.hvml");
+            mHVMLParser = new HVMLParser(inputStream);
+
+            ((TextView) findViewById(R.id.TopicName)).setText(mHVMLParser.getHead().description);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -148,11 +164,12 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
             case VoiceUIListenerImpl.ACTION_START:
                 if(FUNC_HVML_ACTION.equals(function)) {
                     final String action = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_HVML_ACTION);
+                    final String speechText = mHVMLParser.getTopicFromID(action).getActions().get(0).getSpeech().getValue();
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             if(!isFinishing()) {
-                                ((TextView) findViewById(R.id.TopicName)).setText("Topic:" + action);
+                                ((TextView) findViewById(R.id.TopicName)).setText(speechText);
                             }
                         }
                     });
