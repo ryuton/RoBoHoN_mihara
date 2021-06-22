@@ -168,7 +168,7 @@
         </topic>
         <topic id="t15" listen="false">
             <action index="1">
-                <speech>診察は${memory_p:com.example.robohonreception.appoint_time}時からだよ</speech>
+                <speech>診察は${memory_p:com.example.robohonreception.appoint_time}時${memory_p:com.example.robohonreception.appoint_minute}分からだよ</speech>
             </action>
         </topic>
     </body>

@@ -35,6 +35,7 @@ import okhttp3.Request;
 import com.example.robohonreception.R;
 
 import com.example.robohonreception.hvml.HVMLParser;
+import com.example.robohonreception.mDNS.mDNSHandler;
 import com.example.robohonreception.patient.Appoint;
 import com.example.robohonreception.patient.PatientController;
 import com.example.robohonreception.patient.Response;
@@ -53,9 +54,9 @@ import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_RECO
 public class MainActivity extends Activity implements VoiceUIListenerImpl.ScenarioCallback {
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    private final String BASE_URL = "http://192.168.1.102:8080/";
-    private final String PATIENT_URL = BASE_URL + "patient/";
-    private final String APPOINT_URL = BASE_URL + "appoint/";
+    private String BASE_URL = "http://192.168.1.102:8080/";
+    private String PATIENT_URL = BASE_URL + "patient/";
+    private String APPOINT_URL = BASE_URL + "appoint/";
 
     /**
      * 音声UI制御.
@@ -75,6 +76,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
     private Handler mHandler = new Handler();
 
     private HVMLParser mHVMLParser = null;
+    private mDNSHandler mmDNSHandler = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +118,8 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        mmDNSHandler = new mDNSHandler(getApplicationContext());
     }
 
     @Override
@@ -243,6 +247,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
     }
 
     public void getAppoint(int id) {
+        if (!mmDNSHandler.getHostIP().isEmpty()) BASE_URL = mmDNSHandler.getHostIP();
         Request request = new Request.Builder()
                 .url(APPOINT_URL + id)
                 .get()
@@ -268,6 +273,13 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
 //                if (ret == VoiceUIManager.VOICEUI_ERROR) throw new RemoteException("failed to set memory");
                 ret = VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_NAME, res.result.patientName);
 //                if (ret == VoiceUIManager.VOICEUI_ERROR) throw new RemoteException("failed to set memory");
+
+                if (!res.result.patientID1.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "0");
+                else if (!res.result.patientID2.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "15");
+                else if (!res.result.patientID3.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "30");
+                else if (!res.result.patientID4.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "45");
+                else VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "0");
+                
                 VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_APPOINT);
             }
         });

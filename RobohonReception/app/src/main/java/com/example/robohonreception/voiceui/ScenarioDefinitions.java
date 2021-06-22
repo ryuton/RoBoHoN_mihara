@@ -122,6 +122,13 @@ public class ScenarioDefinitions {
      * memory_p：予約時間.
      * */
     public static final String MEM_P_APPOINT_TIME = ScenarioDefinitions.PACKAGE + ".appoint_time";
+
+    /**
+     * memory_p：予約時間.
+     * */
+    public static final String MEM_P_APPOINT_MINUTE = ScenarioDefinitions.PACKAGE + ".appoint_minute";
+
+
     /**
      * static クラスとして使用する.
      */
