@@ -1,5 +1,7 @@
 package com.example.robohonreception.patient;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -7,28 +9,51 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class PatientController {
-    private final String BASE_URL = "http://rasp0.local:8080/";
+    private final String BASE_URL = "http://192.168.1.102:8080/";
     private final String PATIENT_URL = BASE_URL + "patient/";
     private final String APPOINT_URL = BASE_URL + "appoint/";
 
-    com.example.robohonreception.patient.Response<Patient> getPatient(int id) {
+    public com.example.robohonreception.patient.Response<Patient> getPatient(int id) {
         return getTClass(Patient.class, PATIENT_URL + id);
     }
 
-    com.example.robohonreception.patient.Response<Patient> getPatient(String id) {
+    public com.example.robohonreception.patient.Response<Patient> getPatient(String id) {
         return getTClass(Patient.class, PATIENT_URL + id);
     }
 
-    com.example.robohonreception.patient.Response<Appoint> getAppoint(int id) {
-        return getTClass(Appoint.class, APPOINT_URL + id);
+    public void getAppoint(int id) {
+        Request request = new Request.Builder()
+                .url(APPOINT_URL + id)
+                .get()
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("PatientController", e.toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Gson gson = new Gson();
+                ParameterizedType type = new GenericOf<>(com.example.robohonreception.patient.Response.class, Appoint.class);
+                com.example.robohonreception.patient.Response<Appoint> res = null;
+                res = gson.fromJson(response.body().string(), type);
+                Log.d("PatientController", res.toString());
+            }
+        });
     }
 
-    com.example.robohonreception.patient.Response<Appoint> getAppoint(String id) {
+    public com.example.robohonreception.patient.Response<Appoint> getAppoint(String id) {
         return getTClass(Appoint.class, APPOINT_URL + id);
     }
 
@@ -50,7 +75,7 @@ public class PatientController {
             response = gson.fromJson(res, type);
 
         } catch (Exception e) {
-
+            Log.d("PatientController", e.toString());
         }
 
         return response;

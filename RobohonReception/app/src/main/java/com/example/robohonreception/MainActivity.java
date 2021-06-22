@@ -11,25 +11,38 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.List;
 
 import jp.co.sharp.android.voiceui.VoiceUIManager;
 import jp.co.sharp.android.voiceui.VoiceUIVariable;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
 import com.example.robohonreception.R;
 
 import com.example.robohonreception.hvml.HVMLParser;
+import com.example.robohonreception.patient.Appoint;
+import com.example.robohonreception.patient.PatientController;
+import com.example.robohonreception.patient.Response;
 import com.example.robohonreception.voiceui.ScenarioDefinitions;
 import com.example.robohonreception.voiceui.VoiceUIListenerImpl;
 import com.example.robohonreception.voiceui.VoiceUIManagerUtil;
 import com.example.robohonreception.voiceui.VoiceUIVariableUtil;
+import com.google.gson.Gson;
 
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_CALLL_ACTION;
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_END_APP;
@@ -39,6 +52,10 @@ import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_RECO
 
 public class MainActivity extends Activity implements VoiceUIListenerImpl.ScenarioCallback {
     public static final String TAG = MainActivity.class.getSimpleName();
+
+    private final String BASE_URL = "http://192.168.1.102:8080/";
+    private final String PATIENT_URL = BASE_URL + "patient/";
+    private final String APPOINT_URL = BASE_URL + "appoint/";
 
     /**
      * 音声UI制御.
@@ -99,7 +116,6 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -174,18 +190,28 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                         }
                     });
                 }
+                break;
             //必要なイベント毎に実装.
             case VoiceUIListenerImpl.ACTION_END:
                 if(FUNC_END_APP.equals(function)) {
                     finish();
                     break;
-                }else if(FUNC_RECOG_TALK.equals(function)){
+                }else if(FUNC_HVML_ACTION.equals(function)){
                     final String lvcsr = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_LVCSR_BASIC);
+                    if (lvcsr.isEmpty()) break;
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             if(!isFinishing()) {
-//                                ((TextView) findViewById(R.id.recog_text)).setText("Lvcsr:"+lvcsr);
+                                try {
+                                    int appointID = Integer.parseInt(lvcsr);
+                                    getAppoint(appointID);
+
+                                } catch (NumberFormatException e) {
+                                    //パースできなかった場合はもう一度発話頼む
+                                    VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_TALK_FAILED);
+
+                                }
                             }
                         }
                     });
@@ -213,6 +239,63 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                 break;
             default:
                 break;
+        }
+    }
+
+    public void getAppoint(int id) {
+        Request request = new Request.Builder()
+                .url(APPOINT_URL + id)
+                .get()
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("PatientController", e.toString());
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                Gson gson = new Gson();
+                ParameterizedType type = new GenericOf<>(com.example.robohonreception.patient.Response.class, Appoint.class);
+                com.example.robohonreception.patient.Response<Appoint> res = null;
+                res = gson.fromJson(response.body().string(), type);
+                Log.d("PatientController", res.toString());
+
+                int ret = VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_TIME, res.result.appointTime);
+//                if (ret == VoiceUIManager.VOICEUI_ERROR) throw new RemoteException("failed to set memory");
+                ret = VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_NAME, res.result.patientName);
+//                if (ret == VoiceUIManager.VOICEUI_ERROR) throw new RemoteException("failed to set memory");
+                VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_APPOINT);
+            }
+        });
+    }
+
+    class GenericOf<X, Y> implements ParameterizedType {
+
+        private final Class<X> container;
+        private final Class<Y> wrapped;
+
+        GenericOf(Class<X> container, Class<Y> wrapped) {
+            this.container = container;
+            this.wrapped = wrapped;
+        }
+
+        @Override
+        public Type[] getActualTypeArguments() {
+            return new Type[]{wrapped};
+        }
+
+        @Override
+        public Type getRawType() {
+            return container;
+        }
+
+        @Override
+        public Type getOwnerType() {
+            return null;
         }
     }
 

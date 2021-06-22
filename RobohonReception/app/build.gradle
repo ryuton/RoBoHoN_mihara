@@ -26,5 +26,5 @@ dependencies {
     provided files('jar/jp.co.sharp.android.voiceui.framework.jar')
     compile files('jar/simple-xml-2.7.1.jar')
     compile 'com.squareup.okhttp3:okhttp:4.0.0-alpha02'
-    compile 'com.google.code.gson:gson:2.8.7'
+    compile 'com.google.code.gson:gson:2.2.4'
 }
