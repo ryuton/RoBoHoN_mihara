@@ -84,6 +84,8 @@ public class ScenarioDefinitions {
      * accost名：発話実行.
      */
     public static final String ACC_TALK = ScenarioDefinitions.PACKAGE + ".talk.t1";
+    public static final String ACC_TALK_FAILED = ScenarioDefinitions.PACKAGE + ".talk.t4";
+    public static final String ACC_APPOINT = ScenarioDefinitions.PACKAGE + ".talk.t12";
     /**
      * resolve variable：アプリで変数解決する値.
      */
@@ -105,6 +107,10 @@ public class ScenarioDefinitions {
      */
     public static final String KEY_HVML_ACTION = "topic_id";
     /**
+     * data key：call action
+     */
+    public static final String KEY_CALL_ACTION = "call";
+    /**
      * memory_p：時.
      */
     public static final String MEM_P_HOUR = ScenarioDefinitions.PACKAGE + ".hour";
@@ -112,6 +118,21 @@ public class ScenarioDefinitions {
      * memory_p：分.
      * */
     public static final String MEM_P_MINUTE = ScenarioDefinitions.PACKAGE + ".minute";
+    /**
+     * memory_p：患者の名前.
+     * */
+    public static final String MEM_P_PATIENT_NAME = ScenarioDefinitions.PACKAGE + ".patient_name";
+    /**
+     * memory_p：予約時間.
+     * */
+    public static final String MEM_P_APPOINT_TIME = ScenarioDefinitions.PACKAGE + ".appoint_time";
+
+    /**
+     * memory_p：予約時間.
+     * */
+    public static final String MEM_P_APPOINT_MINUTE = ScenarioDefinitions.PACKAGE + ".appoint_minute";
+
+
     /**
      * static クラスとして使用する.
      */

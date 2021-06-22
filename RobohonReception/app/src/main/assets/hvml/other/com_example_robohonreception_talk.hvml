@@ -8,6 +8,8 @@
         <situation priority="75" topic_id="t0" trigger="user-word">こんにちは in ${Lvcsr:Basic}</situation>
         <situation priority="75" topic_id="t0" trigger="user-word">イマカラシャベルヨ near ${Lvcsr:Kana}</situation>
         <accost priority="74" topic_id="t0" word="com.example.robohonreception.talk.t1"/>
+        <accost priority="75" topic_id="t4" word="com.example.robohonreception.talk.t4"/>
+        <accost priority="75" topic_id="t14" word="com.example.robohonreception.talk.t12"/>
         <version value="1.0" />
     </head>
     <body>
@@ -35,7 +37,7 @@
                 <memory type="temporary" key="loop_count" value="0"/>
             </action>
             <a href="#t3">
-                <situation trigger="user-word"> 0 lt ${Lvcsr:Basic}</situation>
+                <situation trigger="user-word"> ${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]</situation>
             </a>
             <next href="#t4" type="default"/>
         </topic>
@@ -43,11 +45,9 @@
         <topic id="t3" listen="false">
             <action index="1">
                 <speech>ちょっと待ってね</speech>
-                <control function="recog_talk" target="com.example.robohonreception">
-                    <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
-                </control>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t3"/>
+                    <data key="Lvcsr_Basic" value="${Lvcsr:Basic}"/>
                 </control>
                 <behavior id="assign" type="normal" />
             </action>
@@ -68,7 +68,7 @@
                     <behavior id="assign" type="normal" />
                 </action>
                 <a href="#t3">
-                    <situation trigger="user-word"> 1 in ${Lvcsr:Basic}</situation>
+                    <situation trigger="user-word">${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]</situation>
                 </a>
                 <next href="#t4" type="default"/>
             </case>
@@ -88,10 +88,10 @@
                 </control>
             </action>
             <a href="#t5">
-                <situation trigger="user-word">院長 in ${Lvcsr:Basic}</situation>
+                <situation trigger="user-word">インチョウ near ${Lvcsr:Kana}</situation>
             </a>
             <a href="#t6">
-                <situation trigger="user-word">スタッフ  in ${Lvcsr:Basic}</situation>
+                <situation trigger="user-word">スタッフ near ${Lvcsr:Kana}</situation>
             </a>
             <next href="#out" type="default"/>
         </topic>
@@ -128,11 +128,9 @@
         <topic id="t10" listen="true">
             <action index="1">
                 <speech> 院長に電話をかけます。少々お待ちください。</speech>
-                <control function="call_action" target="com.example.robohonreception">
-                    <data key="call" value="yes"/>
-                </control>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t10"/>
+                    <data key="call" value="yes"/>
                 </control>
             </action>
         </topic>
@@ -147,18 +145,35 @@
         </topic>
 
         <topic dict="Reply" id="y2" listen="true">
-            <action index="1">
-                <speech> 検索したよ。</speech>
-                <control function="hvml_action" target="jp.co.sharp.sample.simple">
-                    <data key="topic_id" value="y2"/>
-                </control>
-            </action>
             <a href="#t12">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
             </a>
-            <a href="#t13">
+            <a href="#t11">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
             </a>
+        </topic>
+
+        <topic id="t10" listen="true">
+            <action index="1">
+                <speech> スタッフに電話をかけます。少々お待ちください。</speech>
+                <control function="hvml_action" target="com.example.robohonreception">
+                    <data key="topic_id" value="t10"/>
+                    <data key="call" value="yes"/>
+                </control>
+            </action>
+        </topic>
+
+
+        <topic id="t14" listen="false">
+            <action index="1">
+                <speech>${memory_p:com.example.robohonreception.patient_name}さんですね</speech>
+            </action>
+            <next href="#t15" type="default"/>
+        </topic>
+        <topic id="t15" listen="false">
+            <action index="1">
+                <speech>診察は${memory_p:com.example.robohonreception.appoint_time}時${memory_p:com.example.robohonreception.appoint_minute}分からだよ</speech>
+            </action>
         </topic>
     </body>
 </hvml>
