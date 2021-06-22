@@ -7,22 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RemoteException;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Calendar;
 import java.util.List;
 
 import jp.co.sharp.android.voiceui.VoiceUIManager;
@@ -32,13 +26,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-import com.example.robohonreception.R;
-
 import com.example.robohonreception.hvml.HVMLParser;
 import com.example.robohonreception.mDNS.mDNSHandler;
 import com.example.robohonreception.patient.Appoint;
-import com.example.robohonreception.patient.PatientController;
-import com.example.robohonreception.patient.Response;
 import com.example.robohonreception.voiceui.ScenarioDefinitions;
 import com.example.robohonreception.voiceui.VoiceUIListenerImpl;
 import com.example.robohonreception.voiceui.VoiceUIManagerUtil;
@@ -48,7 +38,6 @@ import com.google.gson.Gson;
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_CALLL_ACTION;
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_END_APP;
 import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_HVML_ACTION;
-import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_RECOG_TALK;
 
 
 public class MainActivity extends Activity implements VoiceUIListenerImpl.ScenarioCallback {
