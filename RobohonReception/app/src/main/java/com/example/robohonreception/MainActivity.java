@@ -46,6 +46,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
     private String BASE_URL = "http://192.168.1.102:8080/";
     private String PATIENT_URL = BASE_URL + "patient/";
     private String APPOINT_URL = BASE_URL + "appoint/";
+    private String GPIO_URL = BASE_URL + "gpio/";
 
     /**
      * 音声UI制御.
@@ -66,6 +67,9 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
 
     private HVMLParser mHVMLParser = null;
     private mDNSHandler mmDNSHandler = null;
+
+    private Handler handler = null;
+    private Runnable r =null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +113,18 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
         }
 
         mmDNSHandler = new mDNSHandler(getApplicationContext());
+
+
+        handler = new Handler();
+        r = new Runnable() {
+            int count = 0;
+            @Override
+            public void run() {
+                // UIスレッド
+                getGPIO();
+                handler.postDelayed(this, 10000);
+            }
+        };
     }
 
     @Override
@@ -129,6 +145,8 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
 
         //Scene有効化.
         VoiceUIManagerUtil.enableScene(mVUIManager, ScenarioDefinitions.SCENE_COMMON);
+
+        handler.post(r);
     }
 
     @Override
@@ -252,6 +270,33 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
             default:
                 break;
         }
+    }
+
+    public void getGPIO() {
+        if (!mmDNSHandler.getHostIP().isEmpty()) BASE_URL = mmDNSHandler.getHostIP();
+        Request request = new Request.Builder()
+                .url(GPIO_URL)
+                .get()
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("PatientController", e.toString());
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                Gson gson = new Gson();
+                ParameterizedType type = new GenericOf<>(com.example.robohonreception.patient.Response.class, Integer.class);
+                com.example.robohonreception.patient.Response<Integer> res = null;
+                res = gson.fromJson(response.body().string(), type);
+                Log.d(TAG, res.result.toString());
+                if (res.result == 1) VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_TALK);
+            }
+        });
     }
 
     public void getAppoint(int id) {

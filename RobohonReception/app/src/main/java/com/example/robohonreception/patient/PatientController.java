@@ -19,9 +19,14 @@ public class PatientController {
     private final String BASE_URL = "http://192.168.1.102:8080/";
     private final String PATIENT_URL = BASE_URL + "patient/";
     private final String APPOINT_URL = BASE_URL + "appoint/";
+    private final String GPIO_URL = BASE_URL + "gpio/";
 
     public com.example.robohonreception.patient.Response<Patient> getPatient(int id) {
         return getTClass(Patient.class, PATIENT_URL + id);
+    }
+
+    public com.example.robohonreception.patient.Response<Integer> getGPIO() {
+        return getTClass(Integer.class, GPIO_URL);
     }
 
     public com.example.robohonreception.patient.Response<Patient> getPatient(String id) {
