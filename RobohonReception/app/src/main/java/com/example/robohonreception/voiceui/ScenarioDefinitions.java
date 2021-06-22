@@ -107,6 +107,10 @@ public class ScenarioDefinitions {
      */
     public static final String KEY_HVML_ACTION = "topic_id";
     /**
+     * data key：call action
+     */
+    public static final String KEY_CALL_ACTION = "call";
+    /**
      * memory_p：時.
      */
     public static final String MEM_P_HOUR = ScenarioDefinitions.PACKAGE + ".hour";

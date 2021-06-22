@@ -202,24 +202,43 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                     break;
                 }else if(FUNC_HVML_ACTION.equals(function)){
                     final String lvcsr = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_LVCSR_BASIC);
-                    if (lvcsr.isEmpty()) break;
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(!isFinishing()) {
-                                try {
-                                    int appointID = Integer.parseInt(lvcsr);
-                                    getAppoint(appointID);
+                    if (!lvcsr.isEmpty()) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isFinishing()) {
+                                    try {
+                                        int appointID = Integer.parseInt(lvcsr);
+                                        getAppoint(appointID);
 
-                                } catch (NumberFormatException e) {
-                                    //パースできなかった場合はもう一度発話頼む
-                                    VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_TALK_FAILED);
+                                    } catch (NumberFormatException e) {
+                                        //パースできなかった場合はもう一度発話頼む
+                                        VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_TALK_FAILED);
 
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
+
+                    final String callAction = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_CALL_ACTION);
+                    if (!callAction.isEmpty()){
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isFinishing()) {
+                                    String number = "0138473163";
+                                    Uri call = Uri.parse("tel:" + number);
+                                    Intent surf = new Intent(Intent.ACTION_CALL, call);
+                                    startActivity(surf);
+                                }
+                            }
+                        });
+                    }
+
                 } else if(FUNC_CALLL_ACTION.equals(function)) {
+                    final String callAction = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_CALL_ACTION);
+                    if (callAction.isEmpty()) break;
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -279,7 +298,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                 else if (!res.result.patientID3.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "30");
                 else if (!res.result.patientID4.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "45");
                 else VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "0");
-                
+
                 VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_APPOINT);
             }
         });
