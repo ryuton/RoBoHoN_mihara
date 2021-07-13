@@ -27,6 +27,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 import com.example.robohonreception.hvml.HVMLParser;
+import com.example.robohonreception.hvml.tag.Topic;
 import com.example.robohonreception.mDNS.mDNSHandler;
 import com.example.robohonreception.patient.Appoint;
 import com.example.robohonreception.voiceui.ScenarioDefinitions;
@@ -43,7 +44,8 @@ import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_HVML
 public class MainActivity extends Activity implements VoiceUIListenerImpl.ScenarioCallback {
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    private String BASE_URL = "http://192.168.11.35:8080/";
+//    private String BASE_URL = "http://192.168.11.35:8080/";
+    private String BASE_URL = "http://192.168.1.103:8080/";
     private String PATIENT_URL = BASE_URL + "patient/";
     private String APPOINT_URL = BASE_URL + "appoint/";
     private String GPIO_URL = BASE_URL + "gpio/";
@@ -186,15 +188,19 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
             case VoiceUIListenerImpl.ACTION_START:
                 if(FUNC_HVML_ACTION.equals(function)) {
                     final String action = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_HVML_ACTION);
-                    final String speechText = mHVMLParser.getTopicFromID(action).getActions().get(0).getSpeech().getValue();
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(!isFinishing()) {
-                                ((TextView) findViewById(R.id.TopicName)).setText(speechText);
+                    final Topic topic =  mHVMLParser.getTopicFromID(action);
+                    if (topic != null) {
+                        final String speechText = topic.getActions().get(0).getSpeech().getValue();
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isFinishing()) {
+                                    ((TextView) findViewById(R.id.TopicName)).setText(speechText);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 }
                 break;
             //必要なイベント毎に実装.

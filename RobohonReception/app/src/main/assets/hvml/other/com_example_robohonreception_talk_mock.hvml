@@ -59,7 +59,7 @@
             <action index="1">
                 <speech>患者様でしたら、オッケーって言ってね。</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t01"/>
+                    <data key="topic_id" value="t111"/>
                 </control>
             </action>
             <next href="#y3" type="default"/>
@@ -99,10 +99,10 @@
                 <speech>ちょっと待ってね</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t3"/>
-                    <data key="Lvcsr_Basic" value="${memory_p:com.example.robohonreception.patient_id}"/>
                 </control>
                 <behavior id="assign" type="normal" />
             </action>
+            <next href="#14" type="default" />
         </topic>
 
         <topic id="t4" listen="true">
@@ -241,14 +241,14 @@
 
         <topic id="t14" listen="false" listen_ms="60000">
             <action index="1">
-                <speech>${memory_p:com.example.robohonreception.patient_name}さんですね</speech>
+                <speech>テストさんですね</speech>
             </action>
             <next href="#t15" type="default"/>
         </topic>
 
         <topic id="t15" listen="false" listen_ms="60000">
             <action index="1">
-                <speech>診察は${memory_p:com.example.robohonreception.appoint_time}時${memory_p:com.example.robohonreception.appoint_minute}分からだよ</speech>
+                <speech>診察は12時30分からだよ</speech>
             </action>
         </topic>
 
