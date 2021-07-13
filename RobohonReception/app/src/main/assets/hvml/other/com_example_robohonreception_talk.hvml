@@ -8,7 +8,7 @@
         <situation priority="75" topic_id="t0" trigger="user-word">こんにちは in ${Lvcsr:Basic}</situation>
         <situation priority="75" topic_id="t0" trigger="user-word">イマカラシャベルヨ near ${Lvcsr:Kana}</situation>
         <accost priority="74" topic_id="s0" word="com.example.robohonreception.talk.s0"/>
-        <accost priority="75" topic_id="t1" word="com.example.robohonreception.talk.t4"/>
+        <accost priority="80" topic_id="t1" word="com.example.robohonreception.talk.t4"/>
         <accost priority="75" topic_id="t14" word="com.example.robohonreception.talk.t12"/>
         <accost priority="75" topic_id="t16" word="com.example.robohonreception.talk.t16"/>
         <version value="1.0" />
@@ -99,7 +99,7 @@
                 <speech>ちょっと待ってね</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t3"/>
-                    <data key="Lvcsr_Basic" value="${memory_p:com.example.robohonreception.patient_id}"/>
+                    <data key="Lvcsr_Basic" value="${memory_t:patient_number}"/>
                 </control>
                 <behavior id="assign" type="normal" />
             </action>
@@ -255,9 +255,9 @@
         <topic id="t16" listen="false" listen_ms="60000">
             <action index="1">
                 <speech>${Lvcsr:Basic}番ですか？よかったらオッケーっていってね</speech>
+                <memory key="patient_number" type="temporary" value="(${Lvcsr:Basic})"/>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t16"/>
-                    <data key="Lvcsr_Basic_check" value="${Lvcsr:Basic}"/>
                 </control>
             </action>
 
