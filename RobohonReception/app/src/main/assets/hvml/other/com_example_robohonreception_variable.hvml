@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<hvml version="2.0">
+    <head>
+        <producer>com.example.robohonreception</producer>
+        <description>Java側でしか処理できない値をシナリオから取得する</description>
+        <situation priority="75" topic_id="t1" trigger="user-word">スウジ near ${Lvcsr:Kana}</situation>
+        <scene value="com.example.robohonreception.scene_common"/>
+        <version value="1.0"/>
+        <accost priority="75" topic_id="t1" word="com.example.robohonreception.variable.t1"/>
+    </head>
+    <body>
+        <topic id="t1" listen="true" listen_ms="60000">
+            <action index="1">
+                <speech>番号を教えて。</speech>
+                <control function="hvml_action" target="com.example.robohonreception">
+                    <data key="topic_id" value="t1" />
+                </control>
+                <memory key="loop_count" type="temporary" value="0" />
+            </action>
+            <a href="#t16">
+                <situation trigger="user-word">${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]</situation>
+            </a>
+            <next href="#t16" type="default" />
+        </topic>
+
+        <topic id="t16" listen="false" listen_ms="60000">
+            <action index="1">
+                <speech>${Lvcsr:Basic}です</speech>
+                <memory key="patient_number" type="temporary" value="(${Lvcsr:Basic})" />
+                <control function="hvml_action" target="com.example.robohonreception">
+                    <data key="topic_id" value="t16" />
+                </control>
+            </action>
+        </topic>
+    </body>
+</hvml>
