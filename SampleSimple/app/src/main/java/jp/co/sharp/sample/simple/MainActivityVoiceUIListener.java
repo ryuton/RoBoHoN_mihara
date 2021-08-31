@@ -15,7 +15,7 @@ import jp.co.sharp.sample.simple.util.VoiceUIVariableUtil;
  * 音声UIからの通知を処理する.
  * Callbackの中では重い処理をしないこと.
  */
-public class MainActivityVoiceUIListener implements VoiceUIListener {
+public class MainActivityVoiceUIListener implements VoiceUIListener{
     private static final String TAG = MainActivityVoiceUIListener.class.getSimpleName();
 
     private MainActivityScenarioCallback mCallback;
@@ -24,6 +24,7 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
      * Activity側でのCallback実装チェック（実装してないと例外発生）.
      */
     public MainActivityVoiceUIListener(Context context) {
+
         super();
         try {
             mCallback = (MainActivityScenarioCallback) context;
@@ -37,6 +38,15 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
         //controlタグからの通知(シナリオ側にcontrolタグのあるActionが開始されると呼び出される).
         //発話と同時にアプリ側で処理を実行したい場合はこちらを使う.
         Log.v(TAG, "onVoiceUIEvent");
+
+        //発話のTopic名
+        if (VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_HVML_ACTION)) {
+            mCallback.onExecCommand(ScenarioDefinitions.FUNC_HVML_ACTION, variables);
+        }
+        //発話の内容取得
+        else if(VoiceUIVariableUtil.isTargetFuncution(variables, ScenarioDefinitions.TARGET, ScenarioDefinitions.FUNC_RECOG_TALK)) {
+            mCallback.onExecCommand(ScenarioDefinitions.FUNC_RECOG_TALK, variables);
+        }
     }
 
     @Override
@@ -47,6 +57,8 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
         if (VoiceUIVariableUtil.isTarget(variables, ScenarioDefinitions.TARGET)) {
             mCallback.onExecCommand(VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.ATTR_FUNCTION), variables);
         }
+
+        //mCallback.call();
     }
 
     @Override
@@ -77,7 +89,7 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
         //priority負けなどで発話が棄却された場合のコールバック.
         Log.v(TAG, "onVoiceUIRejection");
         if (ScenarioDefinitions.ACC_END_APP.equals(variable.getStringValue())) {
-            mCallback.onExecCommand(ScenarioDefinitions.FUNC_END_APP, null);
+            mCallback.onExecCommand(ScenarioDefinitions.FUNC_END_APP, variable);
         }
     }
 
@@ -89,13 +101,14 @@ public class MainActivityVoiceUIListener implements VoiceUIListener {
     /**
      * Activityへの通知用IFクラス.
      */
-    public static interface MainActivityScenarioCallback {
+    public interface MainActivityScenarioCallback {
         /**
          * 実行されたcontrolの通知.
          *
          * @param function 実行された操作コマンド種別.
          */
-        public void onExecCommand(String function, List<VoiceUIVariable> variables);
+        void onExecCommand(String function, List<VoiceUIVariable> variables);
+        void onExecCommand(String function, VoiceUIVariable variable);
+        void call();
     }
-
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bc0c6bca-7968-4a9b-8b74-eccc2f984ef3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SampleSimple/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/RoBoHoN_mihara.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/libraries/Gradle__com_android_support_support_annotations_21_0_3_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/libraries/Gradle__org_jetbrains_annotations_13_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_3_50_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_3_50_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_3_50_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/app/src/main/assets/hvml/other/jp_co_sharp_sample_simple_talk.hvml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/app/src/main/java/jp/co/sharp/sample/simple/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/app/src/main/java/jp/co/sharp/sample/simple/MainActivityVoiceUIListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SampleSimple/app/src/main/java/jp/co/sharp/sample/simple/customize/ScenarioDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/SampleSimple/app/src/main/java/jp/co/sharp/sample/simple/customize/ScenarioDefinitions.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1kxcZQNwaKTg699uNd2nrrq628p" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$PROJECT_DIR$/../Library/Android/sdk" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc0c6bca-7968-4a9b-8b74-eccc2f984ef3" name="Default Changelist" comment="" />
+      <created>1606645737681</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606645737681</updated>
+    </task>
+    <servers />
+  </component>
+</project>
