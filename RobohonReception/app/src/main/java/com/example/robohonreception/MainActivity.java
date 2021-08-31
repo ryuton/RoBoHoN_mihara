@@ -119,7 +119,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
             public void run() {
                 // UIスレッド
                 getGPIO();
-                handler.postDelayed(this, 5000);
+                handler.postDelayed(this, 1000);
             }
         };
     }
@@ -142,7 +142,8 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
 
         //Scene有効化.
         VoiceUIManagerUtil.enableScene(mVUIManager, ScenarioDefinitions.SCENE_COMMON);
-//        handler.post(r);
+
+        handler.post(r);
     }
 
     @Override
@@ -188,7 +189,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                 if(FUNC_HVML_ACTION.equals(function)) {
                     final String action = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_HVML_ACTION);
                     final Topic topic =  mHVMLParser.getTopicFromID(action);
-                    if (topic != null) {
+                    if(topic.getActions() != null) {
                         final String speechText = topic.getActions().get(0).getSpeech().getValue();
                         mHandler.post(new Runnable() {
                             @Override
@@ -198,8 +199,17 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                                 }
                             }
                         });
+                    } else if (topic.getCases() != null) {
+                        final String speechText = topic.getCases().get(0).getActions().get(0).getSpeech().getValue();
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isFinishing()) {
+                                    ((TextView) findViewById(R.id.TopicName)).setText(speechText);
+                                }
+                            }
+                        });
                     }
-
                 }
                 break;
             //必要なイベント毎に実装.
@@ -303,6 +313,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
 
     public void getGPIO() {
         if (!mmDNSHandler.getHostIP().isEmpty()) BASE_URL = mmDNSHandler.getHostIP();
+        else return;
         Request request = new Request.Builder()
                 .url(BASE_URL + GPIO_URL)
                 .get()

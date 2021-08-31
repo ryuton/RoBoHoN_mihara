@@ -2,74 +2,217 @@
 <hvml version="2.0">
     <head>
         <producer>com.example.robohonreception</producer>
-        <description>こんにちはと話しかけてね</description>
-        <scene value="com.example.robohonreception.scene_common"/>
-        <situation priority="75" topic_id="t0" trigger="user-word">コンニチハ near ${Lvcsr:Kana}</situation>
-        <situation priority="75" topic_id="t0" trigger="user-word">こんにちは in ${Lvcsr:Basic}</situation>
-        <situation priority="75" topic_id="t0" trigger="user-word">イマカラシャベルヨ near ${Lvcsr:Kana}</situation>
-        <accost priority="74" topic_id="s0" word="com.example.robohonreception.talk.s0"/>
-        <accost priority="80" topic_id="t1" word="com.example.robohonreception.talk.t4"/>
-        <accost priority="75" topic_id="t14" word="com.example.robohonreception.talk.t12"/>
-        <accost priority="75" topic_id="t16" word="com.example.robohonreception.talk.t16"/>
+        <description>ミハラと話しかけてね</description>
+        <scene value="com.example.robohonreception.scene_common" />
+        <situation priority="75" topic_id="t0" trigger="user-word">ミハラ near ${Lvcsr:Kana}
+        </situation>
+        <situation priority="60" topic_id="t0" trigger="user-word">みはら in ${Lvcsr:Basic}</situation>
+        <situation priority="60" topic_id="t0" trigger="user-word">はら in ${Lvcsr:Basic}</situation>
+        <situation priority="60" topic_id="s2" trigger="user-word">ショシン in ${Lvcsr:Kana}
+        </situation>
+        <situation priority="60" topic_id="t1" trigger="user-word">ヨウジ in ${Lvcsr:Kana}</situation>
+        <situation priority="60" topic_id="s0" trigger="user-word">もう一度 in ${Lvcsr:Basic}
+        </situation>
+
+        <accost priority="80" topic_id="s0" word="com.example.robohonreception.talk.s0" />
+        <accost priority="80" topic_id="t4" word="com.example.robohonreception.talk.t4" />
+        <accost priority="75" topic_id="t14" word="com.example.robohonreception.talk.t12" />
+        <accost priority="75" topic_id="t16" word="com.example.robohonreception.talk.t16" />
         <version value="1.0" />
     </head>
     <body>
-        <topic id="s0" listen="true" listen_ms="60000">
-            <action index="1">
-                <speech>こんにちは、午後２時から診療開始です。僕に用事がある時は、元気よく、こんにちはと声をかけてください</speech>
-                <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="s0"/>
-                </control>
-                <behavior type="normal" id="0x060001"/>
-            </action>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
+        <topic id="s0" listen="false">
+            <rule>
+                <condition case_id="1" priority="10">${Hour} ge 7</condition>
+                <condition case_id="2" priority="9">${Hour} ge 12 and ${Minute} ge 30</condition>
+                <condition case_id="3" priority="8">${Hour} ge 14</condition>
+                <condition case_id="4" priority="7">${Hour} ge 17</condition>
+            </rule>
+            <case id="1">
+                <action index="1">
+                    <speech>おはようございます。こんにちは。初めての方は、僕を「しょしん」と大きなこえで、呼んでください。
+                        予約されている方は、待合室でおまちください。
+                        予約の方で、僕に用事があるときには「ようじ」と声をかけてください。
+                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください
+                    </speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="s0" />
+                    </control>
+                    <behavior id="0x060001" type="normal" />
+                </action>
+            </case>
+            <case id="2">
+                <action index="1">
+                    <speech>こんにちは。初めての方は、僕を「しょしん」と大きなこえで、呼んでください。
+                        予約されている方は、待合室でおまちください。
+                        予約の方で、僕に用事があるときには「ようじ」と声をかけてください。
+                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください
+                    </speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="s0" />
+                    </control>
+                    <behavior id="0x060001" type="normal" />
+                </action>
+            </case>
+            <case id="3">
+                <action index="1">
+                    <speech>こんにちは。初めての方は、僕を「しょしん」と大きなこえで、呼んでください。
+                        予約されている方は、待合室でおまちください。
+                        予約の方で、僕に用事があるときには「ようじ」と声をかけてください。
+                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください
+                    </speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="s0" />
+                    </control>
+                    <behavior id="0x060001" type="normal" />
+                </action>
+            </case>
+            <case id="4">
+                <action index="1">
+                    <speech>こんばんは。初めての方は、僕を「しょしん」と大きなこえで、呼んでください。
+                        予約されている方は、待合室でおまちください。
+                        予約の方で、僕に用事があるときには「ようじ」と声をかけてください。
+                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください
+                    </speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="s0" />
+                    </control>
+                    <behavior id="0x060001" type="normal" />
+                </action>
+            </case>
         </topic>
 
-        <topic id="out" listen="false" listen_ms="60000">
+        <topic id="s2" listen="false">
+            <action index="1">
+                <speech>左側にかかっている問診表をもって、座ってご記入ください。すぐにかかりのものがきますので、座ってお待ちください。</speech>
+                <control function="hvml_action" target="com.example.robohonreception">
+                    <data key="topic_id" value="s2" />
+                </control>
+            </action>
+        </topic>
+
+        <topic id="out" listen="false">
             <action index="1">
                 <speech>ごめんね、聞き取れなかったよ。</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="s1"/>
+                    <data key="topic_id" value="s1" />
                 </control>
             </action>
         </topic>
 
-        <topic id="t0" listen="true" listen_ms="60000">
+        <topic id="t0" listen="true" listen_ms="10000">
+            <rule>
+                <condition case_id="1" priority="10">${Hour} ge 7</condition>
+                <condition case_id="2" priority="9">${Hour} ge 12 and ${Minute} ge 30</condition>
+                <condition case_id="3" priority="8">${Hour} ge 14</condition>
+                <condition case_id="4" priority="7">${Hour} ge 17</condition>
+            </rule>
+            <case id="1">
+                <action index="1">
+                    <speech>おはようございます。患者様ですか？業者様ですか？</speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="t0" />
+                    </control>
+                </action>
+                <a href="#t1">
+                    <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near
+                        ${Lvcsr:Kana} or カン near ${Lvcsr:Kana} or ジャ near ${Lvcsr:Kana}
+                    </situation>
+                </a>
+            </case>
+            <case id="2">
+                <action index="1">
+                    <speech>こんにちは。患者様ですか？業者様ですか？</speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="t0" />
+                    </control>
+                </action>
+                <a href="#t01">
+                    <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near
+                        ${Lvcsr:Kana} or カン near ${Lvcsr:Kana} or ジャ near ${Lvcsr:Kana}
+                    </situation>
+                </a>
+            </case>
+            <case id="3">
+                <action index="1">
+                    <speech>こんにちは。患者様ですか？業者様ですか？</speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="t0" />
+                    </control>
+                </action>
+                <a href="#t1">
+                    <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near
+                        ${Lvcsr:Kana} or カン near ${Lvcsr:Kana} or ジャ near ${Lvcsr:Kana}
+                    </situation>
+                </a>
+            </case>
+            <case id="4">
+                <action index="1">
+                    <speech>こんばんは。患者様ですか？業者様ですか？</speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="t0" />
+                    </control>
+                </action>
+                <a href="#t1">
+                    <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near
+                        ${Lvcsr:Kana} or カン near ${Lvcsr:Kana} or ジャ near ${Lvcsr:Kana}
+                    </situation>
+                </a>
+            </case>
+
+            <a href="#t2">
+                <situation trigger="user-word">ギョウシャ include ${Lvcsr:Kana} or ギョウシャ near
+                    ${Lvcsr:Kana} or ギョウ near ${Lvcsr:Kana} or シャ near ${Lvcsr:Kana}
+                </situation>
+            </a>
+            <next href="#t22" type="default" />
+        </topic>
+
+        <topic id="t01" listen="false">
             <action index="1">
-                <speech>こんにちは。患者様ですか？業者様ですか？</speech>
+                <speech>患者様でしたら、2時までお待ちください。お急ぎの際には47-3163まで電話してね。</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t0"/>
+                    <data key="topic_id" value="t01" />
                 </control>
             </action>
-            <a href="#t01">
-                <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near ${Lvcsr:Kana}</situation>
-            </a>
-            <a href="#t2">
-                <situation trigger="user-word">ギョウシャ include ${Lvcsr:Kana} or ギョウシャ near ${Lvcsr:Kana}</situation>
+            <next href="#t22" type="default" />
+        </topic>
+
+        <topic id="t1" listen="true" listen_ms="60000">
+            <action index="1">
+                <speech>診察券の番号を教えて欲しいな。番号は一桁ずつ1、２、３、４みたいに言って下さい</speech>
+                <control function="hvml_action" target="com.example.robohonreception">
+                    <data key="topic_id" value="t1" />
+                </control>
+                <memory key="loop_count" type="temporary" value="0" />
+            </action>
+            <a href="#t16">
+                <situation trigger="user-word">${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]
+                </situation>
             </a>
             <a href="#out">
                 <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
             </a>
-            <next href="#out" type="default"/>
+            <next href="#t4" type="default" />
         </topic>
 
-        <topic id="t01" listen="false" listen_ms="60000">
+        <topic id="t16" listen="false" listen_ms="60000">
             <action index="1">
-                <speech>患者様でしたら、オッケーって言ってね。</speech>
+                <speech>${Lvcsr:Basic}番ですか？よかったらオッケーっていってね</speech>
+                <memory key="patient_number" type="temporary" value="(${Lvcsr:Basic})" />
                 <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t01"/>
+                    <data key="topic_id" value="t16" />
                 </control>
             </action>
-            <next href="#y3" type="default"/>
+
+            <next href="#y4" type="default" />
         </topic>
 
-        <topic dict="Reply" id="y3" listen="true">
-            <a href="#t1">
+        <topic dict="Reply" id="y4" listen="true">
+            <a href="#t3">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
             </a>
-            <a href="#t0">
+            <a href="#t1">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
             </a>
             <a href="#out">
@@ -77,29 +220,12 @@
             </a>
         </topic>
 
-        <topic id="t1" listen="true" listen_ms="60000">
-            <action index="1">
-                <speech> 診察券の番号を教えて欲しいな。番号は一桁ずつ1、２、３、４みたいに言って下さい</speech>
-                <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t1"/>
-                </control>
-                <memory type="temporary" key="loop_count" value="0"/>
-            </action>
-            <a href="#t16">
-                <situation trigger="user-word"> ${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]</situation>
-            </a>
-             <a href="#out">
-                 <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-             </a>
-            <next href="#t4" type="default"/>
-        </topic>
-
-        <topic id="t3" listen="false" listen_ms="60000">
+        <topic id="t3" listen="false">
             <action index="1">
                 <speech>ちょっと待ってね</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t3"/>
-                    <data key="Lvcsr_Basic" value="${memory_t:patient_number}"/>
+                    <data key="topic_id" value="t3" />
+                    <data key="Lvcsr_Basic" value="${memory_t:patient_number}" />
                 </control>
                 <behavior id="assign" type="normal" />
             </action>
@@ -107,25 +233,27 @@
 
         <topic id="t4" listen="true">
             <rule>
-                <condition case_id="1">${memory_t:loop_count} lt 2 </condition>
-                <condition case_id="2">${memory_t:loop_count} ge 2 </condition>
+                <condition case_id="1">${memory_t:loop_count} lt 2</condition>
+                <condition case_id="2">${memory_t:loop_count} ge 2</condition>
             </rule>
             <case id="1">
                 <action index="1">
                     <speech>番号が違うみたいだよ。もう一度教えてね。番号は一桁ずつ1、２、３、４みたいに言って下さい</speech>
                     <control function="hvml_action" target="com.example.robohonreception">
-                        <data key="topic_id" value="t4"/>
+                        <data key="topic_id" value="t4" />
                     </control>
-                    <memory type="temporary" key="loop_count" value="(${memory_t:loop_count} + 1)"/>
+                    <memory key="loop_count" type="temporary"
+                        value="(${memory_t:loop_count} + 1)" />
                     <behavior id="assign" type="normal" />
                 </action>
                 <a href="#t3">
-                    <situation trigger="user-word">${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]</situation>
+                    <situation trigger="user-word">${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]
+                    </situation>
                 </a>
                 <a href="#out">
                     <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
                 </a>
-                <next href="#t4" type="default"/>
+                <next href="#t4" type="default" />
             </case>
             <case id="2">
                 <action index="1">
@@ -138,141 +266,42 @@
             </case>
         </topic>
 
-        <topic id="t2" listen="true" listen_ms="60000">
+        <topic id="t2" listen="true">
             <action index="1">
-                <speech> 院長にご用意でしょうか？スタッフにご用事でしょうか？急ぐようでしたら、お呼びします</speech>
+                <speech>
+                    院長にご用意のかたは、070-2663-2734にお電話お願いします。スタッフにご用事の方は47-3163にお電話お願いします。はいか、いいえでお願いします。もう一回繰り返しますか？
+                </speech>
                 <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t2"/>
+                    <data key="topic_id" value="t2" />
                 </control>
             </action>
-            <a href="#t5">
-                <situation trigger="user-word">インチョウ near ${Lvcsr:Kana}</situation>
+
+            <a href="#t2">
+                <situation trigger="user-word">ハイ include ${Lvcsr:Kana} or ハイ near ${Lvcsr:Kana}
+                </situation>
             </a>
-            <a href="#t6">
-                <situation trigger="user-word">スタッフ near ${Lvcsr:Kana}</situation>
+            <a href="#t22">
+                <situation trigger="user-word">イイエ include ${Lvcsr:Kana} or イイエ near ${Lvcsr:Kana}
+                </situation>
             </a>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
+            <next href="#t22" type="default" />
         </topic>
 
-        <topic id="t5" listen="false" listen_ms="60000">
+        <topic id="t22" listen="false">
             <action index="1">
-                <speech>院長に電話をかけますか？よかったらオッケーって言ってね。</speech>
+                <speech>ありがとうございました。御用の時には,みはら,とまた、声をかけてね</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t5"/>
+                    <data key="topic_id" value="t22" />
                 </control>
             </action>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
-            <next href="#y1" type="default"/>
-        </topic>
-
-        <topic id="t6" listen="false" listen_ms="60000">
-            <action index="1">
-                <speech>スタッフに電話をかけますか？よかったらオッケーって言ってね。</speech>
-                <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t6"/>
-                </control>
-            </action>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
-            <next href="#y2" type="default"/>
         </topic>
 
         <topic dict="Reply" id="y1" listen="true">
-            <a href="#t10">
+            <a href="#t2">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
             </a>
-            <a href="#t11">
+            <a href="#tout">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
-            </a>
-        </topic>
-
-        <topic id="t10" listen="false" listen_ms="60000">
-            <action index="1">
-                <speech> 院長に電話をかけます。少々お待ちください。</speech>
-                <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t10"/>
-                    <data key="call_director" value="yes"/>
-                </control>
-            </action>
-        </topic>
-
-        <topic id="t11" listen="false" listen_ms="60000">
-            <action index="1">
-                <speech> 午後は2時から診療開始だよ。ソファーに座って、もう少し待ってね。</speech>
-                <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t11"/>
-                </control>
-            </action>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
-        </topic>
-
-        <topic dict="Reply" id="y2" listen="true" listen_ms="60000">
-            <a href="#t12">
-                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
-            </a>
-            <a href="#t11">
-                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
-            </a>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
-        </topic>
-
-        <topic id="t12" listen="false" listen_ms="60000">
-            <action index="1">
-                <speech> スタッフに電話をかけます。少々お待ちください。</speech>
-                <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t10"/>
-                    <data key="call_staff" value="yes"/>
-                </control>
-            </action>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
-        </topic>
-
-
-        <topic id="t14" listen="false" listen_ms="60000">
-            <action index="1">
-                <speech>${memory_p:com.example.robohonreception.patient_name}さんですね</speech>
-            </action>
-            <next href="#t15" type="default"/>
-        </topic>
-
-        <topic id="t15" listen="false" listen_ms="60000">
-            <action index="1">
-                <speech>診察は${memory_p:com.example.robohonreception.appoint_time}時${memory_p:com.example.robohonreception.appoint_minute}分からだよ</speech>
-            </action>
-        </topic>
-
-        <topic id="t16" listen="false" listen_ms="60000">
-            <action index="1">
-                <speech>${Lvcsr:Basic}番ですか？よかったらオッケーっていってね</speech>
-                <memory key="patient_number" type="temporary" value="(${Lvcsr:Basic})"/>
-                <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t16"/>
-                </control>
-            </action>
-
-            <next href="#y4" type="default"/>
-        </topic>
-
-        <topic dict="Reply" id="y4" listen="true">
-            <a href="#t3">
-                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
-            </a>
-            <a href="#t1">
-                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
-            </a>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
             </a>
         </topic>
     </body>
