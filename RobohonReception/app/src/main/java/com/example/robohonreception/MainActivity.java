@@ -27,6 +27,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 import com.example.robohonreception.hvml.HVMLParser;
+import com.example.robohonreception.hvml.tag.Topic;
 import com.example.robohonreception.mDNS.mDNSHandler;
 import com.example.robohonreception.patient.Appoint;
 import com.example.robohonreception.voiceui.ScenarioDefinitions;
@@ -43,10 +44,11 @@ import static com.example.robohonreception.voiceui.ScenarioDefinitions.FUNC_HVML
 public class MainActivity extends Activity implements VoiceUIListenerImpl.ScenarioCallback {
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    private String BASE_URL = "http://192.168.1.102:8080/";
-    private String PATIENT_URL = BASE_URL + "patient/";
-    private String APPOINT_URL = BASE_URL + "appoint/";
-    private String GPIO_URL = BASE_URL + "gpio/";
+//    private String BASE_URL = "http://192.168.11.35:8080/";
+    private String BASE_URL = "";
+    private String PATIENT_URL = "patient/";
+    private String APPOINT_URL = "appoint/";
+    private String GPIO_URL = "gpio/";
 
     /**
      * 音声UI制御.
@@ -77,28 +79,23 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
         Log.v(TAG, "onCreate()");
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            //ホームシナリオから"mode"の値を受け取る.
-            String modeVal = intent.getStringExtra("mode");
-            if (modeVal != null) {
-                ((TextView)findViewById(R.id.mode_value)).setText(modeVal);
-            }
-            //ホームシナリオから任意の値を受け取る.
-            List<VoiceUIVariable> variables = intent.getParcelableArrayListExtra("VoiceUIVariable");
-            if (variables != null) {
-                String test1 = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_TEST_1);
-                String test2 = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_TEST_2);
-                ((TextView)findViewById(R.id.test_value)).setText(test1 + ", " + test2);
-            }else{
-                Log.d(TAG, "VoiceUIVariable is null");
-            }
-        }
-
-        //ホームボタンの検知登録.
-        mHomeEventReceiver = new HomeEventReceiver();
-        IntentFilter filterHome = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-        registerReceiver(mHomeEventReceiver, filterHome);
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//            //ホームシナリオから"mode"の値を受け取る.
+//            String modeVal = intent.getStringExtra("mode");
+//            if (modeVal != null) {
+//                ((TextView)findViewById(R.id.mode_value)).setText(modeVal);
+//            }
+//            //ホームシナリオから任意の値を受け取る.
+//            List<VoiceUIVariable> variables = intent.getParcelableArrayListExtra("VoiceUIVariable");
+//            if (variables != null) {
+//                String test1 = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_TEST_1);
+//                String test2 = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_TEST_2);
+//                ((TextView)findViewById(R.id.test_value)).setText(test1 + ", " + test2);
+//            }else{
+//                Log.d(TAG, "VoiceUIVariable is null");
+//            }
+//        }
 
 
         //HVMLParse
@@ -122,7 +119,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
             public void run() {
                 // UIスレッド
                 getGPIO();
-                handler.postDelayed(this, 10000);
+                handler.postDelayed(this, 1000);
             }
         };
     }
@@ -163,6 +160,9 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
         //Scene無効化.
         VoiceUIManagerUtil.disableScene(mVUIManager, ScenarioDefinitions.SCENE_COMMON);
 
+        mVUIManager = null;
+        mVUIListener = null;
+
         //単一Activityの場合はonPauseでアプリを終了する.
         finish();
     }
@@ -171,9 +171,6 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
     protected void onDestroy() {
         super.onDestroy();
         Log.v(TAG, "onDestroy()");
-
-        //ホームボタンの検知破棄.
-        this.unregisterReceiver(mHomeEventReceiver);
 
         //インスタンスのごみ掃除.
         mVUIManager = null;
@@ -191,15 +188,28 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
             case VoiceUIListenerImpl.ACTION_START:
                 if(FUNC_HVML_ACTION.equals(function)) {
                     final String action = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_HVML_ACTION);
-                    final String speechText = mHVMLParser.getTopicFromID(action).getActions().get(0).getSpeech().getValue();
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(!isFinishing()) {
-                                ((TextView) findViewById(R.id.TopicName)).setText(speechText);
+                    final Topic topic =  mHVMLParser.getTopicFromID(action);
+                    if(topic.getActions() != null) {
+                        final String speechText = topic.getActions().get(0).getSpeech().getValue();
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isFinishing()) {
+                                    ((TextView) findViewById(R.id.TopicName)).setText(speechText);
+                                }
                             }
-                        }
-                    });
+                        });
+                    } else if (topic.getCases() != null) {
+                        final String speechText = topic.getCases().get(0).getActions().get(0).getSpeech().getValue();
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isFinishing()) {
+                                    ((TextView) findViewById(R.id.TopicName)).setText(speechText);
+                                }
+                            }
+                        });
+                    }
                 }
                 break;
             //必要なイベント毎に実装.
@@ -210,16 +220,22 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                 }else if(FUNC_HVML_ACTION.equals(function)){
                     final String lvcsr = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_LVCSR_BASIC);
                     if (!lvcsr.isEmpty()) {
+                        Log.d(TAG, "lvcsr: " + lvcsr);
+//                        VoiceUIManagerUtil.clearMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_ID);
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 if(!isFinishing()) {
                                     try {
+                                        Log.d(TAG, lvcsr);
                                         int appointID = Integer.parseInt(lvcsr);
+                                        Log.d(TAG, String.valueOf(appointID));
                                         getAppoint(appointID);
 
-                                    } catch (NumberFormatException e) {
+                                    } catch (Exception e) {
                                         //パースできなかった場合はもう一度発話頼む
+                                        Log.e(TAG, e.toString());
+                                        VoiceUIManagerUtil.stopSpeech();
                                         VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_TALK_FAILED);
 
                                     }
@@ -228,8 +244,14 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                         });
                     }
 
-                    final String callAction = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_CALL_ACTION);
-                    if (!callAction.isEmpty()){
+//                    final String lvcsrCheck = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_LVCSR_BASIC_CHECK);
+//                    if (!lvcsrCheck.isEmpty()) {
+//                        Log.d(TAG, "check: " + lvcsrCheck);
+//                        VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_ID, lvcsrCheck);
+//                    }
+
+                    final String callStaffAction = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_CALL_STAFF_ACTION);
+                    if (!callStaffAction.isEmpty()) {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -243,14 +265,31 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                         });
                     }
 
+
+                    final String callDirectorAction = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_CALL_DIRECTOR_ACTION);
+                    if (!callDirectorAction.isEmpty()){
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isFinishing()) {
+                                    String number = "07026632734";
+
+                                    Uri call = Uri.parse("tel:" + number);
+                                    Intent surf = new Intent(Intent.ACTION_CALL, call);
+                                    startActivity(surf);
+                                }
+                            }
+                        });
+                    }
+
                 } else if(FUNC_CALLL_ACTION.equals(function)) {
-                    final String callAction = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_CALL_ACTION);
+                    final String callAction = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_CALL_DIRECTOR_ACTION);
                     if (callAction.isEmpty()) break;
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             if(!isFinishing()) {
-                                String number = "0138473163";
+                                String number = "07026632734";
                                 Uri call = Uri.parse("tel:" + number);
                                 Intent surf = new Intent(Intent.ACTION_CALL, call);
                                 startActivity(surf);
@@ -274,8 +313,9 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
 
     public void getGPIO() {
         if (!mmDNSHandler.getHostIP().isEmpty()) BASE_URL = mmDNSHandler.getHostIP();
+        else return;
         Request request = new Request.Builder()
-                .url(GPIO_URL)
+                .url(BASE_URL + GPIO_URL)
                 .get()
                 .build();
 
@@ -285,6 +325,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("PatientController", e.toString());
+
             }
 
             @Override
@@ -302,7 +343,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
     public void getAppoint(int id) {
         if (!mmDNSHandler.getHostIP().isEmpty()) BASE_URL = mmDNSHandler.getHostIP();
         Request request = new Request.Builder()
-                .url(APPOINT_URL + id)
+                .url(BASE_URL + APPOINT_URL + id)
                 .get()
                 .build();
 
@@ -312,6 +353,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("PatientController", e.toString());
+                VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_TALK_FAILED);
             }
 
             @Override
@@ -320,20 +362,26 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                 ParameterizedType type = new GenericOf<>(com.example.robohonreception.patient.Response.class, Appoint.class);
                 com.example.robohonreception.patient.Response<Appoint> res = null;
                 res = gson.fromJson(response.body().string(), type);
-                Log.d("PatientController", res.toString());
-
-                int ret = VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_TIME, res.result.appointTime);
+                if (res.result.patientName.isEmpty()) {
+                    VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_TALK_FAILED);
+                } else {
+                    Log.d("PatientController", res.result.patientName);
+                    Log.d("PatientController", res.result.appointTime);
+                    VoiceUIManagerUtil.clearMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_TIME);
+                    int ret = VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_TIME, res.result.appointTime);
 //                if (ret == VoiceUIManager.VOICEUI_ERROR) throw new RemoteException("failed to set memory");
-                ret = VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_NAME, res.result.patientName);
+                    VoiceUIManagerUtil.clearMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_NAME);
+                    ret = VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_NAME, res.result.patientKanaName);
 //                if (ret == VoiceUIManager.VOICEUI_ERROR) throw new RemoteException("failed to set memory");
 
-                if (!res.result.patientID1.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "0");
-                else if (!res.result.patientID2.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "15");
-                else if (!res.result.patientID3.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "30");
-                else if (!res.result.patientID4.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "45");
-                else VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "0");
+                    if (!res.result.patientID1.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "0");
+                    else if (!res.result.patientID2.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "15");
+                    else if (!res.result.patientID3.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "30");
+                    else if (!res.result.patientID4.isEmpty()) VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "45");
+                    else VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_APPOINT_MINUTE, "0");
 
-                VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_APPOINT);
+                    VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_APPOINT);
+                }
             }
         });
     }

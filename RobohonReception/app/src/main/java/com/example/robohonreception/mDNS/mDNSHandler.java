@@ -13,12 +13,14 @@ public class mDNSHandler {
     private NsdManager.ResolveListener resolveListener;
     private NsdServiceInfo mService;
     private String TAG = "mDNSHandler";
+    private String reIPAdress = "/[0-9]+.[0-9]+.[0-9]+.[0-9]+";
 
     private String serviceName = "rasp0";
     private String hostIP = "";
 
     public String getHostIP() {
-        return "http:/" + hostIP + "/";
+        if (hostIP.isEmpty()) return "";
+        else                  return "http:/" + hostIP + ":8080/";
     }
 
     // raspberry service type
@@ -94,7 +96,7 @@ public class mDNSHandler {
                 mService = serviceInfo;
                 int port = mService.getPort();
                 InetAddress host = mService.getHost();
-                hostIP = host.toString();
+                if (host.toString().matches(reIPAdress)) hostIP = host.toString();
             }
         };
     }

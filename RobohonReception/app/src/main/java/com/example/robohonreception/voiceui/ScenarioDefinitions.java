@@ -83,9 +83,10 @@ public class ScenarioDefinitions {
     /**
      * accost名：発話実行.
      */
-    public static final String ACC_TALK = ScenarioDefinitions.PACKAGE + ".talk.t1";
+    public static final String ACC_TALK = ScenarioDefinitions.PACKAGE + ".talk.s0";
     public static final String ACC_TALK_FAILED = ScenarioDefinitions.PACKAGE + ".talk.t4";
     public static final String ACC_APPOINT = ScenarioDefinitions.PACKAGE + ".talk.t12";
+    public static final String ACC_WAIT = ScenarioDefinitions.PACKAGE + ".talk.t16";
     /**
      * resolve variable：アプリで変数解決する値.
      */
@@ -102,6 +103,7 @@ public class ScenarioDefinitions {
      * data key：大語彙認識文言.
      */
     public static final String KEY_LVCSR_BASIC = "Lvcsr_Basic";
+    public static final String KEY_LVCSR_BASIC_CHECK = "Lvcsr_Basic_check";
     /**
      * data key：HVML Name.
      */
@@ -109,7 +111,11 @@ public class ScenarioDefinitions {
     /**
      * data key：call action
      */
-    public static final String KEY_CALL_ACTION = "call";
+    public static final String KEY_CALL_STAFF_ACTION = "call_staff";
+    /**
+     * data key：call action
+     */
+    public static final String KEY_CALL_DIRECTOR_ACTION = "call_director";
     /**
      * memory_p：時.
      */
@@ -121,12 +127,15 @@ public class ScenarioDefinitions {
     /**
      * memory_p：患者の名前.
      * */
+    public static final String MEM_P_PATIENT_ID = ScenarioDefinitions.PACKAGE + ".patient_id";
+    /**
+     * memory_p：患者の名前.
+     * */
     public static final String MEM_P_PATIENT_NAME = ScenarioDefinitions.PACKAGE + ".patient_name";
     /**
      * memory_p：予約時間.
      * */
     public static final String MEM_P_APPOINT_TIME = ScenarioDefinitions.PACKAGE + ".appoint_time";
-
     /**
      * memory_p：予約時間.
      * */
