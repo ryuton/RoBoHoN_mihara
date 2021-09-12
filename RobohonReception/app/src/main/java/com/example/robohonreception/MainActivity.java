@@ -11,6 +11,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -73,6 +76,14 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
     private Handler handler = null;
     private Runnable r =null;
 
+    /**
+     * 画面表示切り替え用
+     */
+    private int isHideHVMLView = View.VISIBLE;
+    private int isHideKeyInputView = View.INVISIBLE;
+    private View hvmlView = null;
+    private View keyInputView = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +133,28 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                 handler.postDelayed(this, 1000);
             }
         };
+
+        //Viewのインスタンス取得
+        this.hvmlView = findViewById(R.id.contentHVML);
+        this.keyInputView = findViewById(R.id.contentKeyinput);
+        this.hvmlView.setVisibility(this.isHideHVMLView);
+        this.keyInputView.setVisibility(this.isHideKeyInputView);
+        findViewById(R.id.appointSendButtun).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText appointNumberInput = (EditText) findViewById(R.id.appointNumberInput);
+                try {
+                    int appointNum = Integer.parseInt(appointNumberInput.getText().toString());
+                    getAppoint(appointNum);
+                    isHideHVMLView = View.INVISIBLE;
+                    isHideKeyInputView = View.VISIBLE;
+                    hvmlView.setVisibility(isHideHVMLView);
+                    keyInputView.setVisibility(isHideKeyInputView);
+                } catch (NumberFormatException e) {
+                    return;
+                }
+            }
+        });
     }
 
     @Override
@@ -242,6 +275,22 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                                 }
                             }
                         });
+                    }
+                    final String searchAppoint = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_SEARCH_APPOINT);
+                    if (!searchAppoint.isEmpty()) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isFinishing()) {
+                                    Log.d(TAG, "search appoint: " + searchAppoint);
+                                    isHideHVMLView = View.INVISIBLE;
+                                    isHideKeyInputView = View.VISIBLE;
+                                    hvmlView.setVisibility(isHideHVMLView);
+                                    keyInputView.setVisibility(isHideKeyInputView);
+                                }
+                            }
+                        });
+
                     }
 
 //                    final String lvcsrCheck = VoiceUIVariableUtil.getVariableData(variables, ScenarioDefinitions.KEY_LVCSR_BASIC_CHECK);

@@ -178,22 +178,23 @@
             <next href="#t22" type="default" />
         </topic>
 
-        <topic id="t1" listen="true" listen_ms="60000">
+        <topic id="t1" listen="false" listen_ms="60000">
             <action index="1">
-                <speech>診察券の番号を教えて欲しいな。番号は一桁ずつ1、２、３、４みたいに言って下さい</speech>
+                <speech>診察券の番号を教えて欲しいな。背中のモニターに入力してください</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t1" />
+                    <data key="search_appoint" value="true" />
                 </control>
                 <memory key="loop_count" type="temporary" value="0" />
             </action>
-            <a href="#t16">
-                <situation trigger="user-word">${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]
-                </situation>
-            </a>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
-            <next href="#t4" type="default" />
+            <!--<a href="#t16">-->
+                <!--<situation trigger="user-word">${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]-->
+                <!--</situation>-->
+            <!--</a>-->
+            <!--<a href="#out">-->
+                <!--<situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>-->
+            <!--</a>-->
+            <!--<next href="#t4" type="default" />-->
         </topic>
 
         <topic id="t16" listen="false" listen_ms="60000">
