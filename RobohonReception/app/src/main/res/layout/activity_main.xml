@@ -6,7 +6,15 @@
     tools:context="com.example.robohonreception.MainActivity">
 
 
-    <include layout="@layout/layout_topic" />
+    <include
+        android:id="@+id/contentKeyinput"
+        layout="@layout/content_key_input"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include
+        android:id="@+id/contentHVML"
+        layout="@layout/layout_topic" />
 
 
 </RelativeLayout>
