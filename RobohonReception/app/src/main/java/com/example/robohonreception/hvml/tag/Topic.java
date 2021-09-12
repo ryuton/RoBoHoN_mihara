@@ -1,14 +1,29 @@
 package com.example.robohonreception.hvml.tag;
 
+import android.text.format.Time;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.util.Date;
 import java.util.List;
 
 @Root(name = "topic")
 public class Topic {
+    public Case getCaseFromData() {
+        if (this.cases.size() < 1) return null;
+        else if (this.cases.size() < 4) return this.cases.get(0);
+        else {
+            Time time = new Time("Asia/Tokyo");
+            time.setToNow();
+            if (time.hour < 7) return this.cases.get(0);
+            else if (time.hour < 12 && time.minute < 30) return this.cases.get(1);
+            else if (time.hour < 14) return this.cases.get(2);
+            else return this.cases.get(3);
+        }
+    }
 
     //situation,accost タグで遷移する topic を指定
     @Attribute
