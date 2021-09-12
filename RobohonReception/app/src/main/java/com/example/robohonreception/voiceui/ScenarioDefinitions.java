@@ -60,6 +60,7 @@ public class ScenarioDefinitions {
      * function：発話内容を通知する.
      */
     public static final String FUNC_HVML_ACTION = "hvml_action";
+
     /**
      * function：発話内容を通知する.
      */
@@ -108,6 +109,10 @@ public class ScenarioDefinitions {
      * data key：HVML Name.
      */
     public static final String KEY_HVML_ACTION = "topic_id";
+    /**
+     * data key：HVML Name.
+     */
+    public static final String KEY_SEARCH_APPOINT = "search_appoint";
     /**
      * data key：call action
      */
