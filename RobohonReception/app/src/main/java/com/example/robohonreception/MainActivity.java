@@ -233,7 +233,8 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                             }
                         });
                     } else if (topic.getCases() != null) {
-                        final String speechText = topic.getCases().get(0).getActions().get(0).getSpeech().getValue();
+//                        final String speechText = topic.getCases().get(0).getActions().get(0).getSpeech().getValue();
+                        final String speechText = topic.getCaseFromData().getActions().get(0).getSpeech().getValue();
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
