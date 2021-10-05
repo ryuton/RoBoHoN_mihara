@@ -4,20 +4,30 @@
         <producer>com.example.robohonreception</producer>
         <description>ミハラと話しかけてね</description>
         <scene value="com.example.robohonreception.scene_common" />
-        <situation priority="75" topic_id="t0" trigger="user-word">ミハラ near ${Lvcsr:Kana}
+        <situation priority="75" topic_id="t0" trigger="user-word">
+            ミハラ near ${Lvcsr:Kana}
         </situation>
-        <situation priority="60" topic_id="t0" trigger="user-word">みはら in ${Lvcsr:Basic}</situation>
-        <situation priority="60" topic_id="t0" trigger="user-word">はら in ${Lvcsr:Basic}</situation>
-        <situation priority="60" topic_id="s2" trigger="user-word">ショシン in ${Lvcsr:Kana}
+        <situation priority="60" topic_id="t0" trigger="user-word">
+            みはら in ${Lvcsr:Basic}
         </situation>
-        <situation priority="60" topic_id="t1" trigger="user-word">ヨウジ in ${Lvcsr:Kana}</situation>
-        <situation priority="60" topic_id="s0" trigger="user-word">もう一度 in ${Lvcsr:Basic}
+        <situation priority="60" topic_id="t0" trigger="user-word">
+            はら in ${Lvcsr:Basic}
+        </situation>
+        <situation priority="60" topic_id="s2" trigger="user-word">
+            ショシン in ${Lvcsr:Kana}　or ショ in ${Lvcsr:Kana}
+        </situation>
+        <situation priority="60" topic_id="t1" trigger="user-word">
+            ヨウジ in ${Lvcsr:Kana} or ヨウ in ${Lvcsr:Kana} or 用事 in {Lvcsr:Basic}
+        </situation>
+        <situation priority="60" topic_id="s0" trigger="user-word">
+            もう一度 in ${Lvcsr:Basic}
         </situation>
 
         <accost priority="80" topic_id="s0" word="com.example.robohonreception.talk.s0" />
         <accost priority="80" topic_id="t4" word="com.example.robohonreception.talk.t4" />
         <accost priority="75" topic_id="t14" word="com.example.robohonreception.talk.t12" />
         <accost priority="75" topic_id="t16" word="com.example.robohonreception.talk.t16" />
+        <accost priority="75" topic_id="out2" word="com.example.robohonreception.talk.out2" />
         <version value="1.0" />
     </head>
     <body>
@@ -30,10 +40,10 @@
             </rule>
             <case id="1">
                 <action index="1">
-                    <speech>おはようございます。こんにちは。初めての方は、僕を「しょしん」と大きなこえで、呼んでください。
-                        予約されている方は、待合室でおまちください。
-                        予約の方で、僕に用事があるときには「ようじ」と声をかけてください。
-                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください
+                    <speech>おはようございます。予約されている方は、待合室でおまちください。<wait ms="300"/>
+                        初めての方は、僕に「しょしん」と大きなこえで、呼んでください。
+                        僕に用事があるときには「みはら」と声をかけてください。
+                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください。
                     </speech>
                     <control function="hvml_action" target="com.example.robohonreception">
                         <data key="topic_id" value="s0" />
@@ -43,10 +53,11 @@
             </case>
             <case id="2">
                 <action index="1">
-                    <speech>こんにちは。初めての方は、僕を「しょしん」と大きなこえで、呼んでください。
-                        予約されている方は、待合室でおまちください。
-                        予約の方で、僕に用事があるときには「ようじ」と声をかけてください。
-                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください
+                    <speech>
+                        12時半から2時まではお昼休みです。
+                        患者様でしたら、2時までお待ちください。
+                        お急ぎの際には47-3163まで電話してね。
+                        僕に用事がある時は「みはら」と声をかけてね。
                     </speech>
                     <control function="hvml_action" target="com.example.robohonreception">
                         <data key="topic_id" value="s0" />
@@ -56,10 +67,10 @@
             </case>
             <case id="3">
                 <action index="1">
-                    <speech>こんにちは。初めての方は、僕を「しょしん」と大きなこえで、呼んでください。
-                        予約されている方は、待合室でおまちください。
-                        予約の方で、僕に用事があるときには「ようじ」と声をかけてください。
-                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください
+                    <speech>こんにちは。予約されている方は、待合室でおまちください。<wait ms="300"/>
+                        初めての方は、僕に「しょしん」と大きなこえで、呼んでください。
+                        僕に用事があるときには「みはら」と声をかけてください。
+                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください。
                     </speech>
                     <control function="hvml_action" target="com.example.robohonreception">
                         <data key="topic_id" value="s0" />
@@ -69,10 +80,10 @@
             </case>
             <case id="4">
                 <action index="1">
-                    <speech>こんばんは。初めての方は、僕を「しょしん」と大きなこえで、呼んでください。
-                        予約されている方は、待合室でおまちください。
-                        予約の方で、僕に用事があるときには「ようじ」と声をかけてください。
-                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください
+                    <speech>こんばんは。予約されている方は、待合室でおまちください。<wait ms="300"/>
+                        初めての方は、僕に「しょしん」と大きなこえで、呼んでください。
+                        僕に用事があるときには「みはら」と声をかけてください。
+                        もう一度お聞きになりたい方は、「もういちど」と声をかけてください。
                     </speech>
                     <control function="hvml_action" target="com.example.robohonreception">
                         <data key="topic_id" value="s0" />
@@ -115,8 +126,13 @@
                     </control>
                 </action>
                 <a href="#t1">
-                    <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near
+                    <situation trigger="user-word">カンジャ in ${Lvcsr:Kana} or カンジャ near
                         ${Lvcsr:Kana} or カン near ${Lvcsr:Kana} or ジャ near ${Lvcsr:Kana}
+                    </situation>
+                </a>
+
+                <a href="#t2">
+                    <situation trigger="user-word">ギョウシャ in ${Lvcsr:Kana} or ギョウシャ in ${Lvcsr:Kana} or ギョウ in ${Lvcsr:Kana} or シャ in ${Lvcsr:Kana}
                     </situation>
                 </a>
             </case>
@@ -127,9 +143,14 @@
                         <data key="topic_id" value="t0" />
                     </control>
                 </action>
-                <a href="#t01">
-                    <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near
+                <a href="#t1">
+                    <situation trigger="user-word">カンジャ in ${Lvcsr:Kana} or カンジャ near
                         ${Lvcsr:Kana} or カン near ${Lvcsr:Kana} or ジャ near ${Lvcsr:Kana}
+                    </situation>
+                </a>
+
+                <a href="#t2">
+                    <situation trigger="user-word">ギョウシャ in ${Lvcsr:Kana} or ギョウシャ in ${Lvcsr:Kana} or ギョウ in ${Lvcsr:Kana} or シャ in ${Lvcsr:Kana}
                     </situation>
                 </a>
             </case>
@@ -141,8 +162,13 @@
                     </control>
                 </action>
                 <a href="#t1">
-                    <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near
-                        ${Lvcsr:Kana} or カン near ${Lvcsr:Kana} or ジャ near ${Lvcsr:Kana}
+                    <situation trigger="user-word">カンジャ in ${Lvcsr:Kana} or カンジャ in
+                        ${Lvcsr:Kana} or カン in ${Lvcsr:Kana} or ジャ in ${Lvcsr:Kana}
+                    </situation>
+                </a>
+
+                <a href="#t2">
+                    <situation trigger="user-word">ギョウシャ in ${Lvcsr:Kana} or ギョウシャ in ${Lvcsr:Kana} or ギョウ in ${Lvcsr:Kana} or シャ in ${Lvcsr:Kana}
                     </situation>
                 </a>
             </case>
@@ -152,25 +178,31 @@
                     <control function="hvml_action" target="com.example.robohonreception">
                         <data key="topic_id" value="t0" />
                     </control>
+                    <memory key="loop_count" type="permanent" value="0" />
                 </action>
                 <a href="#t1">
-                    <situation trigger="user-word">カンジャ include ${Lvcsr:Kana} or カンジャ near
-                        ${Lvcsr:Kana} or カン near ${Lvcsr:Kana} or ジャ near ${Lvcsr:Kana}
+                    <situation trigger="user-word">カンジャ in ${Lvcsr:Kana} or カンジャ in
+                        ${Lvcsr:Kana} or カン in ${Lvcsr:Kana} or ジャ in ${Lvcsr:Kana}
+                    </situation>
+                </a>
+
+                <a href="#t2">
+                    <situation trigger="user-word">ギョウシャ in ${Lvcsr:Kana} or ギョウシャ in ${Lvcsr:Kana} or ギョウ in ${Lvcsr:Kana} or シャ in ${Lvcsr:Kana}
                     </situation>
                 </a>
             </case>
 
-            <a href="#t2">
-                <situation trigger="user-word">ギョウシャ include ${Lvcsr:Kana} or ギョウシャ near
-                    ${Lvcsr:Kana} or ギョウ near ${Lvcsr:Kana} or シャ near ${Lvcsr:Kana}
-                </situation>
-            </a>
             <next href="#t22" type="default" />
         </topic>
 
         <topic id="t01" listen="false">
             <action index="1">
-                <speech>患者様でしたら、2時までお待ちください。お急ぎの際には47-3163まで電話してね。</speech>
+                <speech>
+                    12時半から2時まではお昼休みです。
+                    患者様でしたら、2時までお待ちください。
+                    お急ぎの際には47-3163まで電話してね。
+                    僕に用事がある時は「みはら」と声をかけてね。
+                </speech>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t01" />
                 </control>
@@ -180,12 +212,11 @@
 
         <topic id="t1" listen="false" listen_ms="60000">
             <action index="1">
-                <speech>診察券の番号を教えて欲しいな。背中のモニターに入力してください</speech>
+                <speech>診察券の番号を教えて欲しいな。キーボードで入力して、ENTERをゆっくり２回押してください。</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t1" />
                     <data key="search_appoint" value="true" />
                 </control>
-                <memory key="loop_count" type="temporary" value="0" />
             </action>
             <!--<a href="#t16">-->
                 <!--<situation trigger="user-word">${Lvcsr:Basic} include [0,1,2,3,4,5,6,7,8,9]-->
@@ -197,36 +228,67 @@
             <!--<next href="#t4" type="default" />-->
         </topic>
 
-        <topic id="t16" listen="false" listen_ms="60000">
-            <action index="1">
-                <speech>${Lvcsr:Basic}番ですか？よかったらオッケーっていってね</speech>
-                <memory key="patient_number" type="temporary" value="(${Lvcsr:Basic})" />
-                <control function="hvml_action" target="com.example.robohonreception">
-                    <data key="topic_id" value="t16" />
-                </control>
-            </action>
+        <topic id="t16" listen="true" listen_ms="5000">
+            <rule>
+                <condition case_id="1">${memory_p:loop_count} lt 1</condition>
+                <condition case_id="2">${memory_p:loop_count} ge 1</condition>
+            </rule>
+            <case id="1">
+                <action index="1">
+                    <speech>${memory_p:com.example.robohonreception.patient_id}番ですか？よかったらエンターっていってね。違う場合は違うと言ってもう一度入力してください。</speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="t16" />
+                    </control>
+                    <memory key="loop_count" type="permanent"
+                        value="(${memory_p:loop_count} + 1)" />
+                </action>
 
-            <next href="#y4" type="default" />
+                <a href="#t3">
+                    <situation trigger="user-word">エンター in ${Lvcsr:Kana} or エン in ${Lvcsr:Kana} or ター in {Lvcsr:Kana}</situation>
+                </a>
+                <a href="#t1">
+                    <situation trigger="user-word">チガウ in ${Lvcsr:Kana} or 違う in ${Lvcsr:Basic}</situation>
+                </a>
+                <next href="#out2" type="default" />
+            </case>
+            <case id="2">
+                <action index="1">
+                    <speech>>${memory_p:com.example.robohonreception.patient_id}番ですか？よかったらエンターっていってね。違う場合は違うと言ってもう一度入力してください。</speech>
+                    <control function="hvml_action" target="com.example.robohonreception">
+                        <data key="topic_id" value="t16" />
+                    </control>
+                    <memory key="loop_count" type="permanent"
+                        value="(${memory_p:loop_count} + 1)" />
+                </action>
+
+                <a href="#t3">
+                    <situation trigger="user-word">エンター in ${Lvcsr:Kana} or エン in ${Lvcsr:Kana} or ター in {Lvcsr:Kana}</situation>
+                </a>
+                <a href="#out2">
+                    <situation trigger="user-word">チガウ in ${Lvcsr:Kana} or 違う in ${Lvcsr:Basic}</situation>
+                </a>
+                <next href="#out2" type="default" />
+            </case>
         </topic>
 
-        <topic dict="Reply" id="y4" listen="true">
-            <a href="#t3">
-                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
-            </a>
-            <a href="#t1">
-                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
-            </a>
-            <a href="#out">
-                <situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>
-            </a>
-        </topic>
+        <!--<topic dict="Reply" id="y4" listen="true">-->
+            <!--<a href="#t3">-->
+                <!--<situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>-->
+            <!--</a>-->
+            <!--<a href="#t1">-->
+                <!--<situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>-->
+            <!--</a>-->
+            <!--<a href="#out">-->
+                <!--<situation trigger="user-word">ＶＯＩＣＥＰＦ＿ＥＲＲ in ${Lvcsr:Basic}</situation>-->
+            <!--</a>-->
+        <!--</topic>-->
 
         <topic id="t3" listen="false">
             <action index="1">
                 <speech>ちょっと待ってね</speech>
                 <control function="hvml_action" target="com.example.robohonreception">
                     <data key="topic_id" value="t3" />
-                    <data key="Lvcsr_Basic" value="${memory_t:patient_number}" />
+                    <data key="Lvcsr_Basic" value="${memory_p:com.example.robohonreception.patient_id}" />
                 </control>
                 <behavior id="assign" type="normal" />
             </action>
@@ -234,8 +296,8 @@
 
         <topic id="t4" listen="true">
             <rule>
-                <condition case_id="1">${memory_t:loop_count} lt 2</condition>
-                <condition case_id="2">${memory_t:loop_count} ge 2</condition>
+                <condition case_id="1">${memory_t:loop_count} lt -1</condition>
+                <condition case_id="2">${memory_t:loop_count} ge -1</condition>
             </rule>
             <case id="1">
                 <action index="1">
@@ -278,11 +340,11 @@
             </action>
 
             <a href="#t2">
-                <situation trigger="user-word">ハイ include ${Lvcsr:Kana} or ハイ near ${Lvcsr:Kana}
+                <situation trigger="user-word">ハイ include ${Lvcsr:Kana} or ハイ in ${Lvcsr:Kana}
                 </situation>
             </a>
             <a href="#t22">
-                <situation trigger="user-word">イイエ include ${Lvcsr:Kana} or イイエ near ${Lvcsr:Kana}
+                <situation trigger="user-word">イイエ include ${Lvcsr:Kana} or イイエ in ${Lvcsr:Kana}
                 </situation>
             </a>
             <next href="#t22" type="default" />
@@ -296,6 +358,30 @@
                 </control>
             </action>
         </topic>
+
+        <topic id="out2" listen="false">
+            <action index="1">
+                <speech>もう一度最初からお願いします。</speech>
+                <control function="hvml_action" target="com.example.robohonreception">
+                    <data key="topic_id" value="out2" />
+                </control>
+            </action>
+        </topic>
+
+        <topic id="t14" listen="false">
+            <action index="1">
+                <speech>${memory_p:com.example.robohonreception.patient_name}さんですね</speech>
+            </action>
+            <next href="#t15" type="default"/>
+        </topic>
+
+        <topic id="t15" listen="false">
+            <action index="1">
+                <speech>診察は${memory_p:com.example.robohonreception.appoint_time}時${memory_p:com.example.robohonreception.appoint_minute}分からだよ</speech>
+            </action>
+            <next href="#t22" type="default" />
+        </topic>
+
 
         <topic dict="Reply" id="y1" listen="true">
             <a href="#t2">

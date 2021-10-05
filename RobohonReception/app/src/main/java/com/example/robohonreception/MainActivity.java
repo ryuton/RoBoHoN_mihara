@@ -139,17 +139,30 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
         this.keyInputView = findViewById(R.id.contentKeyinput);
         this.hvmlView.setVisibility(this.isHideHVMLView);
         this.keyInputView.setVisibility(this.isHideKeyInputView);
+
         findViewById(R.id.appointSendButtun).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText appointNumberInput = (EditText) findViewById(R.id.appointNumberInput);
                 try {
-                    int appointNum = Integer.parseInt(appointNumberInput.getText().toString());
-                    getAppoint(appointNum);
-                    isHideHVMLView = View.INVISIBLE;
-                    isHideKeyInputView = View.VISIBLE;
-                    hvmlView.setVisibility(isHideHVMLView);
-                    keyInputView.setVisibility(isHideKeyInputView);
+                    String appointNum = appointNumberInput.getText().toString();
+                    VoiceUIManagerUtil.clearMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_ID);
+                    int ret = VoiceUIManagerUtil.setMemory(mVUIManager, ScenarioDefinitions.MEM_P_PATIENT_ID, appointNum);
+
+                    VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_WAIT);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(!isFinishing()) {
+                                isHideHVMLView = View.VISIBLE;
+                                isHideKeyInputView = View.INVISIBLE;
+                                hvmlView.setVisibility(isHideHVMLView);
+                                keyInputView.setVisibility(isHideKeyInputView);
+                            }
+                        }
+                    });
+                    appointNumberInput.getEditableText().clear();
+
                 } catch (NumberFormatException e) {
                     return;
                 }
