@@ -399,6 +399,7 @@ public class MainActivity extends Activity implements VoiceUIListenerImpl.Scenar
                 res = gson.fromJson(response.body().string(), type);
                 Log.d(TAG, res.result.toString());
                 if (res.result == 1) VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_TALK);
+                else if (res.result == 2) VoiceUIManagerUtil.startSpeech(mVUIManager, ScenarioDefinitions.ACC_END_TALK);
             }
         });
     }

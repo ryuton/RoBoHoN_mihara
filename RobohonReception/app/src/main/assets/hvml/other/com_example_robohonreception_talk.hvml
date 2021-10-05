@@ -24,6 +24,7 @@
         </situation>
 
         <accost priority="80" topic_id="s0" word="com.example.robohonreception.talk.s0" />
+        <accost priority="75" topic_id="e0" word="com.example.robohonreception.talk.e0" />
         <accost priority="80" topic_id="t4" word="com.example.robohonreception.talk.t4" />
         <accost priority="75" topic_id="t14" word="com.example.robohonreception.talk.t12" />
         <accost priority="75" topic_id="t16" word="com.example.robohonreception.talk.t16" />
@@ -390,6 +391,19 @@
             <a href="#tout">
                 <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
             </a>
+        </topic>
+
+        <topic id="t14" listen="false">
+            <action index="1">
+                <speech>${memory_p:com.example.robohonreception.patient_name}さんですね</speech>
+            </action>
+            <next href="#t15" type="default"/>
+        </topic>
+
+        <topic id="e0" listen="false">
+            <action index="1">
+                <speech>またね。</speech>
+            </action>
         </topic>
     </body>
 </hvml>

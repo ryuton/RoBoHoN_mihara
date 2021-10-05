@@ -85,6 +85,7 @@ public class ScenarioDefinitions {
      * accost名：発話実行.
      */
     public static final String ACC_TALK = ScenarioDefinitions.PACKAGE + ".talk.s0";
+    public static final String ACC_END_TALK = ScenarioDefinitions.PACKAGE + ".talk.e0";
     public static final String ACC_TALK_FAILED = ScenarioDefinitions.PACKAGE + ".talk.t4";
     public static final String ACC_APPOINT = ScenarioDefinitions.PACKAGE + ".talk.t12";
     public static final String ACC_WAIT = ScenarioDefinitions.PACKAGE + ".talk.t16";
